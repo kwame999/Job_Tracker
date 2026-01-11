@@ -8,18 +8,18 @@ interface ColumnProps {
     name: string,
 }
 
-interface JobType {
+// interface JobType {
 
-    id: number,
-    company: string,
-    role: string,
-    status: ["wishlist", "applied", "interview", "offer", "rejected", "ghosted"],
-    link?: string,
-    createdAt: string,
-    rating: number,
-    moodTxt: string,
+//     id: number,
+//     company: string,
+//     role: string,
+//     status: ["wishlist", "applied", "interview", "offer", "rejected", "ghosted"],
+//     link?: string,
+//     createdAt: string,
+//     rating: number,
+//     moodTxt: string,
 
-}
+// }
 
 // interface CardProps {
 //     job

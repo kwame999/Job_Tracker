@@ -1,11 +1,16 @@
 import Column from './Column'
-import './App.css'
+import {Modal, Card} from './Modal'
+
+import './index.css'
 
 function App() {
  
   return (
-    <Column name='Active'>
-    </Column>
+
+  <Modal></Modal>
+
+    // <Column name='Active'>
+    // </Column>
   )
 }
 
