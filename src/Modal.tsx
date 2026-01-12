@@ -15,23 +15,24 @@ type JobType = {
 
 const Modal = () => {
     
-    const [jobType, setJobType] = useState([{}])
-    const [company, setCompany] = useState("")
-    const [role, setRole] = useState("")
-    const [status, setStatus] = useState("")
-    const [link, setLink] = useState("")
-    const [createdAt, setCreatedAt] = useState("")
-    const [rating, setRating] = useState("-")
-    const [moodTxt, setMoodTxt] = useState("")
+    const [jobType, setJobType] = useState([{}]);
+    const [company, setCompany] = useState("");
+    const [role, setRole] = useState("");
+    const [status, setStatus] = useState("");
+    const [link, setLink] = useState("");
+    const [createdAt, setCreatedAt] = useState("");
+    const [rating, setRating] = useState("-");
+    const [moodTxt, setMoodTxt] = useState("");
 
     console.log(jobType)
     
     function handleJobType(){
         
         setJobType(
-            [...jobType,  {
+            
+            [...jobType, {
                 
-                id: "",
+                id: crypto.randomUUID(),
                 company: company,
                 role: role,
                 status: status,
@@ -41,14 +42,13 @@ const Modal = () => {
                 moodTxt: moodTxt,
                 
             }
-        ]
+            ]
         
     )
        
     }
     
     
-
     return(
     
         <section>
@@ -56,6 +56,7 @@ const Modal = () => {
             <form action="">
 
                 <div>
+                    
                     <label htmlFor="">Company name:</label>
                     <input type="text" name="company" id="" value={company} onChange={(e)=>{
                         setCompany(e.target.value)
@@ -68,21 +69,21 @@ const Modal = () => {
                     <input type="text" name="link" id="" value={link} onChange={(e)=>{
                         setLink(e.target.value);
                     }}/>
-                    <label htmlFor="created at"></label>
+                    <label htmlFor="">Created at:</label>
                     <input type="text" name="date" id="" value={createdAt} onChange={(e)=>{
                         setCreatedAt(e.target.value);
                     }}/>
                     <label htmlFor="mood"></label>
-                    <input type="text" name="mood" id="" value={moodTxt} onChange={(e)=>{
-                        setMoodTxt(e.target.value);
-                        
-                    }}/>
-
                 
                 </div>
 
-                <textarea name="moodMsg" id=""></textarea>
-                <select name="status" id="">
+                <textarea name="moodMsg" id="" onChange={(e)=>{
+                    setMoodTxt(e.target.value);
+                }}></textarea>
+
+                <select name="status" id="" onChange={(e)=>{
+                    setStatus(e.target.value);
+                }}>
                     
                     <option value="wishlist">Wishlist</option>
                     <option value="applied">Applied</option>
@@ -95,8 +96,15 @@ const Modal = () => {
 
                 <button type="submit" onClick={(e)=>{
                     e.preventDefault();
-                    handleJobType()
-                }}>ss</button>
+                    handleJobType();
+                    setCompany("");
+                    setCreatedAt("");
+                    setLink("");
+                    setMoodTxt("");
+                    setRole("");
+                    setStatus("");
+                    setMoodTxt("");
+                }}>Track</button>
             </form>
 
         </section>
