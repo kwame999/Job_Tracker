@@ -1,5 +1,10 @@
 import { useReducer, useState } from "react"
 
+type Company = {
+    logo: string,
+    alt: string
+}
+
 type JobType = {
     
     id: string,
@@ -14,15 +19,6 @@ type JobType = {
     favorites: boolean,
 }
 
-type Company = {
-    logo: string,
-    alt: string
-}
-
-type Job ={
-    jobtype: JobType
-}
-
 type State = {
     boarder: string;
 };
@@ -31,6 +27,12 @@ type Action =
     | { type: 'EMPTY' }
     | { type: 'ACTIVE' }
     | { type: 'FILLED' };
+
+type AddJob = (newJob: JobType) => void;
+
+type ModalProps = {
+    onAddJob: AddJob
+}
 
 function inputReducer(state: State, action: Action): State {
     switch (action.type) {
@@ -44,12 +46,11 @@ function inputReducer(state: State, action: Action): State {
             return state; 
     }
 }
-const Modal = () => {
+const Modal = ({ onAddJob }: ModalProps) => {
     
-    const [jobs, setJobs] = useState<JobType[]>([]);
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
-    const [status, setStatus] = useState("draft");
+    const [status, setStatus] = useState("");
     const [link, setLink] = useState("");
     const [createdAt, setCreatedAt] = useState("");
     const [rating, setRating] = useState(0);
@@ -57,13 +58,12 @@ const Modal = () => {
 
     const [state, dispatch] = useReducer(inputReducer, {boarder: "white", 
                                                      })
-    console.log(jobs)
     
-    function handleJobType(){
+    function handleJobsNType(){
         
-        setJobs(
+        const newJob: JobType =
             
-            [...jobs, {
+            {
                 
                 id: crypto.randomUUID(),
                 company: company,
@@ -79,16 +79,11 @@ const Modal = () => {
                 moodTxt: moodTxt,
                 favorites: false,
             }
-        ]
         
-        
-    )
-    
+    onAddJob(newJob);
     
 }
-localStorage.setItem("Jobs", JSON.stringify(jobs))
 
-console.log(state.boarder)
 
 return(
     
@@ -146,7 +141,7 @@ return(
 
                 <button type="submit" onClick={(e)=>{
                     e.preventDefault();
-                    handleJobType();
+                    handleJobsNType();
                     setCompany("");
                     setCreatedAt("");
                     setLink("");
@@ -160,37 +155,7 @@ return(
         </section>
 )
 
-
 }
 
 
-const Card = (jobs: JobType) => {
-    
-    const {company, position, link, status, moodTxt, createdAt, rating} = jobs
-
-    // const deleteTodo = (id) => { jobType.filter(job => job !== jobType.id)}
-
-    return(
-        
-        <section>
-        
-            <p>Company:{company}</p>
-            <p>Position:{position}</p>
-            <p>Link:{link}</p>
-            <p>Applied:{createdAt}</p>
-            <p>Status:{status}</p>
-            <p>Mood:{moodTxt}</p>
-            <p>Rating:{rating}</p>
-        <div>
-            <button>Delete</button>
-            <button>Edit</button>
-        </div>
-
-        </section>
-    )
-
-
-}
-
-
-export {Modal, Card}
+export { Modal }

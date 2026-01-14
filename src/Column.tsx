@@ -1,29 +1,36 @@
 import type { ReactNode } from "react"
 
 //Types:
-interface ColumnProps {
+type ColumnProps = {
 
     children?: ReactNode,
     color?: string,
     name: string,
 }
 
-// interface JobType {
 
-//     id: number,
-//     company: string,
-//     role: string,
-//     status: ["wishlist", "applied", "interview", "offer", "rejected", "ghosted"],
-//     link?: string,
-//     createdAt: string,
-//     rating: number,
-//     moodTxt: string,
+type JobType = {
+    
+    id: string,
+    company: string,
+    companyIcon: Company,
+    position: string,
+    status: string,
+    link?: string,
+    createdAt: string,
+    rating?: number,
+    moodTxt: string,
+    favorites: boolean,
+}
 
-// }
 
-// interface CardProps {
-//     job
-// }
+
+type Company = {
+    logo: string,
+    alt: string
+}
+
+
 
 const Column = ({children, color, name = "grey"}: ColumnProps) => {
 
@@ -43,23 +50,33 @@ const Column = ({children, color, name = "grey"}: ColumnProps) => {
 
 }
 
-
-// const Card = ({jobType}) => {
+const Card = (job: JobType) => {
     
-//     const {...jobType} = jobType
-//     return(
-//         <section>
-//             <p>Company:{jobType.company}</p>
-//             <p>Position:{jobType.position}</p>
-//             <p>Link:{jobType.link}</p>
-//             <p>Applied:{jobType.createdAt}</p>
-//             <p>Status:{jobType.status[0]}</p>
-//             <p>Mood:{jobType.moodTxt}</p>
-//             <p>Rating:{jobType.rating}</p>
+    const {company, position, link, status, moodTxt, createdAt, rating} = job
+
+    // const deleteTodo = (id) => { jobType.filter(job => job !== jobType.id)}
+
+    return(
         
-//         </section>
-//     )
+        <section>
+        
+            <p>Company:{company}</p>
+            <p>Position:{position}</p>
+            <p>Link:{link}</p>
+            <p>Applied:{createdAt}</p>
+            <p>Status:{status}</p>
+            <p>Mood:{moodTxt}</p>
+            <p>Rating:{rating}</p>
+        <div>
+            <button>Delete</button>
+            <button>Edit</button>
+        </div>
 
-// }
+        </section>
+    )
 
-export default Column
+
+}
+
+
+export { Column, Card}
