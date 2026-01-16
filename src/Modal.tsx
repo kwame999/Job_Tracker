@@ -40,10 +40,12 @@ type Action =
 
 
 type AddJob = (newJob: JobType) => void;
+type UpdateJob = (job: JobType) => void;
 
 type ModalProps = {
     onAddJob: AddJob,
-    editingJob: JobType | null
+    editingJob: JobType | null,
+    updateJob:  UpdateJob
 }
 
 function inputReducer(state: State, action: Action): State {
@@ -69,7 +71,7 @@ function valueReducer(state: ValueState, action: Action): ValueState{
 }
 
 
-const Modal = ({ onAddJob, editingJob }: ModalProps) => {
+const Modal = ({ onAddJob, editingJob, updateJob }: ModalProps) => {
     
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
@@ -98,28 +100,32 @@ const Modal = ({ onAddJob, editingJob }: ModalProps) => {
     setMoodTxt(moodTxt)
 
     },[editingJob])
+
     function handleJobsNType(){
-        
         const newJob: JobType =
-            
-            {
-                
-                id: crypto.randomUUID(),
-                company: company,
-                companyIcon: {
-                    logo: `https://img.logo.dev/${company}.com?token=pk_RKtwoXuaQDSJdIEDV1NYVA`,
-                    alt: `${company} logo`
-                },
-                position: position,
-                status: status,
-                link: link,
-                createdAt: createdAt,
-                rating: rating,
-                moodTxt: moodTxt,
-                favorites: false,
-            }
         
-    onAddJob(newJob);
+        {
+            
+            id: editingJob ?  editingJob.id : crypto.randomUUID(),
+            company: company,
+            companyIcon: {
+                logo: `https://img.logo.dev/${company}.com?token=pk_RKtwoXuaQDSJdIEDV1NYVA`,
+                alt: `${company} logo`
+            },
+            position: position,
+            status: status,
+            link: link,
+            createdAt: createdAt,
+            rating: rating,
+            moodTxt: moodTxt,
+            favorites: false,
+        }
+        if(editingJob){
+             updateJob(newJob)
+        } else { 
+             onAddJob(newJob)
+        } 
+        
     
 }
 
@@ -188,7 +194,8 @@ return(
                     setPosition("");
                     setStatus("");
                     setMoodTxt("");
-                }}>Track</button>
+                }}>{editingJob ? "Save" : "Track"}</button>
+                
             </form>
 
         </section>

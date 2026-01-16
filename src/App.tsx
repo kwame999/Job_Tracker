@@ -45,9 +45,13 @@ function App() {
   )
  }
 
+ function handleUpdateJob(updatedJob: JobType){
+  setJobs(previous => previous.map(job => job.id === updatedJob.id ? updatedJob : job))
+ }
+
   return (
   <>
-  <Modal onAddJob={handleJobs} editingJob={editJob}></Modal>
+  <Modal onAddJob={handleJobs} editingJob={editJob} updateJob={handleUpdateJob}></Modal>
   
   <Column color='red' name='Active'>
     {jobs.map(job => (
