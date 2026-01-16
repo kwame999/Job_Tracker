@@ -41,11 +41,13 @@ type Action =
 
 type AddJob = (newJob: JobType) => void;
 type UpdateJob = (job: JobType) => void;
+type cancelJob = (job: JobType) => void;
 
 type ModalProps = {
     onAddJob: AddJob,
     editingJob: JobType | null,
-    updateJob:  UpdateJob
+    updateJob:  UpdateJob,
+    cancelJob: cancelJob
 }
 
 function inputReducer(state: State, action: Action): State {
@@ -71,7 +73,7 @@ function valueReducer(state: ValueState, action: Action): ValueState{
 }
 
 
-const Modal = ({ onAddJob, editingJob, updateJob }: ModalProps) => {
+const Modal = ({ onAddJob, editingJob, updateJob, cancelJob }: ModalProps) => {
     
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
@@ -129,7 +131,17 @@ const Modal = ({ onAddJob, editingJob, updateJob }: ModalProps) => {
     
 }
 
-
+function jobStatesReset(e: React.MouseEvent){
+    
+    e.preventDefault();
+    setCompany("");
+    setCreatedAt("");
+    setLink("");
+    setMoodTxt("");
+    setPosition("");
+    setStatus("");
+    
+}
 return(
     
     <section>
@@ -167,7 +179,7 @@ return(
                 
                 </div>
 
-                <textarea name="moodMsg" id="" onChange={(e)=>{
+                <textarea name="moodMsg" id="" value={moodTxt} onChange={(e)=>{
                     setMoodTxt(e.target.value);
                 }}></textarea>
 
@@ -185,17 +197,15 @@ return(
                 </select>
 
                 <button type="submit" onClick={(e)=>{
-                    e.preventDefault();
                     handleJobsNType();
-                    setCompany("");
-                    setCreatedAt("");
-                    setLink("");
-                    setMoodTxt("");
-                    setPosition("");
-                    setStatus("");
-                    setMoodTxt("");
+                    jobStatesReset(e)
                 }}>{editingJob ? "Save" : "Track"}</button>
                 
+                <button type="submit" onClick={(e)=>{
+                    e.preventDefault();
+                    jobStatesReset(e);
+
+                }}>Cancel</button>
             </form>
 
         </section>
