@@ -35,6 +35,12 @@ type CardProps = {
     onEdit: (id: string) => void
 }
 
+type CardPreview = {
+    companyName: string,
+    jobPosition: string,
+    jobLink: string
+}
+
 const Column = ({children, color, name = "grey"}: ColumnProps) => {
 
     return(
@@ -57,7 +63,6 @@ const Card = ({job, onDelete, onEdit}: CardProps) => {
     
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const {id, company, position, link, status, moodTxt, createdAt, rating} = job
-
     function handleOpen(){
         setIsOpen( !isOpen ? true : false );
     }
@@ -77,19 +82,9 @@ const Card = ({job, onDelete, onEdit}: CardProps) => {
                 </>
             }
         <div>
-            <button onClick={()=>{
-
-                onDelete(id)
-
-            }}>Delete</button>
-            <button onClick={()=>{
-
-                onEdit(id)
-            }}
-            >Edit</button>
-            <button onClick={()=>{
-                handleOpen()
-            }}>Expand</button>
+            <button onClick={ ()=> {onDelete(id)} }>Delete</button>
+            <button onClick={ ()=> {onEdit(id)} }>Edit</button>
+            <button onClick={ handleOpen }>Expand</button>
         </div>
 
         </section>
@@ -98,5 +93,17 @@ const Card = ({job, onDelete, onEdit}: CardProps) => {
 
 }
 
+const PreviewCard = ({companyName, jobPosition, jobLink}: CardPreview) => {
+    
+    return(
+        <section>
+            <p>Company:{companyName}</p>
+            <p>Position:{jobPosition}</p>
+            <p>Link:{jobLink}</p>
+        </section>
+    )
 
-export { Column, Card}
+}
+
+
+export { Column, Card, PreviewCard}
