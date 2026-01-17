@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import { useState, type ReactNode } from "react"
 
 //Types:
 type ColumnProps = {
@@ -55,20 +55,27 @@ const Column = ({children, color, name = "grey"}: ColumnProps) => {
 
 const Card = ({job, onDelete, onEdit}: CardProps) => {
     
+    const [isOpen, setIsOpen] = useState<boolean>(false)
     const {id, company, position, link, status, moodTxt, createdAt, rating} = job
 
-
+    function handleOpen(){
+        setIsOpen( !isOpen ? true : false );
+    }
+    
     return(
-        
         <section>
         
             <p>Company:{company}</p>
             <p>Position:{position}</p>
-            <p>Link:{link}</p>
-            <p>Applied:{createdAt}</p>
-            <p>Status:{status}</p>
-            <p>Mood:{moodTxt}</p>
-            <p>Rating:{rating}</p>
+            {isOpen && 
+                <>
+                    <p>Link:{link}</p>
+                    <p>Applied:{createdAt}</p>
+                    <p>Status:{status}</p>
+                    <p>Mood:{moodTxt}</p>
+                    <p>Rating:{rating}</p>
+                </>
+            }
         <div>
             <button onClick={()=>{
 
@@ -80,6 +87,9 @@ const Card = ({job, onDelete, onEdit}: CardProps) => {
                 onEdit(id)
             }}
             >Edit</button>
+            <button onClick={()=>{
+                handleOpen()
+            }}>Expand</button>
         </div>
 
         </section>

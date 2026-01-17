@@ -40,10 +40,14 @@ type Action =
 
 
 type AddJob = (newJob: JobType) => void;
+type UpdateJob = (job: JobType) => void;
+type cancelJob = () => void;
 
 type ModalProps = {
     onAddJob: AddJob,
-    editingJob: JobType | null
+    editingJob: JobType | null,
+    updateJob:  UpdateJob,
+    cancelJob: cancelJob
 }
 
 function inputReducer(state: State, action: Action): State {
@@ -69,11 +73,11 @@ function valueReducer(state: ValueState, action: Action): ValueState{
 }
 
 
-const Modal = ({ onAddJob, editingJob }: ModalProps) => {
+const Modal = ({ onAddJob, editingJob, updateJob, cancelJob }: ModalProps) => {
     
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
-    const [status, setStatus] = useState("");
+    const [status, setStatus] = useState("wishlist");
     const [link, setLink] = useState("");
     const [createdAt, setCreatedAt] = useState("");
     const [rating, setRating] = useState(0);
@@ -98,32 +102,45 @@ const Modal = ({ onAddJob, editingJob }: ModalProps) => {
     setMoodTxt(moodTxt)
 
     },[editingJob])
+
     function handleJobsNType(){
-        
         const newJob: JobType =
-            
-            {
-                
-                id: crypto.randomUUID(),
-                company: company,
-                companyIcon: {
-                    logo: `https://img.logo.dev/${company}.com?token=pk_RKtwoXuaQDSJdIEDV1NYVA`,
-                    alt: `${company} logo`
-                },
-                position: position,
-                status: status,
-                link: link,
-                createdAt: createdAt,
-                rating: rating,
-                moodTxt: moodTxt,
-                favorites: false,
-            }
         
-    onAddJob(newJob);
+        {
+            
+            id: editingJob ?  editingJob.id : crypto.randomUUID(),
+            company: company,
+            companyIcon: {
+                logo: `https://img.logo.dev/${company}.com?token=pk_RKtwoXuaQDSJdIEDV1NYVA`,
+                alt: `${company} logo`
+            },
+            position: position,
+            status: status,
+            link: link,
+            createdAt: createdAt,
+            rating: rating,
+            moodTxt: moodTxt,
+            favorites: false,
+        }
+        if(editingJob){
+             updateJob(newJob)
+        } else { 
+             onAddJob(newJob)
+        } 
+        
     
 }
 
-
+function jobStatesReset(){
+    
+    setCompany("");
+    setCreatedAt("");
+    setLink("");
+    setMoodTxt("");
+    setPosition("");
+    setStatus("wishlist");
+    
+}
 return(
     
     <section>
@@ -161,7 +178,7 @@ return(
                 
                 </div>
 
-                <textarea name="moodMsg" id="" onChange={(e)=>{
+                <textarea name="moodMsg" id="" value={moodTxt} onChange={(e)=>{
                     setMoodTxt(e.target.value);
                 }}></textarea>
 
@@ -178,17 +195,15 @@ return(
                 
                 </select>
 
-                <button type="submit" onClick={(e)=>{
-                    e.preventDefault();
+                <button type="button" onClick={()=>{
                     handleJobsNType();
-                    setCompany("");
-                    setCreatedAt("");
-                    setLink("");
-                    setMoodTxt("");
-                    setPosition("");
-                    setStatus("");
-                    setMoodTxt("");
-                }}>Track</button>
+                    jobStatesReset()
+                }}>{editingJob ? "Save" : "Track"}</button>
+                
+                <button type="button" onClick={()=>{
+                    jobStatesReset();
+                    cancelJob()
+                }}>Cancel</button>
             </form>
 
         </section>

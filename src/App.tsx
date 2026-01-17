@@ -34,9 +34,7 @@ function App() {
  }
 
  function handleDeleteJobs(id: string){
-    
   setJobs(previous => previous.filter(job => job.id !== id))
-  
  }
 
  function handleEditJob(id: string){
@@ -45,9 +43,19 @@ function App() {
   )
  }
 
+ function handleUpdateJob(updatedJob: JobType){
+  setJobs(previous => previous.map(job => job.id === updatedJob.id ? updatedJob : job))
+  setNewEditJob(null);
+ }
+
+ function handleCancelJob(){
+  if (editJob) setNewEditJob(null);
+
+ }
+
   return (
   <>
-  <Modal onAddJob={handleJobs} editingJob={editJob}></Modal>
+  <Modal onAddJob={handleJobs} editingJob={editJob} updateJob={handleUpdateJob} cancelJob={handleCancelJob}></Modal>
   
   <Column color='red' name='Active'>
     {jobs.map(job => (
