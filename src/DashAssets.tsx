@@ -82,4 +82,45 @@ const TabView = () => {
 //         </div>
 //     )
 // }
-export {Tag, TabView} 
+
+type StatsBlockProps = {
+    svgType: string,
+    statTxt: string,
+    children: React.ReactNode
+}
+
+const StatBlock = ({svgType, statTxt, children}: StatsBlockProps) => {
+
+
+    return(
+
+        <div>
+            <>
+            <svg>{svgType}</svg>
+            <p>{statTxt}</p>
+            </>
+            {children}
+        </div>
+
+    )
+}
+
+const ProjectSetModal = () => {
+
+
+    return(
+        <form>
+            <h1>New Tracker:</h1>
+            <>
+                <input type="text" name="projName" id="" />
+            </>
+          
+            <input type="text" name="tags" />
+            <input type="text" name="status" />
+
+
+        </form>
+    )
+
+}
+export {Tag, TabView, StatBlock} 
