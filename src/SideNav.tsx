@@ -1,30 +1,5 @@
 import { useState } from "react"
-
-type JobType = {
-    
-    id: string,
-    company: string,
-    companyIcon: Company,
-    position: string,
-    status: string,
-    link?: string,
-    createdAt: string,
-    rating?: number,
-    moodTxt: string,
-    favorites: boolean,
-}
-
-
-type Company = {
-    logo: string,
-    alt: string
-}
-
-
-type SideNavProps = {
-    recentJobs: JobType[]
-
-}
+import type { SideNavProps } from './Types'
 
 
 const SideNav = ({recentJobs}:SideNavProps) => {

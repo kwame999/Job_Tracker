@@ -1,45 +1,6 @@
-import { useState, type ReactNode } from "react"
+import { useState } from "react"
+import type { ColumnProps, CardProps, CardPreview } from './Types'
 
-//Types:
-type ColumnProps = {
-
-    children?: ReactNode,
-    color?: string,
-    name: string,
-}
-
-
-type JobType = {
-    
-    id: string,
-    company: string,
-    companyIcon: Company,
-    position: string,
-    status: string,
-    link?: string,
-    createdAt: string,
-    rating?: number,
-    moodTxt: string,
-    favorites: boolean,
-}
-
-
-type Company = {
-    logo: string,
-    alt: string
-}
-
-type CardProps = {
-    job: JobType,
-    onDelete: (id: string) => void
-    onEdit: (id: string) => void
-}
-
-type CardPreview = {
-    companyName: string,
-    jobPosition: string,
-    jobLink: string
-}
 
 const Column = ({children, color, name = "grey"}: ColumnProps) => {
 

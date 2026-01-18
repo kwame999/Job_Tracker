@@ -1,8 +1,6 @@
 import { useState } from "react"
+import type { HeaderProps } from './Types'
 
-type HeaderProps = {
-    jobProjName: string
-}
 
 const Header = ({jobProjName}: HeaderProps)=> {
 

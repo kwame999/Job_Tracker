@@ -1,6 +1,5 @@
 import { useState } from "react"
-
-type Tags = string
+import type { Tags, StatsBlockProps} from './Types'
 
 const Tag = () => {
 
@@ -83,11 +82,6 @@ const TabView = () => {
 //     )
 // }
 
-type StatsBlockProps = {
-    svgType: string,
-    statTxt: string,
-    children: React.ReactNode
-}
 
 const StatBlock = ({svgType, statTxt, children}: StatsBlockProps) => {
 

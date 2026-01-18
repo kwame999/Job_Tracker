@@ -1,30 +1,6 @@
 import { useEffect, useReducer, useState } from "react"
 import { PreviewCard } from "./Column";
-type Company = {
-    logo: string,
-    alt: string
-}
-
-type JobType = {
-    
-    id: string,
-    company: string,
-    companyIcon: Company,
-    position: string,
-    status: string,
-    link?: string,
-    createdAt: string,
-    rating?: number,
-    moodTxt: string,
-    favorites: boolean,
-}
-
-type State = {
-    boarder: string,
-};
-type ValueState = {
-    key: string | number
-};
+import type { JobType, State, ValueState, ModalProps} from './Types'
 
 type Action = 
       { type: 'EMPTY' }
@@ -39,16 +15,7 @@ type Action =
     | { type: 'SET_MOODTXT' }
 
 
-type AddJob = (newJob: JobType) => void;
-type UpdateJob = (job: JobType) => void;
-type cancelJob = () => void;
 
-type ModalProps = {
-    onAddJob: AddJob,
-    editingJob: JobType | null,
-    updateJob:  UpdateJob,
-    cancelJob: cancelJob
-}
 
 function inputReducer(state: State, action: Action): State {
     switch (action.type) {

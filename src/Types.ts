@@ -1,4 +1,6 @@
-type JobType = {
+import type { ReactNode } from 'react';
+
+export type JobType = {
     
     id: string,
     company: string,
@@ -12,56 +14,70 @@ type JobType = {
     favorites: boolean,
 }
 
-type Company = {
+export type Company = {
     logo: string,
     alt: string
 }
 
 //Column Types (Column.tsx):
 
-type ColumnProps = {
+export type ColumnProps = {
 
-    // children?: ReactNode,
+    children?: ReactNode,
     color?: string,
     name: string,
 }
 
 
-type CardProps = {
+export type CardProps = {
     job: JobType,
     onDelete: (id: string) => void
     onEdit: (id: string) => void
 }
 
-type CardPreview = {
+export type CardPreview = {
     companyName: string,
     jobPosition: string,
     jobLink: string
 }
 
 //Dash assets
-type Tags = string
+export type Tags = string
 
+export type StatsBlockProps = {
+        svgType: string,
+        statTxt: string,
+        children: React.ReactNode
+}
 //Header assets (DashAssets.tsx)
-type HeaderProps = {
+export type HeaderProps = {
     jobProjName: string
 }
 
 //Modal assets (Modal.tsx)
-type State = {
+export type State = {
     boarder: string,
 };
 
-type ValueState = {
+export type ValueState = {
     key: string | number
 };
 
 //SideNav (SideNav.tsx)
-type SideNavProps = {
+export type SideNavProps = {
     recentJobs: JobType[]
 
 }
+//Main modal props
+type AddJob = (newJob: JobType) => void;
+type UpdateJob = (job: JobType) => void;
+type cancelJob = () => void;
 
-export type {JobType, Company, ColumnProps, CardProps, CardPreview, Tags, HeaderProps, State, ValueState, SideNavProps}
+export type ModalProps = {
+    onAddJob: AddJob,
+    editingJob: JobType | null,
+    updateJob:  UpdateJob,
+    cancelJob: cancelJob
+}
 
 
