@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react"
-
+import { PreviewCard } from "./Column";
 type Company = {
     logo: string,
     alt: string
@@ -195,6 +195,7 @@ return(
                 
                 </select>
 
+                <PreviewCard companyName={company} jobPosition={position} jobLink={link}></PreviewCard>
                 <button type="button" onClick={()=>{
                     handleJobsNType();
                     jobStatesReset()

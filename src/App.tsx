@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import {Column, Card} from './Column'
 import { Modal } from './Modal'
-
+import Tag from './DashAssets'
 import './index.css'
-
+import Header from './Header'
 type JobType = {
     
     id: string,
@@ -55,12 +55,16 @@ function App() {
 
   return (
   <>
+  <Header jobProjName='j'></Header>
   <Modal onAddJob={handleJobs} editingJob={editJob} updateJob={handleUpdateJob} cancelJob={handleCancelJob}></Modal>
   
   <Column color='red' name='Active'>
     {jobs.map(job => (
       <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>))};
     </Column>
+
+      <Tag/>
+
     </>
 
     // <Column name='Active'>
