@@ -60,8 +60,14 @@ export type State = {
 };
 
 export type ValueState = {
-    key: string | number
+    value: string | number
 };
+
+export type Action = 
+      { type: 'EMPTY' }
+    | { type: 'ACTIVE' }
+
+
 
 //SideNav (SideNav.tsx)
 export type SideNavProps = {

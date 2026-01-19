@@ -1,43 +1,19 @@
 import { useEffect, useReducer, useState } from "react"
 import { PreviewCard } from "./Column";
-import type { JobType, State, ValueState, ModalProps} from './Types'
-
-type Action = 
-      { type: 'EMPTY' }
-    | { type: 'ACTIVE' }
-    | { type: 'FILLED' }
-    | { type: 'SET_COMPANY' }
-    | { type: 'SET_POSITION' }
-    | { type: 'SET_STATUS' }
-    | { type: 'SET_LINK' }
-    | { type: 'SET_CREATEDAT' }
-    | { type: 'SET_RATING' }
-    | { type: 'SET_MOODTXT' }
-
-
+import type { JobType, State, ModalProps, Action } from './Types'
 
 
 function inputReducer(state: State, action: Action): State {
     switch (action.type) {
         case 'EMPTY':
-            return { boarder: "white" };
+            return { boarder: "white"}
         case 'ACTIVE':
-            return {  boarder: "green" };
-        case 'FILLED':
             return {  boarder: "green" };
         default:
             return state; 
     }
 }
 
-function valueReducer(state: ValueState, action: Action): ValueState{
-    switch(action.type){
-        case 'SET_COMPANY':
-        
-    }
-
-    return state
-}
 
 
 const Modal = ({ onAddJob, editingJob, updateJob, cancelJob }: ModalProps) => {
@@ -50,9 +26,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob }: ModalProps) => {
     const [rating, setRating] = useState(0);
     const [moodTxt, setMoodTxt] = useState("");
 
-    const [valueState, dispatchValue] = useReducer(valueReducer, {key: "s"})
-    const [state, dispatch] = useReducer(inputReducer, {boarder: "white", 
-                                                     })
+    const [state, dispatch] = useReducer(inputReducer, { boarder: "grey", })
     
     useEffect(() => {
 
@@ -98,6 +72,10 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob }: ModalProps) => {
     
 }
 
+
+
+
+
 function jobStatesReset(){
     
     setCompany("");
@@ -119,26 +97,26 @@ return(
                     <label htmlFor="">Company name:</label>
                     
                     <input style={{backgroundColor: state.boarder}} type="text" name="company" id="" value={company} onChange={(e)=>{
-                        setCompany(e.target.value)
-                        
-                        !e.target.value ?
-                        dispatch({
-                            type: 'EMPTY'
-                        }):
-                        dispatch({
-                            type: 'ACTIVE'
-                        })
+
+                        !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
+                        e.target.value && setCompany(e.target.value);
                     }}/>
                     <label htmlFor="">role:</label>
                     <input type="text" name="role"  id="" value={position} onChange={(e)=>{
+                        
+                        !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                         setPosition(e.target.value)
                     }}/>
                     <label htmlFor="">link</label>
                     <input type="text" name="link" id="" value={link} onChange={(e)=>{
+                        
+                        !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                         setLink(e.target.value);
                     }}/>
                     <label htmlFor="">Created at:</label>
                     <input type="text" name="date" id="" value={createdAt} onChange={(e)=>{
+                        
+                        !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                         setCreatedAt(e.target.value);
                     }}/>
                     <label htmlFor="mood"></label>
@@ -146,10 +124,14 @@ return(
                 </div>
 
                 <textarea name="moodMsg" id="" value={moodTxt} onChange={(e)=>{
+                    
+                    !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                     setMoodTxt(e.target.value);
                 }}></textarea>
 
                 <select name="status" id="" onChange={(e)=>{
+                    
+                    !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                     setStatus(e.target.value);
                 }}>
                     

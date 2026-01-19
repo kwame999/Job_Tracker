@@ -117,4 +117,4 @@ const ProjectSetModal = () => {
     )
 
 }
-export {Tag, TabView, StatBlock} 
+export {Tag, TabView, StatBlock, ProjectSetModal} 
