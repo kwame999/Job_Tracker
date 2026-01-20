@@ -23,7 +23,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob }: ModalProps) => {
     const [status, setStatus] = useState("wishlist");
     const [link, setLink] = useState("");
     const [createdAt, setCreatedAt] = useState("");
-    const [rating, setRating] = useState(0);
+    const [salary, setSalary] = useState(0);
     const [moodTxt, setMoodTxt] = useState("");
 
     const [state, dispatch] = useReducer(inputReducer, { boarder: "grey", })
@@ -32,14 +32,14 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob }: ModalProps) => {
 
     if(!editingJob) return
 
-    const {company, position, status, link, createdAt, rating, moodTxt} = editingJob;
+    const {company, position, status, link, createdAt, salary, moodTxt} = editingJob;
     
     setCompany(company);
     setPosition(position);
     setStatus(status);
     setLink(link ?? "");
     setCreatedAt(createdAt);
-    setRating(rating ?? 0);
+    setSalary(salary ?? 0);
     setMoodTxt(moodTxt)
 
     },[editingJob])
@@ -59,7 +59,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob }: ModalProps) => {
             status: status,
             link: link,
             createdAt: createdAt,
-            rating: rating,
+            salary: salary,
             moodTxt: moodTxt,
             favorites: false,
         }
@@ -166,7 +166,7 @@ return(
                 
                 </select>
 
-                <PreviewCard companyName={company} jobPosition={position} jobLink={link}></PreviewCard>
+                <PreviewCard companyName={company} jobPosition={position} jobLink={link} jobSalary={salary}></PreviewCard>
                <div className="bg-green-500 flex w-full">
                    <button type="button" onClick={()=>{
                        jobStatesReset();
