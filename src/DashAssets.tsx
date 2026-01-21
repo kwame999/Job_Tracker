@@ -60,7 +60,7 @@ const TabView = ({children}: TabViewProps) => {
                     <li onClick={()=>{ handleTab(3) }}>{Ghosted}</li>
                 </ul>
 
-                <div className="tab-viewport flex outline-1 p-3.5 gap-7 p h-screen justify-center">
+                <div className="tab-viewport flex outline-1 p-3.5 gap-7 p  justify-center overflow-x-scroll">
                     {children}
                 </div>
             </div>

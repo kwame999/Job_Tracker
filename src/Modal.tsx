@@ -89,7 +89,7 @@ function jobStatesReset(){
 }
 return(
     
-    <section className="bg-red-300 absolute  p-6 rounded-2xl">
+    <section className="bg-red-300 absolute z-1  p-6 rounded-2xl">
             <h1 className="text-[28px]  font-bold pb-1.5">Track Job</h1>
             <form action="">
 
