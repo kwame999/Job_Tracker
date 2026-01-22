@@ -5,21 +5,23 @@ import IconSet from "./icons/icon"
 const Column = ({children, color, name = "grey", onShowModal}: ColumnProps) => {
 
     return(
-        <section className="p-3 rounded-t-xl rounded-b[18px] outline-1 outline-amber-950" style={{backgroundColor: color}} >
-            <div className="flex justify-between mb-2 font-bold">{name}
+        <div className="flex flex-col h-100 overflow-hidden outline-1 rounded-t-[14px] rounded-b[18px]">
+        <section className="h-100 overflow-hidden p-3 " style={{backgroundColor: color}} >
+            <div className="flex justify-between mb-2.5 font-extrabold tracking-wide">{name}
                 <button className="flex justify-center"> <IconSet iconName="moreHorizontal" size={18}></IconSet> </button>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col overflow-auto h-full">
                 {children}
             </div>
 
+        </section>
             <div>
-                <button onClick={onShowModal} className="flex justify-center-safe w-full outline-1 p-1">
+                <button onClick={onShowModal} className="flex justify-center-safe w-full sticky ">
 
                     <IconSet iconName="plus" size={24}></IconSet>
                 </button>
             </div>        
-        </section>
+        </div>
         
     )
 
@@ -34,28 +36,30 @@ const Card = ({job, onDelete, onEdit}: CardProps) => {
     }
     
     return(
-        <section className="flex flex-col rounded-xl w-134.5">
+        <section className="flex flex-col rounded-xl min-w-134.5 ">
             
-            <div className="flex p-3.5 bg-blue-500 rounded-lg w-full">
-            <img src={logo} alt={alt} width={60} className="rounded-md mr-3"/>
+            <div className="flex p-4 bg-blue-500 rounded-xl w-full">
+            <img src={logo} alt={alt} width={55} className="rounded-lg mr-3"/>
                     <div className="flex  flex-col justify-center w-full">
-                        <p className="font-bold text-md">{company}</p>
+                        <p className="font-bold text-md ml-1">{company}</p>
                         
-                        <div className="flex gap-6">
-                            <IconSet iconName="user" size={18}>
-                                <p><span className=" font-semibold">Position: </span>{position}</p>
+                        <div className="flex gap-5 text-sm">
+                            <IconSet iconName="user" size={16}>
+                                <p><span className=" font-medium tracking-[.2px]">Position: </span>{position}</p>
                             </IconSet>
 
-                            <IconSet iconName="money" size={15}>
-                                <p><span className="font-semibold">Salary: </span>{salary}</p>
+                            <IconSet iconName="money" size={16}>
+                                <p><span className="font-medium ">Salary: </span>{salary}</p>
                             </IconSet>
 
-                            <IconSet iconName="calender" size={18}>
-                                <p><span className="font-semibold">Applied: </span>{link}</p>
+                            <IconSet iconName="calender" size={16}>
+                                <p><span className="font-medium ">Applied: </span>{link}</p>
                             </IconSet>
 
                         <button onClick={ handleOpen } className="ml-auto">
-                            <IconSet iconName="cheveron" size={16}></IconSet>
+                            { !isOpen ? <IconSet iconName="cheveronDown" size={16}></IconSet> :
+                              <IconSet iconName="cheveronUp" size={16}></IconSet>
+                            }
                         </button>
 
                         </div>
