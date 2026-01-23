@@ -1,6 +1,8 @@
 import { useState, type ReactNode } from "react"
 import type { Tags, StatsBlockProps} from './Types'
 import { IconSet } from "./icons/icon";
+import './index.css'
+
 const Tag = () => {
 
     const [tagTypes, setTagTypes] = useState<Tags[]>([]);
@@ -8,7 +10,14 @@ const Tag = () => {
 
     function handleTag(){
 
-        if (tagTypes.length > 4) return
+        if (tagTypes.length > 4) {
+            (<div>
+                <p>Cannot set more than {tagTypes.length} tags</p>
+            </div>)
+            return
+        }
+
+
         setTagTypes(prev => [tag, ...prev]);
         setTag("")
     
@@ -16,11 +25,7 @@ const Tag = () => {
 
     function handleDeleteTag(id: number){
 
-
-        setTagTypes(
-
-            tagTypes.filter((tags, indx) => indx !== id)
-        )
+        setTagTypes( tagTypes.filter((tags, indx) => indx !== id))
 
     }
 
@@ -47,7 +52,7 @@ const Tag = () => {
              <div className="flex gap-3 overflow-x-scroll w-full"> 
                     { tagTypes.map((tag, indx) => 
 
-                        <div className="flex gap-1 outline-1 bg-amber-50 p-1" key={`${indx}`}>
+                        <div className="flex gap-1 outline-1 bg-amber-50 p-1 rounded-4xl" key={`${indx}`}>
                             <button onClick={()=>{ handleDeleteTag(indx) }}>
                                 <IconSet iconName="plus" size={18}></IconSet>
                             </button>
@@ -61,10 +66,12 @@ const Tag = () => {
                     
                     if(e.key === 'Enter') handleTag();
 
-                }}/>
+}}/>
             </div>
             </>
-
+             {tagTypes.length > 4 && <p className="text-blue-500">Cannot set more than {tagTypes.length} tags</p>
+}              
+            
         </div>
     )
 
@@ -94,13 +101,13 @@ const TabView = ({children, data}: TabViewProps) => {
     return(
         <>        
             <div className="tabs-container ml-6 mr-6">
-                <div className="flex justify-between outline-1 items-center mb-5">
-                    <div className='flex flex-col gap-5 px-2'>
-                        <div className='flex gap-6'>
-                            <StatBlock svgType='clock' svgSize={24} statTxt='Created:' data={Date.now()}></StatBlock>
-                            <StatBlock svgType='track' svgSize={24} statTxt='Jobs Tracked:' data={data.length}></StatBlock>
+                <div className="flex justify-between  items-center my-5">
+                    <div className='flex flex-col gap-2 px-2'>
+                        <div className='flex gap-8'>
+                            <StatBlock svgType='clock' svgSize={25} statTxt='Created:' data={Date.now()}></StatBlock>
+                            <StatBlock svgType='track' svgSize={25} statTxt='Jobs Tracked:' data={data.length}></StatBlock>
                         </div>
-                            <StatBlock svgType='tags' svgSize={24} statTxt='Tags:' data={"ux"}></StatBlock>
+                            <StatBlock svgType='tags' svgSize={25} statTxt='Tags:' data={"ux"}></StatBlock>
                     </div>
                     <ul className="tab-nav flex gap-6 text-center bg-green-600 p-2.5 w-fit rounded-xl outline-1  ">
                         <li onClick={()=>{ handleTab(0) }} className="bg-purple-200 p-1 rounded-md">{Kanban}</li>
@@ -110,7 +117,7 @@ const TabView = ({children, data}: TabViewProps) => {
                     </ul>
                 </div>
 
-                <div className="tab-viewport flex outline-1  gap-7  justify-between overflow-x-scroll px-2">
+                <div className="tab-viewport flex  gap-7  justify-between overflow-x-scroll px-2">
                     {children}
                 </div>
             </div>
@@ -145,8 +152,8 @@ const StatBlock = ({svgType,svgSize, statTxt, children, data}: StatsBlockProps) 
         <div>
             <div className="flex items-center gap-1">
             <IconSet iconName={svgType} size={svgSize}></IconSet>
-            <p>{statTxt}</p>
-            <p>{data}</p>
+            <p className="font-bold text-text-header2 text-md mr-1">{statTxt}</p>
+            <p className="text-text-paragrah font-semibold">{data}</p>
             </div>
             {children}
         </div>

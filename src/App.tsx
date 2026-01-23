@@ -44,12 +44,12 @@ function App() {
  }
 
   return (
-  <div className='flex h-screen overflow-hidden'>
+  <div className='flex h-screen overflow-hidden bg-main-bgs'>
   <SideNav recentJobs={jobs}></SideNav>
  
   <div className='w-full'>
     
-  <Header jobProjName='jooook' jobProjDetails = {jobs}></Header>
+  <Header jobProjName='UX-Hunt 2026' jobProjDetails = {jobs}></Header>
 
 
   {showModal && <Modal 
@@ -65,7 +65,7 @@ function App() {
   
   <TabView data={jobs}>
 
-  <Column color='yellow' name='Active' onShowModal={handleShowModal}>
+  <Column color='' name='Active' onShowModal={handleShowModal}>
     {jobs.map(job => (<Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>))};
   </Column>
 
@@ -79,11 +79,11 @@ function App() {
     
   </TabView>
 
-      <Tag/>
+      {/* <Tag/>
       
       <p className='bg-twitter-blue'>sadada
 
-      </p>
+      </p> */}
     </div>
    </div>
 

@@ -1,14 +1,30 @@
 import { useState } from "react"
 import type { ColumnProps, CardProps, CardPreview } from './Types'
 import { IconSet } from "./icons/icon"
+import './index.css'
 
 const Column = ({children, color, name = "grey", onShowModal}: ColumnProps) => {
 
+    const [more, setMore] = useState(false)
+    
+    function handleMore(){
+
+        setMore(!more ? true : false);
+    } 
+    
     return(
-        <div className="flex flex-col h-full overflow-hidden outline-1 rounded-t-3xl rounded-b[18px]">
-        <section className="h-100 overflow-hidden p-3 " style={{backgroundColor: color}} >
-            <div className="flex justify-between mb-2.5 font-extrabold tracking-wide">{name}
-                <button className="flex justify-center"> <IconSet iconName="moreHorizontal" size={18}></IconSet> </button>
+        <div className="flex flex-col h-full overflow-hidden bg-custom-fade  rounded-t-2xl rounded-b[18px] outline-2 outline-main-outline">
+        <section className="h-140 overflow-hidden p-3 relative " style={{backgroundColor: color}} >
+
+            { more &&  <ColumnOnMore/>}
+
+            <div className="flex justify-between mb-2.5 font-bold tracking-wide">{name}
+               
+                <button className="flex justify-center" onClick={ handleMore }> 
+                    
+                    <IconSet iconName="moreHorizontal" size={24}></IconSet> 
+                
+                </button>
             </div>
             <div className="flex flex-col overflow-auto h-full">
                 {children}
@@ -36,24 +52,24 @@ const Card = ({job, onDelete, onEdit}: CardProps) => {
     }
     
     return(
-        <section className="flex flex-col rounded-xl min-w-134.5 ">
+        <section className="flex flex-col rounded-xl min-w-134.5">
             
-            <div className="flex p-4 bg-blue-500 rounded-xl w-full">
-            <img src={logo} alt={alt} width={55} className="rounded-lg mr-3"/>
+            <div className="flex p-4 bg-card-main rounded-xl w-full text-text-header2">
+            <img src={logo} alt={alt} width={55} className="rounded-lg mr-3 outline-1 outline-main-outline"/>
                     <div className="flex  flex-col justify-center w-full">
-                        <p className="font-bold text-md ml-1">{company}</p>
+                        <p className=" font-semibold text-md ml-1 text-text-header">{company}</p>
                         
                         <div className="flex gap-5 text-sm">
-                            <IconSet iconName="user" size={16}>
-                                <p><span className=" font-medium tracking-[.2px]">Position: </span>{position}</p>
+                            <IconSet iconName="user" size={18}>
+                                <p><span className=" font-semibold tracking-[.2px] text-text-header">Position: </span>{position}</p>
                             </IconSet>
 
-                            <IconSet iconName="money" size={16}>
-                                <p><span className="font-medium ">Salary: </span>{salary}</p>
+                            <IconSet iconName="money" size={18}>
+                                <p><span className="font-semibold text-text-header">Salary: </span>{salary}</p>
                             </IconSet>
 
-                            <IconSet iconName="calender" size={16}>
-                                <p><span className="font-medium ">Applied: </span>{link}</p>
+                            <IconSet iconName="calender" size={18}>
+                                <p><span className="font-semibold text-text-header">Applied: </span>{link}</p>
                             </IconSet>
 
                         <button onClick={ handleOpen } className="ml-auto">
@@ -79,7 +95,8 @@ const Card = ({job, onDelete, onEdit}: CardProps) => {
                     <p>Applied:{createdAt}</p>
                     <p>Status:{status}</p>
                     <p>Mood:{moodTxt}</p>
-                    <p>Rating:{salary}</p>
+                    <p>Salary:{salary}</p>
+                    
                 </>
             }
 
@@ -105,6 +122,21 @@ const PreviewCard = ({companyName, jobPosition, jobLink, jobSalary}: CardPreview
         </section>
     )
 
+}
+
+
+const ColumnOnMore = () => {
+
+    return(
+        <form className=" absolute bg-pink-400 right-3 top-8 p-2 rounded-sm">
+            <p>Change theme</p>
+            <input type="radio" name="" id="" />
+            <input type="radio" name="" id="" />
+            <input type="radio" name="" id="" />
+        </form>
+
+
+    )
 }
 
 

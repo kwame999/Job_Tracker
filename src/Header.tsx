@@ -2,6 +2,8 @@ import { Children, useState, type ReactNode } from "react"
 import type { HeaderProps } from './Types'
 import { StatBlock } from "./DashAssets"
 import { IconSet } from "./icons/icon"
+import { Tag } from "./DashAssets"
+import './index.css'
 
 const presetBanners = ["./src/banners/default_0.png","imagelink2", "imagelink3"]
 
@@ -22,26 +24,33 @@ const Header = ({jobProjName, jobProjDetails}: HeaderProps)=> {
 
     return(
         <section className="">
-            <div className="flex bg-red-500 py-2 px-3.5 justify-between text-center h-13.25">
+            <div className="flex py-2 px-6 justify-between text-center h-13.25 text-text-header font-bold items-center">
                 {/* <img src="czxc" alt="" /> */}
-                <h1 className="text-2xl">{jobProjName}</h1>
+
+                <div className="flex items-center gap-4">
+                    <h1 className="text-lg">{jobProjName}</h1>
+                    <IconSet iconName="edit" size={20}></IconSet>
+                </div>
 
                 <button onClick={handleSwitch}>
-                    <IconSet iconName="moon" size={18}></IconSet>
+                    <IconSet iconName="more" size={20}></IconSet>
                 </button>
                 {/* <svg>s</svg> */}
             </div>
-            <div className=" w-full outline-1">
+
+            <div className=" w-full outline-1 outline-main-outline">
                 <img src={crntBanner} alt="Gradient Mesh" width="" height="40" className="w-full"/>
             </div>
+
+            
             {openSettings &&
             
                 <ProjectsSettingsModal>
-                    <section className="bg-purple-600 absolute w-100 flex flex-col p-5 rounded-xl">
+                    <section className="bg-purple-600 absolute w-fit flex flex-col p-5 rounded-xl">
                         <div className="flex justify-between">                        
                             <h1>Edit Project</h1>
                             <button onClick={handleSwitch}>
-                                <IconSet iconName="moon" size={18}></IconSet>
+                                <IconSet iconName="moon" size={14}></IconSet>
                             </button>
                         </div>
                         <fieldset className="flex flex-col gap-2 ">
@@ -73,8 +82,9 @@ const Header = ({jobProjName, jobProjDetails}: HeaderProps)=> {
                                 <img src={presetBanners[0]} alt="" width={""} height={100} className="w-100 h-10 rounded-[100px]" />
 
                             </div>
-                        
+                            
                         </fieldset>
+                        <Tag></Tag>
                     </section>
             </ProjectsSettingsModal>
             

@@ -10,7 +10,7 @@ export type JobType = {
     status: string,
     link?: string,
     createdAt: string,
-    salary?: number,
+    salary?: string | number | any,
     moodTxt: string,
     favorites: boolean,
     date: Date
@@ -42,7 +42,7 @@ export type CardPreview = {
     companyName: string,
     jobPosition: string,
     jobLink: string
-    jobSalary: number
+    jobSalary: string | number
 }
 
 //Dash assets
