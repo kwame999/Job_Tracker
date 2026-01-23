@@ -114,16 +114,18 @@ const TabView = ({children, data, jobs, onShowModal}: TabViewProps) => {
                 </div>
 
                 {jobs.length ? <div className="tab-viewport flex  gap-7  justify-between overflow-x-scroll px-2">{children}</div> 
-                             : <div className="flex flex-col w-full items-center justify-center"> <img src="\src\assets\flat-briefcase-icon-by-Vexels 1.png" alt="" />
+                             : <div className="flex flex-col w-full items-center justify-center mt-23.75"> <img src="\src\assets\flat-briefcase-icon-by-Vexels 1.png" alt="" />
                              
                              
-                                    <div className="flex center flex-col items-center gap-2">
-                                        <h1 className="text-2xl font-bold">No Jobs Tracked...</h1>
+                                    <div className="flex center flex-col items-center gap-1">
+                                        <h1 className="text-lg font-bold">No Jobs Tracked...</h1>
                                         <p>Add jobs to track your journey and see your growth!</p>
 
-                                        <div className="w-full flex justify-center items-center">
+                                        <div className="w-full flex justify-center items-center mt-5">
 
-                                            <button className=" bg-gray-300 p-2 w-[40%] rounded-lg font-bold" onClick={ onShowModal }>Track</button>
+                                            <button className=" bg-gray-700 p-2 w-[40%] rounded-lg font-bold shadow-[0px_4px_12px_0px_rgba(0,0,0,0.17)]" 
+                                                    onClick={ onShowModal }>Track
+                                            </button>
                                         
                                         </div>
                                     </div>

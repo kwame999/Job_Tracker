@@ -11,7 +11,8 @@ const Header = ({jobProjName, jobProjDetails}: HeaderProps)=> {
 
     const [crntBanner, setCrntBanner] = useState(presetBanners[0]);
     const [openSettings, setOpenSettings] = useState<boolean>(false)
-
+    const [editContent, setEditContent] =  useState<boolean>(false);
+    // const [projName, setProjName] =  useState<boolean>(false);
     
     function handleCrntBanner(e: React.ChangeEvent<HTMLInputElement>){
         setCrntBanner(e.target.value)
@@ -22,14 +23,21 @@ const Header = ({jobProjName, jobProjDetails}: HeaderProps)=> {
         setOpenSettings(!openSettings ? true : false);
     }
 
+    function handleEdit(){
+        setEditContent(!editContent ? true : false);
+    }
+
     return(
         <section className="">
             <div className="flex py-2 px-6 justify-between text-center h-13.25 text-text-header font-bold items-center">
                 {/* <img src="czxc" alt="" /> */}
 
                 <div className="flex items-center gap-4">
-                    <h1 className="text-lg">{jobProjName}</h1>
-                    <IconSet iconName="edit" size={20}></IconSet>
+                    <h1 className="text-lg" contentEditable={ editContent }>{jobProjName}</h1>
+
+                    <button className="" onClick={ handleEdit }>                        
+                        <IconSet iconName="edit" size={20}></IconSet>
+                    </button>
                 </div>
 
                 <button onClick={handleSwitch}>
