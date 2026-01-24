@@ -41,7 +41,7 @@ export type CardProps = {
 export type CardPreview = {
     companyName: string,
     jobPosition: string,
-    jobLink: string
+    jobcreatedAt: string
     jobSalary: string | number
 }
 
@@ -101,4 +101,5 @@ export type TabViewProps = {
     data: any
     jobs: JobType[]
     onShowModal: () => void
+ 
 }

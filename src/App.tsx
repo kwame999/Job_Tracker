@@ -43,8 +43,27 @@ function App() {
   setShowModal(!showModal? true : false)
  }
 
+ 
+
   return (
   <div className='flex h-screen overflow-hidden bg-main-bgs'>
+  {showModal &&  
+                    
+                    <>
+                    <Modal 
+          
+                    onAddJob={handleJobs} 
+                    editingJob={editJob} 
+                    updateJob={handleUpdateJob} 
+                    cancelJob={handleCancelJob}>
+
+                    </Modal>
+                    <div className='bg-black/50 p-40 absolute w-full h-full backdrop-blur-[1px] flex justify-center items-center'></div>
+                    </>
+
+               
+
+}
   <SideNav recentJobs={jobs}></SideNav>
  
   <div className='w-full'>
@@ -52,21 +71,11 @@ function App() {
   <Header jobProjName='UX-Hunt 2026' jobProjDetails = {jobs}></Header>
 
 
-  {showModal && <Modal 
-      
-                onAddJob={handleJobs} 
-                editingJob={editJob} 
-                updateJob={handleUpdateJob} 
-                cancelJob={handleCancelJob}>
-
-                </Modal>
-
-}
   
   <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal}>
 
     
-  {jobs.length > 0 && <>
+  {jobs.length > 0 && <div className=' flex gap-8 h-[64vh] justify-center w-full'>
   <Column color='' name='Active' onShowModal={handleShowModal}>
     {jobs.map(job => (<Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>))};
   </Column>
@@ -78,8 +87,9 @@ function App() {
   <Column color='pink' name='Ghosted' onShowModal={handleShowModal}>
   {jobs.map(job => (<Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>))};
     </Column>
-    </>
+    </div>
     }
+    
   </TabView>
 
       {/* <Tag/>

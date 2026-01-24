@@ -9,64 +9,43 @@ const Tag = () => {
     const [tag, setTag] = useState<string>("");
 
     function handleTag(){
-
-        if (tagTypes.length > 4) {
-            (<div>
-                <p>Cannot set more than {tagTypes.length} tags</p>
-            </div>)
-            return
-        }
-
-
         setTagTypes(prev => [tag, ...prev]);
         setTag("")
-    
     }
 
     function handleDeleteTag(id: number){
-
         setTagTypes( tagTypes.filter((tags, indx) => indx !== id))
-
     }
 
+
     return(
-        // <div>
-        //     <button onClick={handleOpenField}>+</button>
-
-        //     {openField && 
-        //     <>
-        //         <input type="text" onChange={(e)=>{ setTag(e.target.value) }}/>
-        //         <button onClick={handleTag}>add</button>
-        //         {openField && <><button onClick={()=>{setOpenField(false)}}>close</button></>}
-        //     </>}
-
-        //     {tagTypes.map(tag => <div> <h4>{tag}</h4> </div>)}
-        // </div>
+      
         <div>
-            {/* <button onClick={handleOpenField}>+</button> */}
 
             <>
 
             <div className="flex bg-red-700 min-w-140 max-w-140 p-2">
                 
              <div className="flex gap-3 overflow-x-scroll w-full"> 
+                    
                     { tagTypes.map((tag, indx) => 
 
                         <div className="flex gap-1 outline-1 bg-amber-50 p-1 rounded-4xl" key={`${indx}`}>
+                            
                             <button onClick={()=>{ handleDeleteTag(indx) }}>
                                 <IconSet iconName="plus" size={18}></IconSet>
                             </button>
+                            
                             <h4>{tag}</h4> 
+                        
                         </div>
 
                     )}
                 </div>
             
-                <input type="text" className="ml-auto" value={tag} onChange={(e)=>{ setTag(e.target.value)}} onKeyDown={(e)=>{
-                    
+                <input type="text" className="ml-auto" value={tag} onChange={(e)=>{ setTag(e.target.value)}} onKeyDown={(e)=>{                
                     if(e.key === 'Enter') handleTag();
-
-}}/>
+                }}/>
             </div>
             </>
              {tagTypes.length > 4 && <p className="text-blue-500">Cannot set more than {tagTypes.length} tags</p>
@@ -96,8 +75,8 @@ const TabView = ({children, data, jobs, onShowModal}: TabViewProps) => {
 
     return(
         <>        
-            <div className="tabs-container ml-6 mr-6">
-                <div className="flex justify-between  items-center my-5">
+            <div className="tabs-container ml-6 mr-6 out">
+                <div className="flex justify-between  items-center my-5 out">
                     <div className='flex flex-col gap-2 px-2'>
                         <div className='flex gap-8'>
                             <StatBlock svgType='clock' svgSize={25} statTxt='Created:' data={Date.now()}></StatBlock>
@@ -113,8 +92,8 @@ const TabView = ({children, data, jobs, onShowModal}: TabViewProps) => {
                     </ul>
                 </div>
 
-                {jobs.length ? <div className="tab-viewport flex  gap-7  justify-between overflow-x-scroll px-2">{children}</div> 
-                             : <div className="flex flex-col w-full items-center justify-center mt-23.75"> <img src="\src\assets\flat-briefcase-icon-by-Vexels 1.png" alt="" />
+                {jobs.length ? <div className="tab-viewport flex  gap-7  justify-between overflow-x-scroll px-2 py-2">{children}</div> 
+                             : <div className="flex flex-col w-full items-center justify-center  outline-2 outline-dashed rounded-xl py-7 h-[60vh] outline-gray-300 bg-gray-100"> <img src="\src\assets\flat-briefcase-icon-by-Vexels 1.png" alt="" width={200} />
                              
                              
                                     <div className="flex center flex-col items-center gap-1">

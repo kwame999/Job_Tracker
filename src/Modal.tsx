@@ -93,21 +93,23 @@ function jobStatesReset(){
 }
 return(
     
-    <section className="bg-red-300 absolute z-1  p-6 rounded-2xl">
-            <div className=" flex justify-between">
-            <h1 className="text-[28px]  font-bold pb-1.5">Track Job</h1>
-            <button onClick={handleClose}>
-                <IconSet iconName="sun" size={18}></IconSet>
-            </button>
+    <section className=" bg-gray-100 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  p-6 rounded-xl z-1 max-w-[440px]">
+            
+            <div className=" flex justify-between items-center mb-4">
+                <h1 className="text-[28px]  font-bold">Track Job</h1>
+                    <button onClick={handleClose}>
+                        <IconSet iconName="close" size={18}></IconSet>
+                    </button>
             </div>
+            
             <form action="">
 
                 <div className="flex flex-col gap-4  text-[17px]">
-                    <div className="flex outline-red-700 outline-2">
+                    <div className="flex gap-4.5">
                         <div className="flex flex-col gap-[.4rem]">
-                            <label htmlFor="" className="font-semibold">Company name:</label>
+                            <label htmlFor="" className="font-semibold text-sm">Company name:</label>
                             
-                            <input style={{backgroundColor: state.boarder}} className="p-1" type="text" name="company" id="" size={28} value={company} onChange={(e)=>{
+                            <input style={{backgroundColor: state.boarder}} className="p-1 w-full outline-1 outline-gray-400 rounded-md" type="text" name="company" id="" size={28} value={company} onChange={(e)=>{
 
                                 !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                                 setCompany(e.target.value);
@@ -115,8 +117,8 @@ return(
                         </div>
 
                         <div className="flex flex-col gap-[.4rem]">
-                        <label htmlFor="" className="font-semibold">Position:</label>
-                        <input type="text" name="role"  className="p-1" id="" size={28} value={position} onChange={(e)=>{
+                        <label htmlFor="" className="font-semibold text-sm">Position:</label>
+                        <input type="text" name="role"  className="p-1 outline-1 rounded-md bg-card-main w-full outline-gray-400" id="" size={28} value={position} onChange={(e)=>{
                             
                             !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                             setPosition(e.target.value)
@@ -124,10 +126,10 @@ return(
                         </div>
                     </div>
 
-                    <div className="flex gap-[.4rem]  outline-red-700 outline-2">
+                    <div className="flex gap-4.5">
                         <div className="flex flex-col gap-[.4rem] ">
-                            <label htmlFor="" className="font-semibold">Salary</label>
-                            <input type="text" name="link" id="" size={28}  className="p-1 bg-green-400" value={salary} onChange={(e)=>{
+                            <label htmlFor="" className="font-semibold text-sm">Salary</label>
+                            <input type="text" name="link" id="" size={28}  className="p-1 outline-1 outline-gray-400 rounded-md bg-card-main w-full" value={salary} onChange={(e)=>{
                                 
                                 !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                                 setSalary(e.target.value);
@@ -136,8 +138,8 @@ return(
                         </div>
 
                         <div className="flex flex-col gap-[.4rem]">
-                            <label htmlFor="" className="font-semibold">Created at:</label>
-                            <input type="text" name="date" id="" size={28} className="p-1" value={createdAt} onChange={(e)=>{
+                            <label htmlFor="" className="font-semibold text-sm">Created at:</label>
+                            <input type="text" name="date" id="" size={28} className="p-1 outline-1 outline-gray-400 rounded-sm bg-card-main w-full" value={createdAt} onChange={(e)=>{
                                 
                                 !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                                 setCreatedAt(e.target.value);
@@ -154,12 +156,12 @@ return(
                 </div>
 
                 <div className="flex flex-col gap-[.4rem]">
-                    <label htmlFor="mood" className=" text-[17px] font-semibold pt-5">Note</label>
+                    <label htmlFor="mood" className=" text-sm font-semibold pt-5 ">Note</label>
                     <textarea name="moodMsg" id="" value={moodTxt} onChange={(e)=>{
                         
                         !e.target.value ? dispatch({type: "EMPTY"}) : dispatch({type: "ACTIVE"});
                         setMoodTxt(e.target.value);
-                    }} rows={4} className=" bg-yellow-300"></textarea>
+                    }} rows={4} className="p-1 outline-1 outline-gray-400  rounded-md bg-card-main w-full"></textarea>
                 </div>
 
                 <select name="status" id="" onChange={(e)=>{
@@ -177,16 +179,16 @@ return(
                 
                 </select>
 
-                <PreviewCard companyName={company} jobPosition={position} jobLink={link} jobSalary={salary}></PreviewCard>
+                <PreviewCard companyName={company} jobPosition={position} jobcreatedAt={createdAt} jobSalary={salary}></PreviewCard>
                
-               <div className="bg-green-500 flex w-full">
+               <div className="flex w-full gap-3 font-bold">
 
-                   <button type="button" onClick={ handleClose } className="bg-amber-500 w-full p-3">Cancel</button>
+                   <button type="button" onClick={ handleClose } className="bg-amber-500 w-full p-3 rounded-lg">Cancel</button>
                 
                     <button type="button" onClick={()=>{
                         handleJobsNType();
                         jobStatesReset()
-                    }}className="w-full">{editingJob ? "Save" : "Track"}</button>
+                    }}className="w-full bg-gray-400 rounded-lg">{editingJob ? "Save" : "Track"}</button>
                 
                 </div>
             </form>
