@@ -7,7 +7,7 @@ import './index.css'
 
 const presetBanners = ["./src/banners/default_0.png","imagelink2", "imagelink3"]
 
-const Header = ({jobProjName, jobProjDetails}: HeaderProps)=> {
+const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes}: HeaderProps)=> {
 
     const [crntBanner, setCrntBanner] = useState(presetBanners[0]);
     const [openSettings, setOpenSettings] = useState<boolean>(false)
@@ -93,7 +93,7 @@ const Header = ({jobProjName, jobProjDetails}: HeaderProps)=> {
                             </div>
                             
                         </fieldset>
-                        <Tag></Tag>
+                        <Tag handleNewTag={handleNewTag} tagTypes={tagTypes}></Tag>
                     </section>
             </ProjectsSettingsModal>
             

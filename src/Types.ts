@@ -59,8 +59,10 @@ export type StatsBlockProps = {
 }
 //Header assets (DashAssets.tsx)
 export type HeaderProps = {
-    jobProjName: string
+    jobProjName?: string
     jobProjDetails?: JobType[]
+    handleNewTag: (tag: Tags[]) => void
+    tagTypes: Tags[]
 }
 
 //Modal assets (Modal.tsx)

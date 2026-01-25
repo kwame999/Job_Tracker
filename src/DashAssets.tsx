@@ -1,20 +1,20 @@
 import { useState, type ReactNode } from "react"
-import type { Tags, StatsBlockProps} from './Types'
+import type { Tags, StatsBlockProps, HeaderProps} from './Types'
 import { IconSet } from "./icons/icon";
 import './index.css'
 import type { TabViewProps } from "./Types";
-const Tag = () => {
+const Tag = ({handleNewTag, tagTypes}: HeaderProps) => {
 
-    const [tagTypes, setTagTypes] = useState<Tags[]>([]);
     const [tag, setTag] = useState<string>("");
 
     function handleTag(){
-        setTagTypes(prev => [tag, ...prev]);
+        if(tagTypes.length > 4 || tag === "") return
+        handleNewTag([tag, ...tagTypes])
         setTag("")
     }
 
     function handleDeleteTag(id: number){
-        setTagTypes( tagTypes.filter((tags, indx) => indx !== id))
+        handleNewTag( tagTypes.filter((tags, indx) => indx !== id))
     }
 
 

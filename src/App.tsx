@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {Column, Card} from './Column'
 import { Modal } from './Modal'
 import {Tag, TabView, StatBlock, ModalNewContainer} from './DashAssets'
 import './index.css'
 import {Header} from './Header'
-import type { JobType} from './Types'
+import type { JobType, Tags} from './Types'
 import SideNav from './SideNav'
 import { IconSet } from './icons/icon'
 
@@ -19,8 +19,9 @@ function App() {
  const [showModal, setShowModal] = useState<boolean>(false)
  const [showNewModal, setShowNewModal] = useState<boolean>(false)
  const [customContainer, setCustomContainer] = useState<CustomContainerT[]>([])
+ const [tagTypes, setTagTypes] = useState<Tags[]>([]);
 
-
+  console.log(tagTypes)
  function handleContainer(newContainer: CustomContainerT){
   setCustomContainer(prev => [...prev, newContainer])
  }
@@ -75,6 +76,12 @@ function renderFilteredJob(jobStatus: string){
                           onEdit={handleEditJob}></Card>) ) 
 }
 
+
+function handleSetTags(newTag: Tags[]){
+
+  setTagTypes(newTag)
+}
+
   return (
   <div className='flex h-screen overflow-hidden bg-main-bgs'>
         
@@ -97,7 +104,7 @@ function renderFilteredJob(jobStatus: string){
  
   <div className='w-full'>
     
-    <Header jobProjName='UX-Hunt 2026' jobProjDetails = {jobs}></Header>
+    <Header jobProjName='UX-Hunt 2026' jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes}></Header>
     <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal}>
 
 
@@ -128,10 +135,12 @@ function renderFilteredJob(jobStatus: string){
                                                         </Column> }
                         
 
+                    {customContainer.map(container => <Column  name={container.containerName} onShowModal={handleShowModal}>
+                                                      {renderFilteredJob(container.containerName)}
+                                                      </Column>)}
+                    
                   </div>}
             
-          {customContainer.map(container => <Column  name={container.containerName} onShowModal={handleShowModal}></Column>)}
-          
           
           <div className=' bg-transparent flex p-2  rounded-[1000px] font-medium'>
           {/* <Column color='' name="" onShowModal={()=> true }> 
