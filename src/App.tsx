@@ -20,24 +20,6 @@ function App() {
  const [showNewModal, setShowNewModal] = useState<boolean>(false)
  const [customContainer, setCustomContainer] = useState<CustomContainerT[]>([])
 
- console.log(customContainer)
- type FiltertedTypes = {
-  applied:  () => JobType[] | void
- }
- const [appliedJobs, setAppliedJobs] = useState<JobType[]>([])
- const [wishedJobs, setWishedJobs] = useState<JobType[]>([])
- const [interviewJobs, setinterviewJobs] = useState<JobType[]>([])
- const [offerJobs, setOfferJobs] = useState<JobType[]>([])
- const [rejectedJobs, setRejectedJobs] = useState<JobType[]>([])
- const [ghostedJobs, setGhostedJobs] = useState<JobType[]>([])
- //  const [filteredJobs, setFilteredJobs] = useState<FiltertedTypes>({
-//     applied: filterJobs('applied'),
-//     wishlisted: filterJobs('wishlist'),
-//     interview: filterJobs('interview'),
-//     offer: filterJobs('offer'),
-//     rejected: filterJobs('rejected'),
-//     ghosted: filterJobs('ghosted'),
-//  })
 
  function handleContainer(newContainer: CustomContainerT){
   setCustomContainer(prev => [...prev, newContainer])
@@ -77,112 +59,108 @@ function App() {
   function handleNewModal(){
   setShowNewModal(!showNewModal? true : false)
  }
-//Use use effect here
-useEffect(()=>{
 
-  setAppliedJobs(jobs.filter(jobs => jobs.status === 'applied')) 
-  setWishedJobs(jobs.filter(jobs => jobs.status === 'wishlist')) 
-  setinterviewJobs(jobs.filter(jobs => jobs.status === 'interview')) 
-  setOfferJobs(jobs.filter(jobs => jobs.status === 'offer')) 
-  setRejectedJobs(jobs.filter(jobs => jobs.status === 'rejected')) 
-  setGhostedJobs(jobs.filter(jobs => jobs.status === 'ghosted'))
+function jobStatusTypeCheck(jobStatus: string){
+  
+  return jobs.some(job => job.status === jobStatus)
+ 
+}
 
-}, [jobs])
-
-  // function renderJobs(jobs: JobType[]){
-
-
-  // }
 
 
   return (
   <div className='flex h-screen overflow-hidden bg-main-bgs'>
-  {showModal &&  
+        
+        {showModal &&  
+                          
+                  
+                          <Modal 
+                
+                          onAddJob={handleJobs} 
+                          editingJob={editJob} 
+                          updateJob={handleUpdateJob} 
+                          cancelJob={handleCancelJob}
+                          onAddCustomCol={customContainer}>
+                          
+                          </Modal>
                     
-             
-                    <Modal 
-          
-                    onAddJob={handleJobs} 
-                    editingJob={editJob} 
-                    updateJob={handleUpdateJob} 
-                    cancelJob={handleCancelJob}
-                    onAddCustomCol={customContainer}>
-                    
-                    </Modal>
-              
+        }
 
-               
-
-}
   <SideNav recentJobs={jobs}></SideNav>
  
   <div className='w-full'>
     
-  <Header jobProjName='UX-Hunt 2026' jobProjDetails = {jobs}></Header>
+    <Header jobProjName='UX-Hunt 2026' jobProjDetails = {jobs}></Header>
+    <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal}>
 
 
-  
-  <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal}>
-
-    
   {jobs.length && <div className=' flex gap-8 h-[64vh] justify-center w-full'>
  
      
+                  { jobStatusTypeCheck('ghosted') && <Column color='' name='Ghosted' onShowModal={handleShowModal}>
+                                                      { 
+                                                        jobs.filter(jobs => jobs.status === 'ghosted')
+                                                            .map(job => ( <Card key={job.id} 
+                                                                                job={job} 
+                                                                                onDelete={handleDeleteJobs} 
+                                                                                onEdit={handleEditJob}></Card>) ) 
+                                                      }
+                                                  </Column> }
+ 
+ 
+                  { jobStatusTypeCheck('applied') && <Column color='' name='Applied' onShowModal={handleShowModal}>
+                                                      { 
+                                                        jobs.filter(jobs => jobs.status === 'applied')
+                                                            .map(job => ( <Card key={job.id} 
+                                                                                job={job} 
+                                                                                onDelete={handleDeleteJobs} 
+                                                                                onEdit={handleEditJob}></Card>) )
+                                                      }
+                                                  </Column> }
 
-                               <Column color='' name='Ghosted' onShowModal={handleShowModal}>
-                                    { 
-                    
-                                      jobs.filter(jobs => jobs.status === 'ghosted')
-                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )
-                                      
-                                    }
-                                  
-                                  </Column>
-                                  
-                               <Column color='' name='Applied' onShowModal={handleShowModal}>
-                                    { 
-                                      jobs.filter(jobs => jobs.status === 'applied')
-                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )
-                                    }
-                                  
-                                </Column>
-                               
-                               <Column color='' name='Wished' onShowModal={handleShowModal}>
-                                    { 
-                                      jobs.filter(jobs => jobs.status === 'wishlist')
-                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )  
-                                    }
-                                  
-                                </Column>
-                               
-                               <Column color='' name='Interview' onShowModal={handleShowModal}>
-                                    { 
-                                      jobs.filter(jobs => jobs.status === 'interview')
-                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )  
-                                    }
-                                  
-                                </Column>
-                               
-                               <Column color='' name='Offer' onShowModal={handleShowModal}>
-                                    { 
-                                      jobs.filter(jobs => jobs.status === 'offer')
-                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )  
-                                    }
-                                  
-                                </Column>
-                              
-                               <Column color='' name='Rejected' onShowModal={handleShowModal}>
-                                    { 
-                                      jobs.filter(jobs => jobs.status === 'rejected')
-                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )  
-                                    }
-                                  
-                                </Column>
+                  { jobStatusTypeCheck('wishlist') && <Column color='' name='Wished' onShowModal={handleShowModal}>
+                                                      { 
+                                                        jobs.filter(jobs => jobs.status === 'wishlist')
+                                                            .map(job => ( <Card key={job.id} 
+                                                                                job={job} 
+                                                                                onDelete={handleDeleteJobs} 
+                                                                                onEdit={handleEditJob}></Card>) ) 
+                                                      }
+                                                  </Column> }
 
-      
+                  { jobStatusTypeCheck('interview') && <Column color='' name='Interview' onShowModal={handleShowModal}>
+                                                      { 
+                                                        jobs.filter(jobs => jobs.status === 'interview')
+                                                            .map(job => ( <Card key={job.id} 
+                                                                                job={job} 
+                                                                                onDelete={handleDeleteJobs} 
+                                                                                onEdit={handleEditJob}></Card>) )
+                                                      }
+                                                  </Column> }
 
-                      </div>
-          }
+                  { jobStatusTypeCheck('offer') && <Column color='' name='Offer' onShowModal={handleShowModal}>
+                                                      { 
+                                                        jobs.filter(jobs => jobs.status === 'offer')
+                                                            .map(job => ( <Card key={job.id} 
+                                                                                job={job} 
+                                                                                onDelete={handleDeleteJobs} 
+                                                                                onEdit={handleEditJob}></Card>) )
+                                                      }
+                                                  </Column> }
+
+                  { jobStatusTypeCheck('rejected') && <Column color='' name='Rejected' onShowModal={handleShowModal}>
+                                                      { 
+                                                        jobs.filter(jobs => jobs.status === 'rejected')
+                                                            .map(job => ( <Card key={job.id} 
+                                                                                job={job} 
+                                                                                onDelete={handleDeleteJobs} 
+                                                                                onEdit={handleEditJob}></Card>) )
+                                                      }
+                                                  </Column> }
+                        
+ 
+
+                    </div>}
             
           {customContainer.map(container => <Column  name={container.containerName} onShowModal={handleShowModal}></Column>)}
           
@@ -202,17 +180,10 @@ useEffect(()=>{
           {  showNewModal &&  <ModalNewContainer setNewContainer={handleContainer}></ModalNewContainer>  }
             
   </TabView>
+  </div>
+  </div>
 
-      {/* <Tag/>
-      
-      <p className='bg-twitter-blue'>sadada
 
-      </p> */}
-    </div>
-   </div>
-
-    // <Column name='Active'>
-    // </Column>
   )
 }
 
