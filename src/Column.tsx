@@ -25,7 +25,8 @@ const Column = ({children, color, name = "grey", onShowModal}: ColumnProps) => {
                 </button>
 
             </div>
-            <div className="flex flex-col overflow-auto h-full ">
+            
+            <div className="flex flex-col overflow-auto h-full">
                 {children}
             </div>
 

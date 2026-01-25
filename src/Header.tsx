@@ -48,6 +48,7 @@ const Header = ({jobProjName, jobProjDetails}: HeaderProps)=> {
 
             <div className=" w-full outline-1 outline-main-outline">
                 <img src={crntBanner} alt="Gradient Mesh" width="" height="40" className="w-full"/>
+                <div className=" bg-neutral-500 w-full h-8"></div>
             </div>
 
             

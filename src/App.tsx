@@ -1,17 +1,48 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Column, Card} from './Column'
 import { Modal } from './Modal'
-import {Tag, TabView, StatBlock} from './DashAssets'
+import {Tag, TabView, StatBlock, ModalNewContainer} from './DashAssets'
 import './index.css'
 import {Header} from './Header'
 import type { JobType} from './Types'
 import SideNav from './SideNav'
+import { IconSet } from './icons/icon'
 
+type CustomContainerT = {
+  containerName: string,
+  containerColor?: string,
+}
 
 function App() {
  const [jobs, setJobs] = useState<JobType[]>([])
  const [editJob, setNewEditJob] = useState<JobType | null>(null)
  const [showModal, setShowModal] = useState<boolean>(false)
+ const [showNewModal, setShowNewModal] = useState<boolean>(false)
+ const [customContainer, setCustomContainer] = useState<CustomContainerT[]>([])
+
+ console.log(customContainer)
+ type FiltertedTypes = {
+  applied:  () => JobType[] | void
+ }
+ const [appliedJobs, setAppliedJobs] = useState<JobType[]>([])
+ const [wishedJobs, setWishedJobs] = useState<JobType[]>([])
+ const [interviewJobs, setinterviewJobs] = useState<JobType[]>([])
+ const [offerJobs, setOfferJobs] = useState<JobType[]>([])
+ const [rejectedJobs, setRejectedJobs] = useState<JobType[]>([])
+ const [ghostedJobs, setGhostedJobs] = useState<JobType[]>([])
+ //  const [filteredJobs, setFilteredJobs] = useState<FiltertedTypes>({
+//     applied: filterJobs('applied'),
+//     wishlisted: filterJobs('wishlist'),
+//     interview: filterJobs('interview'),
+//     offer: filterJobs('offer'),
+//     rejected: filterJobs('rejected'),
+//     ghosted: filterJobs('ghosted'),
+//  })
+
+ function handleContainer(newContainer: CustomContainerT){
+  setCustomContainer(prev => [...prev, newContainer])
+ }
+
  function handleJobs(newJob: JobType){
 
     setJobs(previous => [...previous, newJob])
@@ -43,23 +74,42 @@ function App() {
   setShowModal(!showModal? true : false)
  }
 
- 
+  function handleNewModal(){
+  setShowNewModal(!showNewModal? true : false)
+ }
+//Use use effect here
+useEffect(()=>{
+
+  setAppliedJobs(jobs.filter(jobs => jobs.status === 'applied')) 
+  setWishedJobs(jobs.filter(jobs => jobs.status === 'wishlist')) 
+  setinterviewJobs(jobs.filter(jobs => jobs.status === 'interview')) 
+  setOfferJobs(jobs.filter(jobs => jobs.status === 'offer')) 
+  setRejectedJobs(jobs.filter(jobs => jobs.status === 'rejected')) 
+  setGhostedJobs(jobs.filter(jobs => jobs.status === 'ghosted'))
+
+}, [jobs])
+
+  // function renderJobs(jobs: JobType[]){
+
+
+  // }
+
 
   return (
   <div className='flex h-screen overflow-hidden bg-main-bgs'>
   {showModal &&  
                     
-                    <>
+             
                     <Modal 
           
                     onAddJob={handleJobs} 
                     editingJob={editJob} 
                     updateJob={handleUpdateJob} 
-                    cancelJob={handleCancelJob}>
-
+                    cancelJob={handleCancelJob}
+                    onAddCustomCol={customContainer}>
+                    
                     </Modal>
-                    <div className='bg-black/50 p-40 absolute w-full h-full backdrop-blur-[1px] flex justify-center items-center'></div>
-                    </>
+              
 
                
 
@@ -75,21 +125,82 @@ function App() {
   <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal}>
 
     
-  {jobs.length > 0 && <div className=' flex gap-8 h-[64vh] justify-center w-full'>
-  <Column color='' name='Active' onShowModal={handleShowModal}>
-    {jobs.map(job => (<Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>))};
-  </Column>
+  {jobs.length && <div className=' flex gap-8 h-[64vh] justify-center w-full'>
+ 
+     
 
-  <Column color='red' name='Waiting' onShowModal={handleShowModal}>
-      {jobs.map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>))};
-  </Column>
+                               <Column color='' name='Ghosted' onShowModal={handleShowModal}>
+                                    { 
+                    
+                                      jobs.filter(jobs => jobs.status === 'ghosted')
+                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )
+                                      
+                                    }
+                                  
+                                  </Column>
+                                  
+                               <Column color='' name='Applied' onShowModal={handleShowModal}>
+                                    { 
+                                      jobs.filter(jobs => jobs.status === 'applied')
+                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )
+                                    }
+                                  
+                                </Column>
+                               
+                               <Column color='' name='Wished' onShowModal={handleShowModal}>
+                                    { 
+                                      jobs.filter(jobs => jobs.status === 'wishlist')
+                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )  
+                                    }
+                                  
+                                </Column>
+                               
+                               <Column color='' name='Interview' onShowModal={handleShowModal}>
+                                    { 
+                                      jobs.filter(jobs => jobs.status === 'interview')
+                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )  
+                                    }
+                                  
+                                </Column>
+                               
+                               <Column color='' name='Offer' onShowModal={handleShowModal}>
+                                    { 
+                                      jobs.filter(jobs => jobs.status === 'offer')
+                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )  
+                                    }
+                                  
+                                </Column>
+                              
+                               <Column color='' name='Rejected' onShowModal={handleShowModal}>
+                                    { 
+                                      jobs.filter(jobs => jobs.status === 'rejected')
+                                          .map(job => ( <Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>) )  
+                                    }
+                                  
+                                </Column>
 
-  <Column color='pink' name='Ghosted' onShowModal={handleShowModal}>
-  {jobs.map(job => (<Card key={job.id} job={job} onDelete={handleDeleteJobs} onEdit={handleEditJob}></Card>))};
-    </Column>
-    </div>
-    }
-    
+      
+
+                      </div>
+          }
+            
+          {customContainer.map(container => <Column  name={container.containerName} onShowModal={handleShowModal}></Column>)}
+          
+          
+          <div className=' bg-transparent flex p-2  rounded-[1000px] font-medium'>
+          {/* <Column color='' name="" onShowModal={()=> true }> 
+          <div className='w-full bg-red-400'></div>
+          <button>fgd</button>
+          </Column> */}
+              <button  className='flex flex-col items-center justify-center text-gray-600' onClick={handleNewModal}>Container
+                <IconSet iconName='plus' size={28}></IconSet>
+              </button>
+          </div>
+
+          
+
+          {  showNewModal &&  <ModalNewContainer setNewContainer={handleContainer}></ModalNewContainer>  }
+            
   </TabView>
 
       {/* <Tag/>

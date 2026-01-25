@@ -173,6 +173,80 @@ const ProjectSetModal = () => {
 
 }
 
+type CustomContainerT = {
+  containerName: string,
+  containerColor?: string,
+}
+
+type ModalNewContainerProps = {
+setNewContainer: (container: CustomContainerT) => void
+
+}
+
+const ModalNewContainer = ({setNewContainer}: ModalNewContainerProps) => {
+    
+  const [showNewModal, setShowNewModal] = useState<boolean>(true)
+  const [containerName, setContainerName] = useState<string>("")
+//   const [containerColor, setContainerColor] = useState<string>("")
 
 
-export {Tag, TabView, StatBlock, ProjectSetModal} 
+  function handleNewModal(){
+  setShowNewModal(!showNewModal && false)
+ }
+    
+ function handleNewContainer(){
+
+    const newContainer = {
+
+        containerName: containerName,
+        // containerColor: containerName,
+    }
+
+    setNewContainer(newContainer);
+
+ }
+
+
+    return(
+
+    showNewModal && (
+        <form className=" absolute bg-red-400 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-3 ">
+            <div className=" flex justify-between">
+            <h1>Name</h1>
+            <button onClick={(e)=> {
+                e.preventDefault();
+                handleNewModal();
+            }}>
+                <IconSet iconName="close" size={18}></IconSet>
+W            </button>
+            </div>
+            <input type="text" name="projName" id="" onChange={(e)=>{
+                setContainerName(e.target.value)
+            }} />
+       
+            <div>
+                Container color
+
+                <ul className="flex justify-evenly">
+                    <li>fdsfs</li>    
+                    <li>fdsfs</li>    
+                    <li>fdsfs</li>    
+                </ul>                
+            </div>
+        
+            <button className="p-2 bg-red-500" onClick={(e)=>{
+                
+                e.preventDefault();
+                handleNewContainer();
+                handleNewModal();
+
+            }}>Create</button>
+
+        </form>
+    )
+)
+}
+
+
+
+export {Tag, TabView, StatBlock, ProjectSetModal, ModalNewContainer} 

@@ -17,7 +17,7 @@ function inputReducer(state: State, action: Action): State {
 
 
 
-const Modal = ({ onAddJob, editingJob, updateJob, cancelJob }: ModalProps) => {
+const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol }: ModalProps) => {
     
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
@@ -92,8 +92,10 @@ function jobStatesReset(){
     
 }
 return(
+    <>
     
-    <section className=" bg-gray-100 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  p-6 rounded-xl z-1 max-w-[440px]">
+    <div className='bg-black/50 p-40 absolute w-full h-full backdrop-blur-[1px] flex justify-center items-center z-1'></div>
+    <section className=" bg-gray-100 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  p-6 rounded-xl z-1000 max-w-[440px]">
             
             <div className=" flex justify-between items-center mb-4">
                 <h1 className="text-[28px]  font-bold">Track Job</h1>
@@ -176,7 +178,7 @@ return(
                     <option value="offer">Offer</option>
                     <option value="rejected">Rejected</option>
                     <option value="ghosted">Ghosted</option>
-                
+                    { onAddCustomCol.map( col => <option value={col.containerName}>{col.containerName}</option> ) }
                 </select>
 
                 <PreviewCard companyName={company} jobPosition={position} jobcreatedAt={createdAt} jobSalary={salary}></PreviewCard>
@@ -194,6 +196,7 @@ return(
             </form>
 
         </section>
+    </>
 )
 
 }

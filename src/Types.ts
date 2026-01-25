@@ -93,6 +93,7 @@ export type ModalProps = {
     editingJob: JobType | null,
     updateJob:  UpdateJob,
     cancelJob: cancelJob
+    onAddCustomCol: CustomContainerT[]
 }
 
 
@@ -102,4 +103,9 @@ export type TabViewProps = {
     jobs: JobType[]
     onShowModal: () => void
  
+}
+
+type CustomContainerT = {
+  containerName: string,
+  containerColor?: string,
 }
