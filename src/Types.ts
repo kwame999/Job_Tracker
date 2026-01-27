@@ -104,6 +104,7 @@ export type TabViewProps = {
     data: any
     jobs: JobType[]
     onShowModal: () => void
+    tags: Tags[]
  
 }
 

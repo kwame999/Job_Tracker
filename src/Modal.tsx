@@ -27,6 +27,8 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol }: M
     const [salary, setSalary] = useState("");
     const [moodTxt, setMoodTxt] = useState("");
     
+    // const [lastCreatedID, setLastCreatedID] = useState<string>("")
+    // console.log(lastCreatedID)
     const [state, dispatch] = useReducer(inputReducer, { boarder: "grey", })
     
     useEffect(() => {
@@ -68,7 +70,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol }: M
 
 
         if(editingJob){ updateJob(newJob) } else { onAddJob(newJob) } 
-        
+        // if (!editingJob) setLastCreatedID(newJob.id)
     
 }
 
@@ -190,6 +192,7 @@ return(
                     <button type="button" onClick={()=>{
                         handleJobsNType();
                         jobStatesReset()
+                        
                     }}className="w-full bg-gray-400 rounded-lg">{editingJob ? "Save" : "Track"}</button>
                 
                 </div>

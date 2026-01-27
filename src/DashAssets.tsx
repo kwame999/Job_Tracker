@@ -58,7 +58,7 @@ const Tag = ({handleNewTag, tagTypes}: HeaderProps) => {
 
 
 
-const TabView = ({children, data, jobs, onShowModal}: TabViewProps) => {
+const TabView = ({children, data, jobs, onShowModal, tags}: TabViewProps) => {
 
     const tabItems: string[] = ["Kanban View", "Accepted", "Wishlist", "Ghosted"];
     const [Kanban, Accepted, Wishlist, Ghosted] = tabItems
@@ -82,7 +82,12 @@ const TabView = ({children, data, jobs, onShowModal}: TabViewProps) => {
                             <StatBlock svgType='clock' svgSize={25} statTxt='Created:' data={Date.now()}></StatBlock>
                             <StatBlock svgType='track' svgSize={25} statTxt='Jobs Tracked:' data={data.length}></StatBlock>
                         </div>
-                            <StatBlock svgType='tags' svgSize={25} statTxt='Tags:' data={"ux"}></StatBlock>
+                            <StatBlock svgType='tags' svgSize={25} statTxt='Tags:' data={""}>
+                                
+                                <div className="flex gap-8">
+                                    { tags.map(tag => <div>{ tag }</div>) }
+                                </div>
+                            </StatBlock>
                     </div>
                     <ul className="tab-nav flex gap-6 text-center bg-green-600 p-2.5 w-fit rounded-xl outline-1  ">
                         <li onClick={()=>{ handleTab(0) }} className="bg-purple-200 p-1 rounded-md">{Kanban}</li>
@@ -146,9 +151,10 @@ const StatBlock = ({svgType,svgSize, statTxt, children, data}: StatsBlockProps) 
             <div className="flex items-center gap-1">
             <IconSet iconName={svgType} size={svgSize}></IconSet>
             <p className="font-bold text-text-header2 text-md mr-1">{statTxt}</p>
-            <p className="text-text-paragrah font-semibold">{data}</p>
+            <p className="text-text-paragrah font-semibold">{data || children}</p> 
+            
             </div>
-            {children}
+            {/* {children} */}
         </div>
 
     )

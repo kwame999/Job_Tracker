@@ -105,7 +105,7 @@ function handleSetTags(newTag: Tags[]){
   <div className='w-full'>
     
     <Header jobProjName='UX-Hunt 2026' jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes}></Header>
-    <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal}>
+    <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal} tags={tagTypes}>
 
 
   {jobs.length && <div className=' flex gap-8 h-[64vh] justify-center w-full'>
