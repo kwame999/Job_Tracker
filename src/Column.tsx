@@ -4,114 +4,86 @@ import { IconSet } from "./icons/icon"
 import './index.css'
 
 const Column = ({children, color, name = "grey", onShowModal}: ColumnProps) => {
-
     const [more, setMore] = useState(false)
     
-    function handleMore(){
-
-        setMore(!more ? true : false);
-    } 
-    
     return(
-        <div className="flex flex-col h-full overflow-hidden bg-custom-fade  rounded-t-2xl rounded-b[18px] outline-2 outline-main-outline  drop-shadow-lg">
-        <section className=" overflow-hidden p-3 relative" style={{backgroundColor: color}} >
-
-            { more &&  <ColumnOnMore/>}
-
-            <div className="flex justify-between mb-2.5 font-bold tracking-wide">{name}
-               
-                <button className="" onClick={ handleMore }>  
-                    <IconSet iconName="moreHorizontal" size={24}></IconSet> 
-                </button>
-
-            </div>
+        <div className="flex flex-col shrink-0 min-w-[420px] max-w-[350px] h-full bg-[#F7F7F7] rounded-[16px] border border-black/[0.05] overflow-hidden">
             
-            <div className="flex flex-col overflow-auto h-full ">
+            {/* Column Header */}
+            <div className="p-4 flex justify-between items-center bg-white border-b border-black/[0.03]">
+                <div className="flex items-center gap-2">
+                    <div className="w-2.5 h-2.5 rounded-full" style={{backgroundColor: color}}></div>
+                    <span className="font-bold text-[#1A1A1A] tracking-tight capitalize">{name}</span>
+                </div>
+                <button onClick={() => setMore(!more)} className="p-1 hover:bg-gray-100 rounded-md transition-colors">
+                    <IconSet iconName="moreHorizontal" size={20} />
+                </button>
+            </div>
+
+            {/* Column Area */}
+            <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-3 custom-scrollbar">
                 {children}
             </div>
 
-        </section>
-            <div className="outline-2">
-                <button onClick={onShowModal} className="flex justify-center-safe w-full sticky ">
-
-                    <IconSet iconName="plus" size={24}></IconSet>
+            {/* Column Buttom / Add Button */}
+            <div className="p-3 bg-[#F7F7F7] border-t border-black/[0.02]">
+                <button 
+                    onClick={onShowModal} 
+                    className="w-full py-2.5 flex justify-center items-center gap-2 rounded-xl border-2 border-dashed border-black/[0.08] text-black/40 hover:text-black hover:border-black/20 hover:bg-white transition-all font-bold text-sm"
+                >
+                    <IconSet iconName="plus" size={18} />
+                    <span>Add Job</span>
                 </button>
-            </div>        
+            </div>
         </div>
-        
     )
-
 }
 
 const Card = ({job, onDelete, onEdit}: CardProps) => {
-    
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const {id, company, position, link, status, moodTxt, createdAt, salary, companyIcon: {logo, alt}} = job
-    function handleOpen(){
-        setIsOpen( !isOpen ? true : false );
-    }
-    
+    const {id, company, position, moodTxt, createdAt, salary, companyIcon: {logo, alt}} = job
+
     return(
-        <section className="flex flex-col rounded-xl min-w-134.5">
-            
-            <div className="flex p-3 bg-card-main rounded-xl w-full text-text-header2 shadow-[0px_4px_12px_0px_rgba(0,0,0,0.17)]">
-            <img src={logo} alt={alt} width={55} className="rounded-lg mr-3 outline-1 outline-main-outline"/>
-                    <div className="flex  flex-col justify-center w-full">
-                        <p className=" font-bold text-md ml-1 text-text-header mb-sm tracking-wider">{company}</p>
-                        
-                        <div className="flex gap-5 text-sm">
-                            <IconSet iconName="user" size={18}>
-                                <p><span className=" font-semibold tracking-wide text-text-header">Position: </span>{position}</p>
-                            </IconSet>
-
-                            {salary &&
-                            
-                            <IconSet iconName="money" size={18}>
-                                <p><span className="font-semibold text-text-header tracking-wide">Salary: </span>{salary}</p>
-                            </IconSet>
-                            
-                            }
-
-                            {createdAt &&
-                            
-                            <IconSet iconName="calender" size={18}>
-                                <p><span className="font-semibold text-text-header tracking-wide">Applied: </span>{createdAt}</p>
-                            </IconSet>
-                            
-                            }
-
-                        <button onClick={ handleOpen } className="ml-auto">
-                            { !isOpen ? <IconSet iconName="cheveronDown" size={16}></IconSet> :
-                              <IconSet iconName="cheveronUp" size={16}></IconSet>
-                            }
-                        </button>
-
-                        </div>
-                    </div>
+        <section className="flex flex-col bg-white rounded-xl border border-black/[0.05] shadow-sm p-4">
+            <div className="flex gap-3 items-center">
+                {/* Image area */}
+                <img src={logo} alt={alt} className="w-12 h-12 rounded-lg object-contain border border-gray-100"/>
+                <div className="flex-1 overflow-hidden">
+                    {/* Company Name and Top Row Meta */}
+                    <p className="font-bold text-[#0A0A0A] truncate">{company}</p>
+                    <p className="text-xs font-semibold text-blue-600 truncate">{"Position: " + (position || "-")}</p>
+                </div>
+                <button onClick={() => setIsOpen(!isOpen)}>
+                    <IconSet iconName={!isOpen ? "cheveronDown" : "cheveronUp"} size={16}></IconSet>
+                </button>
             </div>
-                    <div>
-                        <button onClick={ ()=> {onDelete(id)} }>Delete</button>
-                        <button onClick={ ()=> {onEdit(id)} }>Edit</button>
+
+            {/* Meta Row */}
+            <div className="flex gap-3 mt-3 overflow-x-auto no-scrollbar">
+                {salary && (
+                    <div className="flex items-center gap-1 text-[10px] font-bold bg-green-50 text-green-700 px-2 py-1 rounded">
+                         $Salary: {salary || "-"}
                     </div>
+                )}
+                {createdAt && (
+                    <div className="flex items-center gap-1 text-[10px] font-bold bg-gray-50 text-gray-500 px-2 py-1 rounded whitespace-nowrap">
+                         {createdAt}
+                    </div>
+                )}
+            </div>
 
-                    
-  
-
-            {isOpen && 
-                <>
-                    <p>Link:{link}</p>
-                    <p>Applied:{createdAt}</p>
-                    <p>Status:{status}</p>
-                    <p>Mood:{moodTxt}</p>
-                    <p>Salary:{salary}</p>
-                    
-                </>
-            }
-
+            {/* Note Row */}
+            {isOpen && (
+                <div className="mt-4 pt-4 border-t border-gray-50 space-y-3">
+                    <p className="text-xs text-gray-500 italic">"{moodTxt || 'No notes...'}"</p>
+                    <div className="flex gap-2">
+                        <button className="flex-1 py-1.5 text-xs font-bold bg-gray-100 rounded-lg" onClick={() => onEdit(id)}>Edit</button>
+                        <button className="flex-1 py-1.5 text-xs font-bold bg-red-50 text-red-600 rounded-lg" onClick={() => onDelete(id)}>Delete</button>
+                    </div>
+                </div>
+            )}
         </section>
     )
-
-
 }
 
 const PreviewCard = ({companyName, jobPosition, jobcreatedAt, jobSalary}: CardPreview) => {
@@ -135,20 +107,6 @@ const PreviewCard = ({companyName, jobPosition, jobcreatedAt, jobSalary}: CardPr
 
 }
 
-
-const ColumnOnMore = () => {
-
-    return(
-        <form className=" absolute bg-pink-400 right-3 top-8 p-2 rounded-sm">
-            <p>Change theme</p>
-            <input type="radio" name="" id="" />
-            <input type="radio" name="" id="" />
-            <input type="radio" name="" id="" />
-        </form>
-
-
-    )
-}
 
 
 export { Column, Card, PreviewCard}

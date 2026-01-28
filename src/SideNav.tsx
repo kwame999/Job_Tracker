@@ -8,36 +8,71 @@ const SideNav = ({recentJobs}:SideNavProps) => {
     const [modeIcon, setModeIcon] = useState<boolean>(false)
     const [isExpanded, isSetExpanded] = useState<boolean>(false);
 
-    function handleSwitch(){
+    function handleSwitch(e: React.MouseEvent){
+        e.stopPropagation(); 
         setModeIcon(!modeIcon ? true : false);
     }
 
-    function handleSwitchNav(){
+    
+    function handleSwitchNav(e: React.MouseEvent){
+        e.stopPropagation();
         isSetExpanded(!isExpanded ? true : false);
     }
 
     return(
-
-        <aside onClick={handleSwitchNav} className="flex flex-col outline-2 outline-main-outline h-screen px-2.5 pt-4 pb-4 gap-11 justify-center bg-main-bgs items-center">
-            <div className="flex justify-between gap-18 items-center">
-                
-                {isExpanded && <h3>Dashboard</h3>}
-                <IconSet iconName="barleft" size={24}></IconSet>
-
+        <aside 
+            className={`
+                flex flex-col h-screen pt-[20px] pb-[20px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
+                bg-white border-r border-black/[0.06] shadow-[0_1px_3px_0_rgba(0,0,0,0.02)]
+                relative overflow-hidden select-none resize-none
+                ${isExpanded ? "w-[240px]" : "w-[50px] cursor-ew-resize"}
+            `}
+            onClick={() => !isExpanded && isSetExpanded(true)}
+        >
+            {/* Top Icon (Bar-Left) */}
+            <div className="px-[12px] w-full">
+                <div 
+                    onClick={handleSwitchNav}
+                    className={`
+                        flex items-center justify-center w-[26px] h-[26px] 
+                        transition-transform hover:scale-110 active:scale-95
+                        ${isExpanded ? "cursor-ew-resize" : "cursor-pointer"}
+                    `}
+                >
+                    <IconSet iconName="barleft" size={24}/>
+                </div>
             </div>
 
+            {/* Dashboard Text & Content */}
+            {isExpanded && (
+                <div className="mt-6 px-[20px] w-full animate-in fade-in slide-in-from-top-2 duration-400">
+                    <h3 className="font-bold text-base text-black/80 mb-8">Dashboard</h3>
+                    
+                    <nav onClick={(e) => e.stopPropagation()}> 
+                        <ul className="flex flex-col gap-4">
+                            <li className="text-[10px] font-bold text-black/30 uppercase tracking-[0.15em]">Tracked Jobs:</li>
+                            {recentJobs.map((job, i) => (
+                                <li key={i} className="text-sm font-medium text-black/60 hover:text-black cursor-pointer truncate transition-colors">
+                                    {job.company}
+                                </li>
+                            ))}
+                        </ul> 
+                    </nav>
+                </div>
+            )}
 
-            {isExpanded && <nav> 
-                                <ul>
-                                    <li>Tracked Jobs:</li>{recentJobs.map(job =>  <li>{job.company}</li> )}
-                                </ul> 
-                          </nav>}
-            <button  className="mt-auto" onClick={ handleSwitch }>{ !modeIcon ? <IconSet iconName="sun" size={24}/> : <IconSet iconName="moon" size={24}/> }</button>
-
+            {/* Theme Toggle */}
+            <div className="mt-auto px-[12px] w-full">
+                <button 
+                    className="flex items-center justify-center w-[26px] h-[40px] hover:bg-black/[0.04] rounded-md transition-all active:scale-90"
+                    onClick={handleSwitch}
+                >
+                    <div className="transition-transform duration-200">
+                        { !modeIcon ? <IconSet iconName="sun" size={22}/> : <IconSet iconName="moon" size={22}/> }
+                    </div>
+                </button>
+            </div>
         </aside>
-        
     )
-
 }
-
 export default SideNav

@@ -63,6 +63,7 @@ export type HeaderProps = {
     jobProjDetails?: JobType[]
     handleNewTag: (tag: Tags[]) => void
     tagTypes: Tags[]
+    isCollapsed?: boolean
 }
 
 //Modal assets (Modal.tsx)
@@ -105,6 +106,8 @@ export type TabViewProps = {
     jobs: JobType[]
     onShowModal: () => void
     tags: Tags[]
+    onHandleTab: (currentTab: string) => void
+    tabActive: string
  
 }
 

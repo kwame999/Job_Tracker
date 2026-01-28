@@ -20,6 +20,7 @@ function App() {
  const [showNewModal, setShowNewModal] = useState<boolean>(false)
  const [customContainer, setCustomContainer] = useState<CustomContainerT[]>([])
  const [tagTypes, setTagTypes] = useState<Tags[]>([]);
+ const [tabActive, setTabActive] = useState<string>("")
 
   console.log(tagTypes)
  function handleContainer(newContainer: CustomContainerT){
@@ -82,6 +83,10 @@ function handleSetTags(newTag: Tags[]){
   setTagTypes(newTag)
 }
 
+function handleTab(currentTab: string){
+  setTabActive(currentTab)
+}
+
   return (
   <div className='flex h-screen overflow-hidden bg-main-bgs'>
         
@@ -102,13 +107,13 @@ function handleSetTags(newTag: Tags[]){
 
   <SideNav recentJobs={jobs}></SideNav>
  
-  <div className='w-full'>
+  <div className='flex-1 min-w-0 flex flex-col overflow-hidden'>
     
-    <Header jobProjName='UX-Hunt 2026' jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes}></Header>
-    <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal} tags={tagTypes}>
+    <Header jobProjName='UX-Hunt 2026' isCollapsed={tabActive === 'Kanban View'}  jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes}></Header>
+    <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal} tags={tagTypes} onHandleTab={handleTab} tabActive= {tabActive}>
 
 
-  {jobs.length && <div className=' flex gap-8 h-[64vh] justify-center w-full'>
+  {jobs.length && <div className=' flex gap-8 h-[64vh] justify-center'>
  
                     { jobStatusTypeCheck('ghosted') && <Column color='' name='Ghosted' onShowModal={handleShowModal}>
                                                         { renderFilteredJob('ghosted') }
