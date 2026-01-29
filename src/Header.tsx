@@ -55,7 +55,7 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
 
                 <button 
                     onClick={ handleSwitch }
-                    className="p-2 hover:bg-black/[0.04] rounded-lg transition-colors"
+                    className="p-2 hover:bg-black/[0.04] rounded-md transition-colors flex justify-center items-center"
                 >
                     <IconSet iconName="more" size={20} />
                 </button>

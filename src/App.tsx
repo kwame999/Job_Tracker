@@ -20,9 +20,10 @@ function App() {
  const [showNewModal, setShowNewModal] = useState<boolean>(false)
  const [customContainer, setCustomContainer] = useState<CustomContainerT[]>([])
  const [tagTypes, setTagTypes] = useState<Tags[]>([]);
- const [tabActive, setTabActive] = useState<string>("")
+ const [tabActive, setTabActive] = useState<string>("");
+ const [currentColumn, setCurrentColumn] = useState<string>('')
 
-  console.log(tagTypes)
+  console.log(currentColumn)
  function handleContainer(newContainer: CustomContainerT){
   setCustomContainer(prev => [...prev, newContainer])
  }
@@ -87,6 +88,10 @@ function handleTab(currentTab: string){
   setTabActive(currentTab)
 }
 
+function handleCurrentColumn(colName: string){
+  setCurrentColumn(colName)
+}
+
   return (
   <div className='flex h-screen overflow-hidden bg-main-bgs'>
         
@@ -99,8 +104,9 @@ function handleTab(currentTab: string){
                           editingJob={editJob} 
                           updateJob={handleUpdateJob} 
                           cancelJob={handleCancelJob}
-                          onAddCustomCol={customContainer}>
-                          
+                          onAddCustomCol={customContainer}
+                          currentCol={currentColumn}
+                          onSetCurrentCol={handleCurrentColumn}>
                           </Modal>
                     
         }
@@ -113,47 +119,48 @@ function handleTab(currentTab: string){
     <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal} tags={tagTypes} onHandleTab={handleTab} tabActive= {tabActive}>
 
 
-  {jobs.length && <div className=' flex gap-8 h-[64vh] justify-center'>
+  {jobs.length && <div className=' flex gap-8 h-full justify-center'>
  
-                    { jobStatusTypeCheck('ghosted') && <Column color='' name='Ghosted' onShowModal={handleShowModal}>
+                    { jobStatusTypeCheck('ghosted') && <Column color='' name='Ghosted' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('ghosted') }
                                                     </Column> }
   
-                    { jobStatusTypeCheck('applied') && <Column color='' name='Applied' onShowModal={handleShowModal}>
+                    { jobStatusTypeCheck('applied') && <Column color='' name='Applied' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('applied') }
                                                     </Column> }
 
-                    { jobStatusTypeCheck('wishlist') && <Column color='' name='Wished' onShowModal={handleShowModal}>
+                    { jobStatusTypeCheck('wishlist') && <Column color='' name='Wished' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('wishlist') }
                                                     </Column> }
 
-                    { jobStatusTypeCheck('interview') && <Column color='' name='Interview' onShowModal={handleShowModal}>
+                    { jobStatusTypeCheck('interview') && <Column color='' name='Interview' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                           { renderFilteredJob('interview') }
                                                         </Column> }
 
-                    { jobStatusTypeCheck('offer') && <Column color='' name='Offer' onShowModal={handleShowModal}>
+                    { jobStatusTypeCheck('offer') && <Column color='' name='Offer' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('offer') }
                                                     </Column> }
 
-                    { jobStatusTypeCheck('rejected') && <Column color='' name='Rejected' onShowModal={handleShowModal}>
+                    { jobStatusTypeCheck('rejected') && <Column color='' name='Rejected' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('rejected') }
                                                         </Column> }
                         
 
-                    {customContainer.map(container => <Column  name={container.containerName} onShowModal={handleShowModal}>
+                    {customContainer.map(container => <Column  name={container.containerName} onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                       {renderFilteredJob(container.containerName)}
                                                       </Column>)}
                     
                   </div>}
             
           
-          <div className=' bg-transparent flex p-2  rounded-[1000px] font-medium'>
-          {/* <Column color='' name="" onShowModal={()=> true }> 
-          <div className='w-full bg-red-400'></div>
-          <button>fgd</button>
-          </Column> */}
-              <button  className='flex flex-col items-center justify-center text-gray-600' onClick={handleNewModal}>Container
-                <IconSet iconName='plus' size={28}></IconSet>
+          <div className=' bg-transparent flex p-2  rounded-[1000px] font-medium ml-auto justify-center items-center bg-red-600 h-full'>
+              <button onClick={handleNewModal} 
+                      className='flex flex-col items-center justify-center text-gray-400 hover:text-black transition-colors'>
+                
+                      <div className='w-12 h-12 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center mb-1'>
+                        <IconSet iconName='plus' size={28}></IconSet>
+                      </div>
+                <span className="text-[10px] font-bold uppercase tracking-widest">Add Column</span>
               </button>
           </div>
 

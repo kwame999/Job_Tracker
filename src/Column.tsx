@@ -3,7 +3,7 @@ import type { ColumnProps, CardProps, CardPreview } from './Types'
 import { IconSet } from "./icons/icon"
 import './index.css'
 
-const Column = ({children, color, name = "grey", onShowModal}: ColumnProps) => {
+const Column = ({children, color, name, onShowModal, onCurrentCol}: ColumnProps) => {
     const [more, setMore] = useState(false)
     
     return(
@@ -28,7 +28,10 @@ const Column = ({children, color, name = "grey", onShowModal}: ColumnProps) => {
             {/* Column Buttom / Add Button */}
             <div className="p-3 bg-[#F7F7F7] border-t border-black/[0.02]">
                 <button 
-                    onClick={onShowModal} 
+                    onClick={()=>{
+                        onCurrentCol(name.toLowerCase());
+                        onShowModal();
+                    }} 
                     className="w-full py-2.5 flex justify-center items-center gap-2 rounded-xl border-2 border-dashed border-black/[0.08] text-black/40 hover:text-black hover:border-black/20 hover:bg-white transition-all font-bold text-sm"
                 >
                     <IconSet iconName="plus" size={18} />

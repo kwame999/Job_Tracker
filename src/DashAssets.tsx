@@ -60,14 +60,22 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
                 <div className="flex justify-between items-end">
                     {/* Stats Section */}
                     <div className='flex flex-col gap-3'>
-                        <div className='flex gap-10'>
-                            <StatBlock svgType='clock' svgSize={18} statTxt='Created' data={new Date().toLocaleDateString()} />
-                            <StatBlock svgType='track' svgSize={18} statTxt='Jobs Tracked' data={data.length} />
+                        <div className='flex gap-8'>
+                            <StatBlock svgType='clock' svgSize={22} statTxt='Created' data={new Date().toLocaleDateString()} />
+                            <StatBlock svgType='calender2' svgSize={24} statTxt='Jobs Tracked' data={data.length || <span className="text-sm font-medium text-black/20 italic ">0 tracked</span>} />
                         </div>
+                            <StatBlock svgType='tags' 
+                                       svgSize={22} 
+                                       statTxt='Active Tags' 
+                                       data={tags.length > 0 ? tags.map((tag, indx) => (
+                                            <div key={indx} className="px-2.5 py-0.5 bg-black/[0.03] border border-black/[0.09] rounded-lg text-[11px] font-bold text-black/60 ">
+                                                {tag}
+                                            </div>
+                                )) : <span className="text-sm font-medium text-black/20 italic ">No tags set...</span>} />
                         
                         {/* Tags Section */}
-                        <div className="flex items-center gap-3">
-                            <span className="text-[10px] font-black text-black/20 uppercase tracking-[0.15em]">Active Tags</span>
+                        {/* <div className="flex items-center gap-3">
+                            <span className="text-[10px] font-black text-black/20  tracking-[0.15em]">Active Tags</span>
                             <div className="flex gap-2">
                                 {tags.length > 0 ? tags.map((tag, indx) => (
                                     <div key={indx} className="px-2.5 py-0.5 bg-black/[0.03] border border-black/[0.05] rounded-full text-[11px] font-bold text-black/60 shadow-sm">
@@ -75,7 +83,7 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
                                     </div>
                                 )) : <span className="text-[10px] text-black/20 italic font-medium">No tags set...</span>}
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* Tab Switcher */}
@@ -110,22 +118,22 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
         </div>
     ) : (
     
-        <div className="mx-8 flex flex-col w-auto items-center justify-center border-2 border-dashed rounded-[24px] py-12 h-[55vh] border-black/[0.05] bg-gray-50/40 transition-all"> 
+        <div className="mx-8 flex flex-col w-auto items-center justify-center border-2 border-dashed rounded-[24px] py-12 h-full border-black/[0.05] bg-gray-50/40 transition-all"> 
             <img 
                 src="/src/assets/flat-briefcase-icon-by-Vexels 1.png" 
                 alt="Empty Workspace" 
                 className="w-48 opacity-15 grayscale mb-6 select-none" 
             />
             <div className="text-center flex flex-col items-center">
-                <h2 className="text-3xl font-extrabold text-[#0A0A0A] tracking-wide mb-2 capitalize">
-                    Your tracker is empty
+                <h2 className="text-1xl font-black text-[#0A0A0A] tracking-tight mb-2 ">
+                    Tracker empty
                 </h2>
                 <p className="text-[14px] text-black/40 font-medium mb-10 max-w-[320px] leading-relaxed">
                     Start your journey by tracking your first application to see your dashboard come to life.
                 </p>
                 
                 <button 
-                    className="bg-[#e6e6e6] text-white px-4 py-4 rounded-[8px] text-[13px] font-black uppercase tracking-widest shadow-lg hover:bg-gray-800 hover:scale-[1.02] active:scale-95 transition-all" 
+                    className="bg-[#e6e6e6] text-white px-4 py-4 rounded-full text-[13px] font-black uppercase tracking-widest shadow-lg hover:bg-gray-800 hover:scale-[1.02] active:scale-95 transition-all" 
                     onClick={onShowModal}
                 >
                     <IconSet iconName="plus" size={23}></IconSet>
@@ -144,8 +152,8 @@ const StatBlock = ({svgType,svgSize, statTxt, children, data}: StatsBlockProps) 
         <div>
             <div className="flex items-center gap-1">
             <IconSet iconName={svgType} size={svgSize}></IconSet>
-            <p className="font-bold text-text-header2 text-md mr-1">{statTxt}</p>
-            <p className="text-text-paragrah font-semibold">{data || children}</p> 
+            <p className="text-sm font-bold  text-black/30 tracking-wide">{statTxt}:</p>
+            <p className="text-sm font-bold text-black/60 ">{data || children}</p> 
             
             </div>
             {/* {children} */}
