@@ -88,7 +88,7 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
                                 {presetBanners.map((bannerClass, index) => (
                                     <label 
                                         key={index}
-                                        className={`flex items-center gap-3 p-1 rounded-xl border-2 transition-all ${crntBanner === bannerClass ? 'border-black bg-black/[0.02]' : 'border-transparent hover:bg-gray-50'}`}
+                                        className={`flex items-center gap-3 p-1 rounded-xl border-2 transition-all ${crntBanner === bannerClass ? 'border-black/[0.1] bg-black/[0.02]' : 'border-transparent hover:bg-gray-50'}`}
                                     >
                                         <input 
                                             type="radio" 

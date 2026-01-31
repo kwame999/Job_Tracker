@@ -132,7 +132,7 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
                     </div>
                 ) : (
                 
-                    <div className="mx-8 flex flex-col w-auto items-center justify-center border-2 border-dashed rounded-[24px] py-12 h-full border-black/[0.05] bg-gray-50/40 transition-all"> 
+                    <div className="mx-8 flex flex-col w-auto items-center justify-center border-2 border-dashed rounded-[24px] py-12 h-full border-black/[0.1] bg-gray-50/40 transition-all"> 
                         <img 
                             src="/src/assets/flat-briefcase-icon-by-Vexels 1.png" 
                             alt="Empty Workspace" 
