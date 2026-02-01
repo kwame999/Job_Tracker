@@ -21,7 +21,7 @@ function App() {
  const [customContainer, setCustomContainer] = useState<CustomContainerT[]>([])
  const [tagTypes, setTagTypes] = useState<Tags[]>([]);
  const [tabActive, setTabActive] = useState<string>('Dashboard');
- const [currentColumn, setCurrentColumn] = useState<string>('')
+ const [currentColumn, setCurrentColumn] = useState<string>('wishlist')
 
   console.log(currentColumn)
  function handleContainer(newContainer: CustomContainerT){
@@ -99,7 +99,6 @@ function handleCurrentColumn(colName: string){
                           
                   
                           <Modal 
-                
                           onAddJob={handleJobs} 
                           editingJob={editJob} 
                           updateJob={handleUpdateJob} 
@@ -129,7 +128,7 @@ function handleCurrentColumn(colName: string){
                                                         { renderFilteredJob('applied') }
                                                     </Column> }
 
-                    { jobStatusTypeCheck('wishlist') && <Column color='' name='Wished' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
+                    { jobStatusTypeCheck('wishlist') && <Column color='' name='Wishlist' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('wishlist') }
                                                     </Column> }
 

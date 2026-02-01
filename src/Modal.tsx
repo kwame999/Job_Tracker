@@ -9,7 +9,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
     
     const [company, setCompany] = useState("");
     const [position, setPosition] = useState("");
-    const [status, setStatus] = useState("wishlist");
+    const [status, setStatus] = useState(currentCol); //Default status is controlled by currentCol
     const [link, setLink] = useState("");
     const [createdAt, setCreatedAt] = useState("");
     const [salary, setSalary] = useState<string | number>("");
@@ -42,7 +42,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
             link: link,
             createdAt: createdAt,
             date: new Date(),
-          salary: (typeof salary === 'string' ? parseInt(salary, 10) : salary) || salary,
+            salary: (typeof salary === 'string' ? parseInt(salary, 10) : salary) || salary,
             moodTxt: moodTxt,
             favorites: false,
         }
@@ -62,7 +62,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
         setLink("");
         setMoodTxt("");
         setPosition("");
-        setStatus(status);
+        setStatus(status); //set back to users last selected status when job is created
         setSalary(""); 
     
     }
@@ -126,10 +126,10 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                             <label className="text-[13px] font-semibold text-[#1A1A1A]">Status</label>
                             <select 
                                 className="w-full h-[40px] px-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all cursor-pointer"
-                                value={!currentCol ? status : currentCol.toLowerCase()} 
+                                value={status.toLowerCase()} 
                                 onChange={(e) => {
                                     setStatus(e.target.value);        //status remains state when modal is open, else btn clicked is state
-                                    onSetCurrentCol("");
+                                    onSetCurrentCol("");   //when setting status, reset currentcol
                                 }}
                             >
                                 
