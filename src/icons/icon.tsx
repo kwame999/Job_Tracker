@@ -13,7 +13,7 @@ const icons = {
  
 
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M9 20V4M9 20H16.8031C17.921 20 18.48 20 18.9074 19.7822C19.2837 19.5905 19.5905 19.2837 19.7822 18.9074C20 18.48 20 17.921 20 16.8031V7.19691C20 6.07899 20 5.5192 19.7822 5.0918C19.5905 4.71547 19.2837 4.40973 18.9074 4.21799C18.4796 4 17.9203 4 16.8002 4H9M9 20H7.19692C6.07901 20 5.5192 20 5.0918 19.7822C4.71547 19.5905 4.40973 19.2837 4.21799 18.9074C4 18.4796 4 17.9203 4 16.8002V7.2002C4 6.08009 4 5.51962 4.21799 5.0918C4.40973 4.71547 4.71547 4.40973 5.0918 4.21799C5.51962 4 6.08009 4 7.2002 4H9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M9 20V4M9 20H16.8031C17.921 20 18.48 20 18.9074 19.7822C19.2837 19.5905 19.5905 19.2837 19.7822 18.9074C20 18.48 20 17.921 20 16.8031V7.19691C20 6.07899 20 5.5192 19.7822 5.0918C19.5905 4.71547 19.2837 4.40973 18.9074 4.21799C18.4796 4 17.9203 4 16.8002 4H9M9 20H7.19692C6.07901 20 5.5192 20 5.0918 19.7822C4.71547 19.5905 4.40973 19.2837 4.21799 18.9074C4 18.4796 4 17.9203 4 16.8002V7.2002C4 6.08009 4 5.51962 4.21799 5.0918C4.40973 4.71547 4.71547 4.40973 5.0918 4.21799C5.51962 4 6.08009 4 7.2002 4H9" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 
 
@@ -30,7 +30,7 @@ const icons = {
   ),
   user: (
     <svg width={size} height={size} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11.0832 12.25C11.0832 9.99484 9.255 8.16667 6.99984 8.16667C4.74467 8.16667 2.9165 9.99484 2.9165 12.25M6.99984 6.41667C5.71117 6.41667 4.6665 5.372 4.6665 4.08333C4.6665 2.79467 5.71117 1.75 6.99984 1.75C8.2885 1.75 9.33317 2.79467 9.33317 4.08333C9.33317 5.372 8.2885 6.41667 6.99984 6.41667Z" stroke="#000000" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M11.0832 12.25C11.0832 9.99484 9.255 8.16667 6.99984 8.16667C4.74467 8.16667 2.9165 9.99484 2.9165 12.25M6.99984 6.41667C5.71117 6.41667 4.6665 5.372 4.6665 4.08333C4.6665 2.79467 5.71117 1.75 6.99984 1.75C8.2885 1.75 9.33317 2.79467 9.33317 4.08333C9.33317 5.372 8.2885 6.41667 6.99984 6.41667Z" stroke="#000000" strokeWidth="1.16667" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   money: (
@@ -40,30 +40,30 @@ const icons = {
   ),
   calender: (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 4H7.2002C6.08009 4 5.51962 4 5.0918 4.21799C4.71547 4.40973 4.40973 4.71547 4.21799 5.0918C4 5.51962 4 6.08009 4 7.2002V8M8 4H16M8 4V2M16 4H16.8002C17.9203 4 18.4796 4 18.9074 4.21799C19.2837 4.40973 19.5905 4.71547 19.7822 5.0918C20 5.5192 20 6.07899 20 7.19691V8M16 4V2M4 8V16.8002C4 17.9203 4 18.4801 4.21799 18.9079C4.40973 19.2842 4.71547 19.5905 5.0918 19.7822C5.5192 20 6.07899 20 7.19691 20H16.8031C17.921 20 18.48 20 18.9074 19.7822C19.2837 19.5905 19.5905 19.2842 19.7822 18.9079C20 18.4805 20 17.9215 20 16.8036V8M4 8H20M16 16H16.002L16.002 16.002L16 16.002V16ZM12 16H12.002L12.002 16.002L12 16.002V16ZM8 16H8.002L8.00195 16.002L8 16.002V16ZM16.002 12V12.002L16 12.002V12H16.002ZM12 12H12.002L12.002 12.002L12 12.002V12ZM8 12H8.002L8.00195 12.002L8 12.002V12Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8 4H7.2002C6.08009 4 5.51962 4 5.0918 4.21799C4.71547 4.40973 4.40973 4.71547 4.21799 5.0918C4 5.51962 4 6.08009 4 7.2002V8M8 4H16M8 4V2M16 4H16.8002C17.9203 4 18.4796 4 18.9074 4.21799C19.2837 4.40973 19.5905 4.71547 19.7822 5.0918C20 5.5192 20 6.07899 20 7.19691V8M16 4V2M4 8V16.8002C4 17.9203 4 18.4801 4.21799 18.9079C4.40973 19.2842 4.71547 19.5905 5.0918 19.7822C5.5192 20 6.07899 20 7.19691 20H16.8031C17.921 20 18.48 20 18.9074 19.7822C19.2837 19.5905 19.5905 19.2842 19.7822 18.9079C20 18.4805 20 17.9215 20 16.8036V8M4 8H20M16 16H16.002L16.002 16.002L16 16.002V16ZM12 16H12.002L12.002 16.002L12 16.002V16ZM8 16H8.002L8.00195 16.002L8 16.002V16ZM16.002 12V12.002L16 12.002V12H16.002ZM12 12H12.002L12.002 12.002L12 12.002V12ZM8 12H8.002L8.00195 12.002L8 12.002V12Z" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   cheveronDown: (
     <svg width={size} height={size} viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M13.2692 1.15384L7.2115 7.21153L1.15381 1.15384" stroke="#000000" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13.2692 1.15384L7.2115 7.21153L1.15381 1.15384" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   cheveronUp: (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5 16L12 9L19 16" stroke="black" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M5 16L12 9L19 16" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   plus: (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M6 12H12M12 12H18M12 12V18M12 12V6" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 12H12M12 12H18M12 12V18M12 12V6" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 
   ),
   moreHorizontal: (    
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17 12C17 12.5523 17.4477 13 18 13C18.5523 13 19 12.5523 19 12C19 11.4477 18.5523 11 18 11C17.4477 11 17 11.4477 17 12Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M5 12C5 12.5523 5.44772 13 6 13C6.55228 13 7 12.5523 7 12C7 11.4477 6.55228 11 6 11C5.44772 11 5 11.4477 5 12Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M17 12C17 12.5523 17.4477 13 18 13C18.5523 13 19 12.5523 19 12C19 11.4477 18.5523 11 18 11C17.4477 11 17 11.4477 17 12Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M5 12C5 12.5523 5.44772 13 6 13C6.55228 13 7 12.5523 7 12C7 11.4477 6.55228 11 6 11C5.44772 11 5 11.4477 5 12Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   ),
   tags: (    
@@ -94,7 +94,7 @@ const icons = {
   track: (
     
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_406_4015)">
+      <g clipPath="url(#clip0_406_4015)">
       <path d="M21.0166 13.4249C20.2065 13.4252 19.4317 13.7564 18.8716 14.3417L16.5974 13.3752C16.7528 12.9101 16.8347 12.4236 16.84 11.9332C16.8345 9.29934 14.7007 7.16545 12.0668 7.16001C11.6686 7.16498 11.2726 7.22043 10.8884 7.3251L9.5807 4.99715C10.6879 3.7837 10.6017 1.90242 9.38827 0.795229C8.17482 -0.311958 6.29354 -0.225802 5.18635 0.987651C4.07916 2.2011 4.16532 4.08239 5.37877 5.18957C5.92913 5.69174 6.64792 5.96906 7.39299 5.96671C7.53601 5.96264 7.6786 5.94834 7.8196 5.92396L9.10538 8.21114C7.17413 9.71498 6.7157 12.447 8.05027 14.4989L4.28738 18.1395C2.74768 17.4564 0.945759 18.1509 0.262697 19.6906C-0.420366 21.2303 0.274087 23.0322 1.81379 23.7153C3.35349 24.3983 5.15542 23.7039 5.83848 22.1642C6.2184 21.3078 6.18367 20.3243 5.74421 19.4969L9.44448 15.917C11.4104 17.2251 14.04 16.8816 15.6039 15.1124L18.0582 16.1546C18.0512 16.2391 18.0333 16.3207 18.0333 16.4062C18.0333 18.0538 19.369 19.3895 21.0166 19.3895C22.6642 19.3895 23.9999 18.0538 23.9999 16.4062C23.9999 14.7585 22.6642 13.4229 21.0166 13.4229V13.4249Z" fill="#374957"/>
       </g>
       <defs>
@@ -109,15 +109,15 @@ const icons = {
   more: (
     
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M13 14C13 14.5523 13.4477 15 14 15C14.5523 15 15 14.5523 15 14C15 13.4477 14.5523 13 14 13C13.4477 13 13 13.4477 13 14Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M7 14C7 14.5523 7.44772 15 8 15C8.55228 15 9 14.5523 9 14C9 13.4477 8.55228 13 8 13C7.44772 13 7 13.4477 7 14Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M1 14C1 14.5523 1.44772 15 2 15C2.55228 15 3 14.5523 3 14C3 13.4477 2.55228 13 2 13C1.44772 13 1 13.4477 1 14Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M13 8C13 8.55228 13.4477 9 14 9C14.5523 9 15 8.55228 15 8C15 7.44772 14.5523 7 14 7C13.4477 7 13 7.44772 13 8Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M7 8C7 8.55228 7.44772 9 8 9C8.55228 9 9 8.55228 9 8C9 7.44772 8.55228 7 8 7C7.44772 7 7 7.44772 7 8Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M1 8C1 8.55228 1.44772 9 2 9C2.55228 9 3 8.55228 3 8C3 7.44772 2.55228 7 2 7C1.44772 7 1 7.44772 1 8Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M13 2C13 2.55228 13.4477 3 14 3C14.5523 3 15 2.55228 15 2C15 1.44772 14.5523 1 14 1C13.4477 1 13 1.44772 13 2Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M7 2C7 2.55228 7.44772 3 8 3C8.55228 3 9 2.55228 9 2C9 1.44772 8.55228 1 8 1C7.44772 1 7 1.44772 7 2Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M1 2C1 2.55228 1.44772 3 2 3C2.55228 3 3 2.55228 3 2C3 1.44772 2.55228 1 2 1C1.44772 1 1 1.44772 1 2Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13 14C13 14.5523 13.4477 15 14 15C14.5523 15 15 14.5523 15 14C15 13.4477 14.5523 13 14 13C13.4477 13 13 13.4477 13 14Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M7 14C7 14.5523 7.44772 15 8 15C8.55228 15 9 14.5523 9 14C9 13.4477 8.55228 13 8 13C7.44772 13 7 13.4477 7 14Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M1 14C1 14.5523 1.44772 15 2 15C2.55228 15 3 14.5523 3 14C3 13.4477 2.55228 13 2 13C1.44772 13 1 13.4477 1 14Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M13 8C13 8.55228 13.4477 9 14 9C14.5523 9 15 8.55228 15 8C15 7.44772 14.5523 7 14 7C13.4477 7 13 7.44772 13 8Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M7 8C7 8.55228 7.44772 9 8 9C8.55228 9 9 8.55228 9 8C9 7.44772 8.55228 7 8 7C7.44772 7 7 7.44772 7 8Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M1 8C1 8.55228 1.44772 9 2 9C2.55228 9 3 8.55228 3 8C3 7.44772 2.55228 7 2 7C1.44772 7 1 7.44772 1 8Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M13 2C13 2.55228 13.4477 3 14 3C14.5523 3 15 2.55228 15 2C15 1.44772 14.5523 1 14 1C13.4477 1 13 1.44772 13 2Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M7 2C7 2.55228 7.44772 3 8 3C8.55228 3 9 2.55228 9 2C9 1.44772 8.55228 1 8 1C7.44772 1 7 1.44772 7 2Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M1 2C1 2.55228 1.44772 3 2 3C2.55228 3 3 2.55228 3 2C3 1.44772 2.55228 1 2 1C1.44772 1 1 1.44772 1 2Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 
   ),
@@ -125,14 +125,14 @@ const icons = {
 
       
   <svg width={size} height={size} viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M12.25 5.39581V5.36665C12.25 4.71325 12.25 4.38656 12.1228 4.13699C12.011 3.91747 11.8325 3.73899 11.613 3.62714C11.3634 3.49998 11.0367 3.49998 10.3833 3.49998L1.75 3.49998M1.75 3.49998L1.75 9.79998C1.75 10.4534 1.75 10.7801 1.87716 11.0296C1.98901 11.2492 2.16749 11.4276 2.38701 11.5395C2.63657 11.6666 2.96327 11.6666 3.61667 11.6666H4.08333M1.75 3.49998L1.75 3.26665C1.75 2.93995 1.75 2.7766 1.81358 2.65182C1.86951 2.54206 1.95875 2.45282 2.06851 2.39689C2.19329 2.33331 2.35664 2.33331 2.68333 2.33331H5.44674C5.58941 2.33331 5.66075 2.33331 5.72789 2.34943C5.78741 2.36372 5.84431 2.38729 5.8965 2.41927C5.95537 2.45535 6.00581 2.50579 6.1067 2.60668L7 3.49998M9.33334 8.16665L10.5 9.33331M6.41667 12.25V10.7916L10.7917 6.41665L12.25 7.87498L7.875 12.25H6.41667Z" stroke="#414148" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M12.25 5.39581V5.36665C12.25 4.71325 12.25 4.38656 12.1228 4.13699C12.011 3.91747 11.8325 3.73899 11.613 3.62714C11.3634 3.49998 11.0367 3.49998 10.3833 3.49998L1.75 3.49998M1.75 3.49998L1.75 9.79998C1.75 10.4534 1.75 10.7801 1.87716 11.0296C1.98901 11.2492 2.16749 11.4276 2.38701 11.5395C2.63657 11.6666 2.96327 11.6666 3.61667 11.6666H4.08333M1.75 3.49998L1.75 3.26665C1.75 2.93995 1.75 2.7766 1.81358 2.65182C1.86951 2.54206 1.95875 2.45282 2.06851 2.39689C2.19329 2.33331 2.35664 2.33331 2.68333 2.33331H5.44674C5.58941 2.33331 5.66075 2.33331 5.72789 2.34943C5.78741 2.36372 5.84431 2.38729 5.8965 2.41927C5.95537 2.45535 6.00581 2.50579 6.1067 2.60668L7 3.49998M9.33334 8.16665L10.5 9.33331M6.41667 12.25V10.7916L10.7917 6.41665L12.25 7.87498L7.875 12.25H6.41667Z" stroke="#414148" strokeWidth="1.16667" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 
   ),
   close: (
     
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 
   ),
