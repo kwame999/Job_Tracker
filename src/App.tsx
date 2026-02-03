@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Column, Card} from './Column'
 import { Modal } from './Modal'
 import {Tag, TabView, StatBlock, ModalNewContainer} from './DashAssets'
 import './index.css'
 import {Header} from './Header'
-import type { JobType, Tags} from './Types'
+import type { JobType, Tags } from './Types'
 import SideNav from './SideNav'
 import { IconSet } from './icons/icon'
 
@@ -14,24 +14,31 @@ type CustomContainerT = {
 }
 
 function App() {
- const [jobs, setJobs] = useState<JobType[]>([])
+
+  
+  const [jobs, setJobs] = useState<JobType[]>(() => {
+    const saveJobs = localStorage.getItem('Jobs');
+    return saveJobs ? JSON.parse(saveJobs) : [];
+  })
  const [editJob, setNewEditJob] = useState<JobType | null>(null)
  const [showModal, setShowModal] = useState<boolean>(false)
  const [showNewModal, setShowNewModal] = useState<boolean>(false)
  const [customContainer, setCustomContainer] = useState<CustomContainerT[]>([])
  const [tagTypes, setTagTypes] = useState<Tags[]>([]);
  const [tabActive, setTabActive] = useState<string>('Dashboard');
- const [currentColumn, setCurrentColumn] = useState<string>('wishlist')
+ const [currentColumn, setCurrentColumn] = useState<string>('wishlist');
 
-  console.log(currentColumn)
+ useEffect(() => {
+  localStorage.setItem('Jobs', JSON.stringify(jobs));
+ },[jobs])
+ 
+  
  function handleContainer(newContainer: CustomContainerT){
   setCustomContainer(prev => [...prev, newContainer])
  }
 
  function handleJobs(newJob: JobType){
-
     setJobs(previous => [...previous, newJob])
-
  }
 
  function handleDeleteJobs(id: string){
@@ -78,7 +85,6 @@ function renderFilteredJob(jobStatus: string){
                           onEdit={handleEditJob}
                           showModal={handleShowModal}></Card>) ) 
 }
-
 
 function handleSetTags(newTag: Tags[]){
 

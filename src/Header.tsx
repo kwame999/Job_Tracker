@@ -1,4 +1,4 @@
-import { Children, useState, type ReactNode } from "react"
+import { Children, useState, type ReactNode, useEffect } from "react"
 import type { HeaderProps } from './Types'
 import { StatBlock } from "./DashAssets"
 import { IconSet } from "./icons/icon"
@@ -16,10 +16,18 @@ const presetBanners = [
 
 const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapsed}: HeaderProps)=> {
 
-    const [crntBanner, setCrntBanner] = useState(presetBanners[0]);
+    const [crntBanner, setCrntBanner] = useState(()=> {
+        const currentBanner = localStorage.getItem('Banner');
+        return currentBanner ? currentBanner : presetBanners[0]
+
+    });
     const [openSettings, setOpenSettings] = useState<boolean>(false)
     const [editContent, setEditContent] =  useState<boolean>(false);
     
+    useEffect(()=>{
+        localStorage.setItem('Banner', crntBanner);
+    },[crntBanner]);
+
     function handleCrntBanner(e: React.ChangeEvent<HTMLInputElement>){
         setCrntBanner(e.target.value)
     }
@@ -68,6 +76,9 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
                 {/* Banner */}
                 <div className={`w-full h-[120px] relative ${crntBanner}`}>
                     <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]"></div>
+                    {/* <div className=" absolute -right-px bottom-px hover:bg-white/80 p-2 bg-white/20 rounded-full mb-2 mr-8">
+                        <IconSet iconName='editPencil' size={20}></IconSet>
+                    </div> */}
                 </div>
             </div>
 
