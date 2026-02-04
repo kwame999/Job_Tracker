@@ -127,27 +127,27 @@ function handleCurrentColumn(colName: string){
 
   {jobs.length && <div className=' flex gap-8 h-full justify-center'>
  
-                    { jobStatusTypeCheck('ghosted') && <Column color='' name='Ghosted' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
+                    { jobStatusTypeCheck('ghosted') && <Column name='Ghosted' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('ghosted') }
                                                     </Column> }
   
-                    { jobStatusTypeCheck('applied') && <Column color='' name='Applied' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
+                    { jobStatusTypeCheck('applied') && <Column name='Applied' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('applied') }
                                                     </Column> }
 
-                    { jobStatusTypeCheck('wishlist') && <Column color='' name='Wishlist' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
+                    { jobStatusTypeCheck('wishlist') && <Column name='Wishlist' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('wishlist') }
                                                     </Column> }
 
-                    { jobStatusTypeCheck('interview') && <Column color='' name='Interview' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
+                    { jobStatusTypeCheck('interview') && <Column name='Interview' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                           { renderFilteredJob('interview') }
                                                         </Column> }
 
-                    { jobStatusTypeCheck('offer') && <Column color='' name='Offer' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
+                    { jobStatusTypeCheck('offer') && <Column name='Offer' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('offer') }
                                                     </Column> }
 
-                    { jobStatusTypeCheck('rejected') && <Column color='' name='Rejected' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
+                    { jobStatusTypeCheck('rejected') && <Column name='Rejected' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                         { renderFilteredJob('rejected') }
                                                         </Column> }
                         
