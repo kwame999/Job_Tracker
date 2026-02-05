@@ -44,13 +44,13 @@ const Column = ({children, color, name, onShowModal, onCurrentCol}: ColumnProps)
 
 const Card = ({job, onDelete, onEdit, showModal}: CardProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
-    const {id, company, position, moodTxt, createdAt, salary, companyIcon: {logo, alt}} = job
+    const {id, company, position, mood_txt, salary, logo_url, logo_alt} = job
 
     return(
         <section className="flex flex-col bg-white rounded-xl border border-black/[0.05] shadow-sm p-4">
             <div className="flex gap-3 items-center">
                 {/* Image area */}
-                <img src={logo} alt={alt} className="w-12 h-12 rounded-lg object-contain border border-gray-100"/>
+                <img src={logo_url} alt={logo_alt} className="w-12 h-12 rounded-lg object-contain border border-gray-100"/>
                 <div className="flex-1 overflow-hidden">
                     {/* Company Name and Top Row Meta */}
                     <p className="font-bold text-[#0A0A0A] truncate">{company}</p>
@@ -68,22 +68,22 @@ const Card = ({job, onDelete, onEdit, showModal}: CardProps) => {
                          $Salary: {salary || "-"}
                     </div>
                 )}
-                {createdAt && (
+                {/* {createdAt && (
                     <div className="flex items-center gap-1 text-[10px] font-bold bg-gray-50 text-gray-500 px-2 py-1 rounded whitespace-nowrap">
                          {createdAt}
                     </div>
-                )}
+                )} */}
             </div>
 
             {/* Note Row */}
             {isOpen && (
                 <div className="mt-4 pt-4 border-t border-gray-50 space-y-3">
-                    <p className="text-xs text-gray-500 italic">"{moodTxt || 'No notes...'}"</p>
+                    <p className="text-xs text-gray-500 italic">"{mood_txt || 'No notes...'}"</p>
                     <div className="flex gap-2">
-                        <button className="flex-1 py-1.5 text-xs font-bold bg-gray-100 rounded-lg" onClick={() => {onEdit(id)
+                        <button className="flex-1 py-1.5 text-xs font-bold bg-gray-100 rounded-lg" onClick={() => {onEdit(id!)
                                                                                                                      showModal()
                         }}>Edit</button>
-                        <button className="flex-1 py-1.5 text-xs font-bold bg-red-50 text-red-600 rounded-lg" onClick={() => onDelete(id)}>Delete</button>
+                        <button className="flex-1 py-1.5 text-xs font-bold bg-red-50 text-red-600 rounded-lg" onClick={() => onDelete(id!)}>Delete</button>
                     </div>
                 </div>
             )}

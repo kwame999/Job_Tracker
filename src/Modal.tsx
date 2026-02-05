@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from "react"
 import { PreviewCard } from "./Column";
 import type { JobType, State, ModalProps, Action } from './Types'
 import { IconSet } from "./icons/icon";
-
+import supabase from './lib/supabaseClient'
 
 
 const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, currentCol, onSetCurrentCol }: ModalProps) => {
@@ -11,44 +11,68 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
     const [position, setPosition] = useState("");
     const [status, setStatus] = useState(currentCol); //Default status is controlled by currentCol
     const [link, setLink] = useState("");
-    const [createdAt, setCreatedAt] = useState("");
     const [salary, setSalary] = useState<string | number>("");
     const [moodTxt, setMoodTxt] = useState("");
    
 
     useEffect(() => {
         if(!editingJob) return
-        const {company, position, status, link, createdAt, salary, moodTxt} = editingJob;
+        const {company, position, status, link, salary, mood_txt} = editingJob;
         
         setCompany(company);
         setPosition(position);
         setStatus(status);
         setLink(link ?? "");
-        setCreatedAt(createdAt);
         setSalary(salary ?? 0);
-        setMoodTxt(moodTxt)
+        setMoodTxt(mood_txt);
+
     },[editingJob]);
 
-    function handleJobsNType(){
+    async function handleJobsNType(){
+
         const newJob: JobType = {
-            id: editingJob ?  editingJob.id : crypto.randomUUID(),
-            company: company,
-            companyIcon: {
-                logo: `https://img.logo.dev/${company}.com?token=pk_RKtwoXuaQDSJdIEDV1NYVA`,
-                alt: `${company} logo`
-            },
-            position: position,
-            status: status,
-            link: link,
-            createdAt: createdAt,
-            date: new Date(),
-            salary: (typeof salary === 'string' ? parseInt(salary, 10) : salary) || salary,
-            moodTxt: moodTxt,
-            favorites: false,
+        company: company,
+        position: position,
+        status: status,
+        link: link,
+        salary: (typeof salary === 'string' ? parseInt(salary, 10) : salary) || 0,
+        mood_txt: moodTxt,
+        logo_url: `https://img.logo.dev/${company}.com?token=pk_RKtwoXuaQDSJdIEDV1NYVA`,
+        logo_alt: `${company} logo`,
         }
 
-        if (editingJob) { updateJob(newJob) } else { newJob.company && onAddJob(newJob) }
-      
+        const {data, error} = await supabase
+        .from('jobs')
+        .insert([newJob])
+        .select()
+
+       if (error) {
+        console.error("Supabase Error:", error.message);
+        return; 
+        }
+
+
+        if (data && data.length) {
+        const savedJob = data[0]; 
+
+            if (editingJob) {
+                const { data, error } = await supabase
+                .from('jobs')
+                .update(newJob)           
+                .eq('id', editingJob.id)  
+                .select();                
+
+                if (error) {
+                    console.error("Update failed:", error.message);
+                } else if (data && data.length > 0){
+                    updateJob(data[0]); 
+                    handleClose()}
+            } else { onAddJob(savedJob); }
+
+    }
+
+        // if (editingJob) { updateJob(data[0]) } else { newJob.company && onAddJob(!data?.length || !data ? [] : data[0]) }
+        
     }
 
     function handleClose(){
@@ -58,7 +82,6 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
 
     function jobStatesReset(){
         setCompany("");
-        setCreatedAt("");
         setLink("");
         setMoodTxt("");
         setPosition("");

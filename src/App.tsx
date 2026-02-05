@@ -7,19 +7,16 @@ import {Header} from './Header'
 import type { JobType, Tags } from './Types'
 import SideNav from './SideNav'
 import { IconSet } from './icons/icon'
-
+import supabase from './lib/supabaseClient'
 type CustomContainerT = {
   containerName: string,
   containerColor?: string,
 }
-
+// console.log(supabase)
 function App() {
 
   
-  const [jobs, setJobs] = useState<JobType[]>(() => {
-    const saveJobs = localStorage.getItem('Jobs');
-    return saveJobs ? JSON.parse(saveJobs) : [];
-  })
+ const [jobs, setJobs] = useState<JobType[]>([])
  const [editJob, setNewEditJob] = useState<JobType | null>(null)
  const [showModal, setShowModal] = useState<boolean>(false)
  const [showNewModal, setShowNewModal] = useState<boolean>(false)
@@ -30,7 +27,26 @@ function App() {
 
  useEffect(() => {
   localStorage.setItem('Jobs', JSON.stringify(jobs));
- },[jobs])
+ },[jobs]);
+
+ useEffect(()=>{
+
+  const datas = async () => {
+    const {data, error} = await supabase
+    .from('jobs')
+    .select('*');
+
+  if (error) {
+      console.log('Error fetching:', error)
+    } else {
+      console.log('My Jobs:', data)
+      setJobs(data)
+    }
+
+  }
+
+  datas()
+ },[])
  
   
  function handleContainer(newContainer: CustomContainerT){
@@ -41,9 +57,20 @@ function App() {
     setJobs(previous => [...previous, newJob])
  }
 
- function handleDeleteJobs(id: string){
-  setJobs(previous => previous.filter(job => job.id !== id))
- }
+ async function handleDeleteJobs(id: string) {
+  const { error } = await supabase
+    .from('jobs')
+    .delete()
+    .eq('id', id)
+    .select() 
+
+  if (error) {
+    console.error('Delete failed:', error.message);
+  } else {
+    setJobs(prev => prev.filter(job => job.id !== id));
+
+  }
+}
 
  function handleEditJob(id: string){
   setNewEditJob(

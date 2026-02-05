@@ -3,17 +3,16 @@ import { icons } from './icons/icon';
 
 export type JobType = {
     
-    id: string,
+    id?: string
     company: string,
-    companyIcon: Company,
+    logo_url: string,
+    logo_alt: string,
     position: string,
     status: string,
     link?: string,
-    createdAt: string,
     salary?: string | number
-    moodTxt: string,
-    favorites: boolean,
-    date: Date
+    mood_txt: string,
+
 }
 
 export type Company = {
