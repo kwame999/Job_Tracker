@@ -111,7 +111,8 @@ export type TabViewProps = {
     onShowModal: () => void
     tags: Tags[]
     onHandleTab: (currentTab: string) => void
-    tabActive: string
+    tabActive: string,
+    isLoading: boolean
  
 }
 

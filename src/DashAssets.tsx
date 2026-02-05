@@ -74,7 +74,7 @@ const Tag = ({handleNewTag, tagTypes}: HeaderProps) => {
 
 
 
-const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActive}: TabViewProps) => {
+const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActive, isLoading}: TabViewProps) => {
 
     const tabItems: string[] = ["Dashboard", "Kanban View"];
     
@@ -130,29 +130,36 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
                     <div className="h-full flex gap-7 overflow-x-auto px-8 pb-8 justify-start items-start custom-scrollbar">
                         {children}
                     </div>
-                ) : (
-                
+                ) :  (
                     <div className="mx-8 flex flex-col w-auto items-center justify-center border-2 border-dashed rounded-[24px] py-12 h-full border-black/[0.1] bg-gray-50/40 transition-all"> 
-                        <img 
-                            src="/src/assets/flat-briefcase-icon-by-Vexels 1.png" 
-                            alt="Empty Workspace" 
-                            className="w-48 opacity-15 grayscale mb-6 select-none" 
-                        />
-                        <div className="text-center flex flex-col items-center">
-                            <h2 className="text-1xl font-black text-[#0A0A0A] tracking-tight mb-2 ">
-                                Tracker empty
-                            </h2>
-                            <p className="text-[14px] text-black/40 font-medium mb-10 max-w-[320px] leading-relaxed">
-                                Start your journey by tracking your first application to see your dashboard come to life.
-                            </p>
-                            
-                            <button 
-                                className="bg-gray-50 text-white px-4 py-4 rounded-full text-[13px] font-black uppercase tracking-widest shadow-lg hover:bg-black/10 hover:scale-[1.02] active:scale-95 transition-all" 
-                                onClick={onShowModal}
-                            >
-                                <IconSet iconName="plus" size={23}></IconSet>
-                            </button>
-                        </div>
+                        {isLoading ? <IconSet iconName="loading" size={70}></IconSet> :
+                        
+                        <>
+                            <img 
+                                src="/src/assets/flat-briefcase-icon-by-Vexels 1.png" 
+                                alt="Empty Workspace" 
+                                className="w-48 opacity-15 grayscale mb-6 select-none" 
+                            />
+                            <div className="text-center flex flex-col items-center">
+                                <h2 className="text-1xl font-black text-[#0A0A0A] tracking-tight mb-2 ">
+                                    Tracker empty
+                                </h2>
+                                <p className="text-[14px] text-black/40 font-medium mb-10 max-w-[320px] leading-relaxed">
+                                    Start your journey by tracking your first application to see your dashboard come to life.
+                                </p>
+                                
+                                <button 
+                                    className="bg-gray-50 text-white px-4 py-4 rounded-full text-[13px] font-black uppercase tracking-widest shadow-lg hover:bg-black/10 hover:scale-[1.02] active:scale-95 transition-all" 
+                                    onClick={onShowModal}
+                                >
+                                    <IconSet iconName="plus" size={23}></IconSet>
+                                </button>
+                            </div>
+                        </>
+                        
+                        
+                        }
+                        
                     </div>
                 )}
             </div>

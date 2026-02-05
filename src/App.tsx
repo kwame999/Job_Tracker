@@ -24,19 +24,25 @@ function App() {
  const [tagTypes, setTagTypes] = useState<Tags[]>([]);
  const [tabActive, setTabActive] = useState<string>('Dashboard');
  const [currentColumn, setCurrentColumn] = useState<string>('wishlist');
-
+ const [isLoading, setisLoading] = useState<boolean>(true)
+ 
+ 
  useEffect(()=>{
 
-  const datas = async () => {
-    const {data, error} = await supabase
-    .from('jobs')
-    .select('*');
-
+   const datas = async () => {
+     const {data, error} = await supabase
+     .from('jobs')
+     .select('*');
+     
+     setisLoading(true) 
+     
   if (error) {
       console.log('Error fetching:', error)
     } else {
       console.log('My Jobs:', data)
       setJobs(data)
+      setisLoading(false)
+
     }
 
   }
@@ -44,7 +50,7 @@ function App() {
   datas()
  },[])
  
-  
+ 
  function handleContainer(newContainer: CustomContainerT){
   setCustomContainer(prev => [...prev, newContainer])
  }
@@ -123,8 +129,10 @@ function handleCurrentColumn(colName: string){
 }
 
   return (
+
+     
+
   <div className='flex h-screen overflow-hidden bg-main-bgs'>
-        
         {showModal &&  
                           
                   
@@ -145,7 +153,7 @@ function handleCurrentColumn(colName: string){
   <div className='flex-1 min-w-0 flex flex-col overflow-hidden'>
     
     <Header jobProjName='UX-Hunt 2026' isCollapsed={tabActive === 'Kanban View'}  jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes}></Header>
-    <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal} tags={tagTypes} onHandleTab={handleTab} tabActive= {tabActive}>
+    <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal} tags={tagTypes} onHandleTab={handleTab} tabActive= {tabActive} isLoading={isLoading}>
 
 
   {jobs.length && <div className=' flex gap-8 h-full justify-center'>
