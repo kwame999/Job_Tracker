@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from "react"
-import type { Tags, StatsBlockProps, HeaderProps} from './Types'
+import type { Tags, StatsBlockProps, HeaderProps, CustomContainerT} from './Types'
 import { IconSet } from "./icons/icon";
 import './index.css'
 import type { TabViewProps } from "./Types";
-
+import supabase from "./lib/supabaseClient";
 
 const Tag = ({handleNewTag, tagTypes}: HeaderProps) => {
     const [tag, setTag] = useState<string>("");
@@ -197,10 +197,7 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
 
     }
 
-    type CustomContainerT = {
-        containerName: string,
-        containerColor?: string,
-    }
+
 
     type ModalNewContainerProps = {
         setNewContainer: (container: CustomContainerT) => void
@@ -215,9 +212,20 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
             setIsVisible(false);
         };
 
-        function onSubmit() {
+        async function onSubmit() {
             if (!containerName.trim()) return;
-            setNewContainer({ containerName: containerName });
+
+            const newContainer = { container_name: containerName }
+
+            const {data, error} = await supabase
+            .from('containers')
+            .insert([newContainer])
+            .select()
+            
+            if (error) {
+                console.error(error.message)
+            }else
+            setNewContainer(data[0]);
             handleInternalClose();
         }
 

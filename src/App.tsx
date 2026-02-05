@@ -4,14 +4,11 @@ import { Modal } from './Modal'
 import {Tag, TabView, StatBlock, ModalNewContainer} from './DashAssets'
 import './index.css'
 import {Header} from './Header'
-import type { JobType, Tags } from './Types'
+import type { JobType, Tags, CustomContainerT } from './Types'
 import SideNav from './SideNav'
 import { IconSet } from './icons/icon'
 import supabase from './lib/supabaseClient'
-type CustomContainerT = {
-  containerName: string,
-  containerColor?: string,
-}
+
 // console.log(supabase)
 function App() {
 
@@ -29,25 +26,42 @@ function App() {
  
  useEffect(()=>{
 
-   const datas = async () => {
-     const {data, error} = await supabase
-     .from('jobs')
-     .select('*');
-     
-     setisLoading(true) 
-     
-  if (error) {
-      console.log('Error fetching:', error)
-    } else {
-      console.log('My Jobs:', data)
-      setJobs(data)
-      setisLoading(false)
-
-    }
+   const jobsData = async () => { 
+      const {data, error} = await supabase
+      .from('jobs')
+      .select('*');
+      
+      setisLoading(isLoading) ;
+      
+      if (error) {
+        console.log('Error fetching:', error);
+      } else {
+        console.log('My Jobs:', data);
+        setJobs(data)
+        setisLoading(!isLoading);
+      }
 
   }
 
-  datas()
+  const containerData = async () => {
+      const {data, error} = await supabase
+      .from('containers')
+      .select('*');
+
+      setisLoading(isLoading);
+
+      if(error) {
+        console.error(error);
+      } else {
+        console.log('My Containers:', data);
+        setCustomContainer(data);
+        setisLoading(!isLoading);
+
+      }
+  }
+  
+  jobsData();
+  containerData();
  },[])
  
  
@@ -65,11 +79,13 @@ function App() {
     .delete()
     .eq('id', id)
    
+    setisLoading(true) 
 
   if (error) {
     console.error('Delete failed:', error.message);
   } else {
     setJobs(prev => prev.filter(job => job.id !== id));
+    setisLoading(false)
 
   }
 }
@@ -185,8 +201,8 @@ function handleCurrentColumn(colName: string){
                     {/* {jobs.map(job => jobStatusTypeCheck(job.status) && <Column name={job.status} onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                                        { renderFilteredJob(job.status)}
                                                                        </Column>)} */}
-                    {customContainer.map(container => <Column  name={container.containerName} onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                      {renderFilteredJob(container.containerName.toLowerCase())}
+                    {customContainer.map(({container_name, id}) => <Column key={id} name={container_name} onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
+                                                      {renderFilteredJob(container_name.toLowerCase())}
                                                       </Column>)}
                     
                   </div>}

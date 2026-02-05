@@ -63,11 +63,10 @@ const Card = ({job, onDelete, onEdit, showModal}: CardProps) => {
 
             {/* Meta Row */}
             <div className="flex gap-3 mt-3 overflow-x-auto no-scrollbar">
-                {salary && (
                     <div className="flex items-center gap-1 text-[10px] font-bold bg-green-50 text-green-700 px-2 py-1 rounded">
                          $Salary: {salary || "-"}
                     </div>
-                )}
+                
                 {/* {createdAt && (
                     <div className="flex items-center gap-1 text-[10px] font-bold bg-gray-50 text-gray-500 px-2 py-1 rounded whitespace-nowrap">
                          {createdAt}

@@ -162,7 +162,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                                 <option value="offer">Offer</option>
                                 <option value="rejected">Rejected</option>
                                 <option value="ghosted">Ghosted</option>
-                                {onAddCustomCol.map(col => <option key={col.containerName} value={col.containerName.toLowerCase()}>{col.containerName}</option>)}
+                                {onAddCustomCol.map(({container_name}) => <option key={container_name} value={container_name.toLowerCase()}>{container_name}</option>)}
                             </select>
                         </div>
                     </div>

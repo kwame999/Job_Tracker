@@ -116,7 +116,8 @@ export type TabViewProps = {
  
 }
 
-type CustomContainerT = {
-  containerName: string,
+export type CustomContainerT = {
+  id?: string
+  container_name: string,
   containerColor?: string,
 }
