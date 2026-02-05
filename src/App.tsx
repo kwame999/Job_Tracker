@@ -25,10 +25,6 @@ function App() {
  const [tabActive, setTabActive] = useState<string>('Dashboard');
  const [currentColumn, setCurrentColumn] = useState<string>('wishlist');
 
- useEffect(() => {
-  localStorage.setItem('Jobs', JSON.stringify(jobs));
- },[jobs]);
-
  useEffect(()=>{
 
   const datas = async () => {
@@ -62,7 +58,7 @@ function App() {
     .from('jobs')
     .delete()
     .eq('id', id)
-    .select() 
+   
 
   if (error) {
     console.error('Delete failed:', error.message);
