@@ -13,8 +13,8 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
     const [link, setLink] = useState("");
     const [salary, setSalary] = useState<string | number>("");
     const [moodTxt, setMoodTxt] = useState("");
-   
-
+    const [isLoading, setisLoading] = useState<boolean>(false)
+    
     useEffect(() => {
         if(!editingJob) return
         const {company, position, status, link, salary, mood_txt} = editingJob;
@@ -66,7 +66,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                 } else if (data){
                     updateJob(data[0]); 
                     handleClose()}
-            } else { onAddJob(savedJob); }
+            } else { company && onAddJob(savedJob); }
 
     }
 
@@ -92,9 +92,17 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
     async function moodTxtAnalyzer(company: string, position: string){
 
         if(!company || !position){
-            return(<p>Please provide a comapny and a position</p>)
+            // return(<p>Please provide a comapny and a position to use coach!</p>)
+            console.log('no')
+            return
         }
+        setisLoading(true)
         let generatedMood = await analyzeJob(company, position)
+        
+        generatedMood && setisLoading(false)
+        setMoodTxt(generatedMood || "")
+        console.log(isLoading)
+
         return generatedMood;
     }
 
@@ -175,22 +183,29 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-[6px]">
+                    <div className="flex flex-col gap-[6px] relative">
                         <label className="text-[13px] font-semibold text-[#1A1A1A]">Notes</label>
                         
-                        <div>
+                        <div className="relative">
+                            { isLoading && <div className="w-full bg-gray-100 h-full p-4 absolute rounded-[8px]  flex justify-center items-center animate-pulse">
+                                <IconSet iconName="loading" size={40}></IconSet>
+                            </div>}
                             <textarea 
-                                placeholder="Add any additional notes..."
+                                placeholder= {isLoading ? 'Coach at work...' : 'Add any additional notes...'}
                                 rows={3}
                                 className="w-full p-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all resize-none"
                                 value={moodTxt} 
                                 onChange={(e) => setMoodTxt(e.target.value)}
-                            ></textarea>
-                            <div className=" w-full flex justify-end items-center">
-                                <button onClick={()=>{}}
-                                        className=" rounded-full outline-1 w-[30px] h-[30px] p-1"
+                            >
+
                                 
-                                >Ai</button>
+                            </textarea>
+                            <div className=" w-full flex justify-end items-center absolute">
+                                <button onClick={()=> !isLoading && moodTxtAnalyzer(company, position)}
+                                        className={`rounded-full outline-1 outline-gray-300 w-[30px] h-[30px] p-0.5 flex justify-center items-center absolute bottom-0 right-0 mb-4 mr-2 drop-shadow-md bg-blue-200 
+                                                    ${isLoading && 'cursor-not-allowed'}`} 
+                                
+                                ><IconSet iconName="sparkle" size={24}></IconSet></button>
                             </div>
                         </div>
                     </div>
