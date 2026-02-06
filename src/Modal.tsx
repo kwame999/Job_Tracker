@@ -60,11 +60,10 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                 .from('jobs')
                 .update(newJob)           
                 .eq('id', editingJob.id)  
-                .select();                
 
                 if (error) {
                     console.error("Update failed:", error.message);
-                } else if (data && data.length > 0){
+                } else if (data){
                     updateJob(data[0]); 
                     handleClose()}
             } else { onAddJob(savedJob); }
