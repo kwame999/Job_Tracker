@@ -13,7 +13,9 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
     const [link, setLink] = useState("");
     const [salary, setSalary] = useState<string | number>("");
     const [moodTxt, setMoodTxt] = useState("");
-    const [isLoading, setisLoading] = useState<boolean>(false)
+    const [isLoading, setisLoading] = useState<boolean>(false);
+    const [checked, setChecked] = useState<boolean>(false);
+
     
     useEffect(() => {
         if(!editingJob) return
@@ -92,11 +94,11 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
     async function moodTxtAnalyzer(company: string, position: string){
 
         if(!company || !position){
-            // return(<p>Please provide a comapny and a position to use coach!</p>)
-            console.log('no')
+            setChecked(true);
             return
         }
         setisLoading(true)
+        setChecked(false)
         let generatedMood = await analyzeJob(company, position)
         
         generatedMood && setisLoading(false)
@@ -202,12 +204,15 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                             </textarea>
                             <div className=" w-full flex justify-end items-center absolute">
                                 <button onClick={()=> !isLoading && moodTxtAnalyzer(company, position)}
-                                        className={`rounded-full outline-1 outline-gray-300 w-[30px] h-[30px] p-0.5 flex justify-center items-center absolute bottom-0 right-0 mb-4 mr-2 drop-shadow-md bg-blue-200 
+                                        className={`rounded-full outline-1 outline-gray-500 w-[30px] h-[30px] p-0.5 flex justify-center items-center absolute bottom-0 right-0 mb-4 mr-2 drop-shadow-md bg-blue-500/10 
                                                     ${isLoading && 'cursor-not-allowed'}`} 
                                 
-                                ><IconSet iconName="sparkle" size={24}></IconSet></button>
+                                ><IconSet iconName="sparkle" size={25}></IconSet>
+                                </button>
+                                
                             </div>
                         </div>
+                        {checked && (<p className="text-red-600 text-sm">*Please, provide a name and a position</p>)}
                     </div>
                 </div>
 

@@ -77,7 +77,7 @@ const Card = ({job, onDelete, onEdit, showModal}: CardProps) => {
             {/* Note Row */}
             {isOpen && (
                 <div className="mt-4 pt-4 border-t border-gray-50 space-y-3">
-                    <p className="text-xs text-gray-500 italic">"{mood_txt || 'No notes...'}"</p>
+                    <p className={`text-xs text-gray-500 ${!mood_txt && 'italic'}`}>{mood_txt || 'No notes...'}</p>
                     <div className="flex gap-2">
                         <button className="flex-1 py-1.5 text-xs font-bold bg-gray-100 rounded-lg" onClick={() => {onEdit(id!)
                                                                                                                      showModal()

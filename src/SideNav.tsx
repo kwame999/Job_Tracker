@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import type { SideNavProps } from './Types'
 import {IconSet} from "./icons/icon"
 import './index.css'
@@ -6,7 +6,15 @@ import './index.css'
 const SideNav = ({recentJobs}:SideNavProps) => {
 
     const [modeIcon, setModeIcon] = useState<boolean>(false)
-    const [isExpanded, isSetExpanded] = useState<boolean>(false);
+    const [isExpanded, isSetExpanded] = useState<boolean>(()=>{
+        const getSide = localStorage.getItem('sideNav')
+        return JSON.parse(getSide!)
+    });
+    
+    useEffect(()=>{
+        localStorage.setItem('sideNav', JSON.stringify(isExpanded))
+    }, [isExpanded]);
+
 
     function handleSwitch(e: React.MouseEvent){
         e.stopPropagation(); 
