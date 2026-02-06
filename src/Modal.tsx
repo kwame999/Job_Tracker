@@ -3,7 +3,7 @@ import { PreviewCard } from "./Column";
 import type { JobType, State, ModalProps, Action } from './Types'
 import { IconSet } from "./icons/icon";
 import supabase from './lib/supabaseClient'
-
+import { analyzeJob } from "./lib/gemini";
 
 const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, currentCol, onSetCurrentCol }: ModalProps) => {
     
@@ -89,6 +89,15 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
     
     }
 
+    async function moodTxtAnalyzer(company: string, position: string){
+
+        if(!company || !position){
+            return(<p>Please provide a comapny and a position</p>)
+        }
+        let generatedMood = await analyzeJob(company, position)
+        return generatedMood;
+    }
+
     return (
         <>
             <div className='fixed inset-0 bg-black/30 backdrop-blur-[2px] z-[999]' onClick={handleClose}></div>
@@ -168,13 +177,22 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
 
                     <div className="flex flex-col gap-[6px]">
                         <label className="text-[13px] font-semibold text-[#1A1A1A]">Notes</label>
-                        <textarea 
-                            placeholder="Add any additional notes..."
-                            rows={3}
-                            className="w-full p-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all resize-none"
-                            value={moodTxt} 
-                            onChange={(e) => setMoodTxt(e.target.value)}
-                        ></textarea>
+                        
+                        <div>
+                            <textarea 
+                                placeholder="Add any additional notes..."
+                                rows={3}
+                                className="w-full p-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all resize-none"
+                                value={moodTxt} 
+                                onChange={(e) => setMoodTxt(e.target.value)}
+                            ></textarea>
+                            <div className=" w-full flex justify-end items-center">
+                                <button onClick={()=>{}}
+                                        className=" rounded-full outline-1 w-[30px] h-[30px] p-1"
+                                
+                                >Ai</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
