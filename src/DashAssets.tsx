@@ -85,12 +85,12 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
                     
                     {/* Stats Section */}
                     <div className='flex flex-col gap-2'>
-                        <div className='flex gap-8'>
-                            <StatBlock svgType='clock' svgSize={22} statTxt='Created' data={new Date().toLocaleDateString()} />
-                            <StatBlock svgType='calender2' svgSize={24} statTxt='Jobs Tracked' data={data.length || <span className="text-sm font-medium text-black/20 italic ">0 tracked</span>} />
+                        <div className='flex gap-4.5'>
+                            <StatBlock svgType='calender2' svgSize={18} statTxt='Created' data={new Date().toLocaleDateString()} />
+                            <StatBlock svgType='briefcase' svgSize={18} statTxt='Jobs Tracked' data={data.length || <span className="text-sm font-medium text-black/20 italic ">0 tracked</span>} />
                         </div>
                             <StatBlock svgType='tags' 
-                                       svgSize={22} 
+                                       svgSize={18} 
                                        statTxt='Active Tags' 
                                        data={   tags.length > 0 ? tags.map((tag, indx) => (
                                             <p key={indx} className="px-2.5 py-0.5 bg-black/[0.03] border border-black/[0.09] rounded-lg text-[11px] font-bold text-black/60 ">

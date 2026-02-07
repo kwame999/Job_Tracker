@@ -25,7 +25,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
         setPosition(position);
         setStatus(status);
         setLink(link ?? "");
-        setSalary(salary ?? 0);
+        setSalary(salary ?? "-");
         setMoodTxt(mood_txt);
 
     },[editingJob]);
@@ -43,34 +43,42 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
         logo_alt: `${company} logo`,
         }
 
-        const {data, error} = await supabase
-        .from('jobs')
-        .insert([newJob])
-        .select()
+        if (editingJob) {
+            
+            const { data, error } = await supabase
+            .from('jobs')
+            .update(newJob)           
+            .eq('id', editingJob.id)  
+            .select()
 
-       if (error) {
-        console.error("Supabase Error:", error.message);
-        return; 
+            if (error) {
+                console.error("Update failed:", error.message);
+            } else {
+                updateJob(data[0]); 
+                handleClose()
+            }
+
+        } else if (company) {
+            
+            const {data, error} = await supabase
+            .from('jobs')
+            .insert([newJob])
+            .select()
+    
+           if (error) {
+            console.error("Supabase Error:", error.message);
+            return; 
+            }
+    
+            if (data && data.length) {
+            onAddJob(data[0]); 
+            }
+
         }
 
 
-        if (data && data.length) {
-        const savedJob = data[0]; 
+        
 
-            if (editingJob) {
-                const { data, error } = await supabase
-                .from('jobs')
-                .update(newJob)           
-                .eq('id', editingJob.id)  
-
-                if (error) {
-                    console.error("Update failed:", error.message);
-                } else if (data){
-                    updateJob(data[0]); 
-                    handleClose()}
-            } else { company && onAddJob(savedJob); }
-
-    }
 
         // if (editingJob) { updateJob(data[0]) } else { newJob.company && onAddJob(!data?.length || !data ? [] : data[0]) }
         
@@ -212,7 +220,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                                 
                             </div>
                         </div>
-                        {checked && (<p className="text-red-600 text-sm">*Please, provide a name and a position</p>)}
+                        {checked && (<p className={`text-red-600 text-sm ${(company || position) && 'hidden'}`}>*Please, provide a name and a position</p>)}
                     </div>
                 </div>
 
@@ -220,7 +228,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                 <div className="px-[32px] py-[24px] border-t border-[#F0F0F0] flex gap-[12px] bg-white">
                     <button type="button" onClick={()=>{
                         handleClose()
-                        onSetCurrentCol("");
+                        onSetCurrentCol('wishlist');
                     }} className="flex-1 h-[44px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[15px] font-semibold text-[#404040] hover:bg-gray-50 transition-colors">
                         Cancel
                     </button>
