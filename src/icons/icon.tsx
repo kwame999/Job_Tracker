@@ -44,9 +44,11 @@ const icons = {
     </svg>
   ),
   cheveronDown: (
-    <svg width={size} height={size} viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M13.2692 1.15384L7.2115 7.21153L1.15381 1.15384" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
+   
+<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 9L12 16L5 9" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>
+
   ),
   cheveronUp: (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,9 +74,9 @@ const icons = {
 
 
 <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1_19818)">
-<path d="M12.5858 4.58579C12.2107 4.21071 11.702 4 11.1716 4H4V11.1716C4 11.702 4.21071 12.2107 4.58579 12.5858L11.5858 19.5858C12.3668 20.3668 13.6332 20.3668 14.4142 19.5858L19.5858 14.4142C20.3668 13.6332 20.3668 12.3668 19.5858 11.5858L12.5858 4.58579Z" stroke="#292929" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="9" y="9" width="0.01" height="0.01" stroke="#292929" stroke-width="3" stroke-linejoin="round"/>
+<g clipPath="url(#clip0_1_19818)">
+<path d="M12.5858 4.58579C12.2107 4.21071 11.702 4 11.1716 4H4V11.1716C4 11.702 4.21071 12.2107 4.58579 12.5858L11.5858 19.5858C12.3668 20.3668 13.6332 20.3668 14.4142 19.5858L19.5858 14.4142C20.3668 13.6332 20.3668 12.3668 19.5858 11.5858L12.5858 4.58579Z" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<rect x="9" y="9" width="0.01" height="0.01" stroke="#292929" strokeWidth="3" strokeLinejoin="round"/>
 </g>
 <defs>
 <clipPath id="clip0_1_19818">
@@ -115,7 +117,7 @@ const icons = {
 
   more: (
     
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M13 14C13 14.5523 13.4477 15 14 15C14.5523 15 15 14.5523 15 14C15 13.4477 14.5523 13 14 13C13.4477 13 13 13.4477 13 14Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M7 14C7 14.5523 7.44772 15 8 15C8.55228 15 9 14.5523 9 14C9 13.4477 8.55228 13 8 13C7.44772 13 7 13.4477 7 14Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M1 14C1 14.5523 1.44772 15 2 15C2.55228 15 3 14.5523 3 14C3 13.4477 2.55228 13 2 13C1.44772 13 1 13.4477 1 14Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -147,11 +149,11 @@ const icons = {
 
 
 <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1_20458)">
-<path d="M4 4H20V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V4Z" stroke="#292929" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4 8H20" stroke="#292929" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M16 3V5" stroke="#292929" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M8 3V5" stroke="#292929" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g clipPath="url(#clip0_1_20458)">
+<path d="M4 4H20V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V4Z" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M4 8H20" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M16 3V5" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M8 3V5" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
 <defs>
 <clipPath id="clip0_1_20458">
@@ -189,11 +191,11 @@ const icons = {
 </svg>),
 briefcase: (
 <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1_20454)">
-<path d="M5 16H19V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V16Z" stroke="#292929" stroke-width="2" stroke-linejoin="round"/>
-<path d="M4 7H20V14C20 15.1046 19.1046 16 18 16H6C4.89543 16 4 15.1046 4 14V7Z" stroke="#292929" stroke-width="2" stroke-linejoin="round"/>
-<rect x="12" y="12" width="0.01" height="0.01" stroke="#292929" stroke-width="3" stroke-linejoin="round"/>
-<path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#292929" stroke-width="2" stroke-linejoin="round"/>
+<g clipPath="url(#clip0_1_20454)">
+<path d="M5 16H19V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V16Z" stroke="#292929" strokeWidth="2" strokeLinejoin="round"/>
+<path d="M4 7H20V14C20 15.1046 19.1046 16 18 16H6C4.89543 16 4 15.1046 4 14V7Z" stroke="#292929" strokeWidth="2" strokeLinejoin="round"/>
+<rect x="12" y="12" width="0.01" height="0.01" stroke="#292929" strokeWidth="3" strokeLinejoin="round"/>
+<path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#292929" strokeWidth="2" strokeLinejoin="round"/>
 </g>
 <defs>
 <clipPath id="clip0_1_20454">
@@ -202,7 +204,16 @@ briefcase: (
 </defs>
 </svg>
 ),
-
+edit2: (
+<svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.0002 4H7.2002C6.08009 4 5.51962 4 5.0918 4.21799C4.71547 4.40973 4.40973 4.71547 4.21799 5.0918C4 5.51962 4 6.08009 4 7.2002V16.8002C4 17.9203 4 18.4801 4.21799 18.9079C4.40973 19.2842 4.71547 19.5905 5.0918 19.7822C5.5192 20 6.07899 20 7.19691 20H16.8031C17.921 20 18.48 20 18.9074 19.7822C19.2837 19.5905 19.5905 19.2839 19.7822 18.9076C20 18.4802 20 17.921 20 16.8031V14M16 5L10 11V14H13L19 8M16 5L19 2L22 5L19 8M16 5L19 8" stroke="#252626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>
+),
+delete: (
+<svg width={size}height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 6V17.8C6 18.9201 6 19.4798 6.21799 19.9076C6.40973 20.2839 6.71547 20.5905 7.0918 20.7822C7.5192 21 8.07899 21 9.19691 21H14.8031C15.921 21 16.48 21 16.9074 20.7822C17.2837 20.5905 17.5905 20.2839 17.7822 19.9076C18 19.4802 18 18.921 18 17.8031V6M6 6H8M6 6H4M8 6H16M8 6C8 5.06812 8 4.60241 8.15224 4.23486C8.35523 3.74481 8.74432 3.35523 9.23438 3.15224C9.60192 3 10.0681 3 11 3H13C13.9319 3 14.3978 3 14.7654 3.15224C15.2554 3.35523 15.6447 3.74481 15.8477 4.23486C15.9999 4.6024 16 5.06812 16 6M16 6H18M18 6H20" stroke="#B50000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>
+)
   
 
 };

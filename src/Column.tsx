@@ -57,7 +57,7 @@ const Card = ({job, onDelete, onEdit, showModal}: CardProps) => {
                     <p className="text-xs font-semibold text-blue-600 truncate">{"Position: " + (position || "-")}</p>
                 </div>
                 <button onClick={() => setIsOpen(!isOpen)}>
-                    <IconSet iconName={!isOpen ? "cheveronDown" : "cheveronUp"} size={16}></IconSet>
+                    <IconSet iconName={!isOpen ? "cheveronDown" : "cheveronUp"} size={18}></IconSet>
                 </button>
             </div>
 
@@ -79,10 +79,17 @@ const Card = ({job, onDelete, onEdit, showModal}: CardProps) => {
                 <div className="mt-4 pt-4 border-t border-gray-50 space-y-3">
                     <p className={`text-xs text-gray-500 ${!mood_txt && 'italic'}`}>{mood_txt || 'No notes...'}</p>
                     <div className="flex gap-2">
-                        <button className="flex-1 py-1.5 text-xs font-bold bg-gray-100 rounded-lg" onClick={() => {onEdit(id!)
-                                                                                                                     showModal()
-                        }}>Edit</button>
-                        <button className="flex-1 py-1.5 text-xs font-bold bg-red-50 text-red-600 rounded-lg" onClick={() => onDelete(id!)}>Delete</button>
+                        <button className="flex-1 py-1.5 text-xs font-bold bg-gray-100 rounded-lg flex justify-center gap-2 items-center" 
+                            onClick={() => {onEdit(id!)
+                                            showModal()
+                        }}> <IconSet iconName="edit2" size={14}></IconSet>Edit</button>
+                        
+                        <button className="flex-1 py-1.5 text-xs font-bold bg-red-50 text-red-600 rounded-lg flex justify-center gap-2 items-center" 
+                        onClick={() => onDelete(id!)
+
+                        }> <IconSet iconName="delete" size={14}>Delete</IconSet>
+
+                        </button>
                     </div>
                 </div>
             )}

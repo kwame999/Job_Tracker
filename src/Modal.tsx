@@ -101,7 +101,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
 
     async function moodTxtAnalyzer(company: string, position: string){
 
-        if(!company || !position){
+        if((!company && !position) || moodTxt){
             setChecked(true);
             return
         }
@@ -115,7 +115,8 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
 
         return generatedMood;
     }
-
+    
+    
     return (
         <>
             <div className='fixed inset-0 bg-black/30 backdrop-blur-[2px] z-[999]' onClick={handleClose}></div>
@@ -197,8 +198,8 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                         <label className="text-[13px] font-semibold text-[#1A1A1A]">Notes</label>
                         
                         <div className="relative">
-                            { isLoading && <div className="w-full bg-gray-100 h-full p-4 absolute rounded-[8px]  flex justify-center items-center animate-pulse">
-                                <IconSet iconName="loading" size={40}></IconSet>
+                            { isLoading && <div className="w-full bg-gray-300 h-full p-4 absolute rounded-[8px]  flex justify-center items-center animate-pulse">
+                                {/* <IconSet iconName="loading" size={40}></IconSet> */}
                             </div>}
                             <textarea 
                                 placeholder= {isLoading ? 'Coach at work...' : 'Add any additional notes...'}
@@ -212,7 +213,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                             </textarea>
                             <div className=" w-full flex justify-end items-center absolute">
                                 <button onClick={()=> !isLoading && moodTxtAnalyzer(company, position)}
-                                        className={`rounded-full outline-1 outline-gray-500 w-[30px] h-[30px] p-0.5 flex justify-center items-center absolute bottom-0 right-0 mb-4 mr-2 drop-shadow-md bg-blue-500/10 
+                                        className={`rounded-full outline-1 outline-gray-200 w-[30px] h-[30px] p-0.5 flex justify-center items-center absolute bottom-0 right-0 mb-4 mr-2 drop-shadow-md bg-blue-500/10 
                                                     ${isLoading && 'cursor-not-allowed'}`} 
                                 
                                 ><IconSet iconName="sparkle" size={25}></IconSet>
@@ -220,7 +221,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                                 
                             </div>
                         </div>
-                        {checked && (<p className={`text-red-600 text-sm ${(company || position) && 'hidden'}`}>*Please, provide a name and a position</p>)}
+                        {checked && (<p className={`text-red-600 text-sm ${(company && position) && 'hidden'}`}>*Please, provide a name and a position</p>)}
                     </div>
                 </div>
 
