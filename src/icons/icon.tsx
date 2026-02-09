@@ -75,8 +75,8 @@ const icons = {
 
 <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clipPath="url(#clip0_1_19818)">
-<path d="M12.5858 4.58579C12.2107 4.21071 11.702 4 11.1716 4H4V11.1716C4 11.702 4.21071 12.2107 4.58579 12.5858L11.5858 19.5858C12.3668 20.3668 13.6332 20.3668 14.4142 19.5858L19.5858 14.4142C20.3668 13.6332 20.3668 12.3668 19.5858 11.5858L12.5858 4.58579Z" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<rect x="9" y="9" width="0.01" height="0.01" stroke="#292929" strokeWidth="3" strokeLinejoin="round"/>
+<path d="M12.5858 4.58579C12.2107 4.21071 11.702 4 11.1716 4H4V11.1716C4 11.702 4.21071 12.2107 4.58579 12.5858L11.5858 19.5858C12.3668 20.3668 13.6332 20.3668 14.4142 19.5858L19.5858 14.4142C20.3668 13.6332 20.3668 12.3668 19.5858 11.5858L12.5858 4.58579Z" stroke="#969696" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<rect x="9" y="9" width="0.01" height="0.01" stroke="#969696" strokeWidth="3" strokeLinejoin="round"/>
 </g>
 <defs>
 <clipPath id="clip0_1_19818">
@@ -150,10 +150,10 @@ const icons = {
 
 <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clipPath="url(#clip0_1_20458)">
-<path d="M4 4H20V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V4Z" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M4 8H20" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M16 3V5" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M8 3V5" stroke="#292929" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M4 4H20V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V4Z" stroke="#969696" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M4 8H20" stroke="#969696" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M16 3V5" stroke="#969696" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M8 3V5" stroke="#969696" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
 <defs>
 <clipPath id="clip0_1_20458">
@@ -192,10 +192,10 @@ const icons = {
 briefcase: (
 <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clipPath="url(#clip0_1_20454)">
-<path d="M5 16H19V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V16Z" stroke="#292929" strokeWidth="2" strokeLinejoin="round"/>
-<path d="M4 7H20V14C20 15.1046 19.1046 16 18 16H6C4.89543 16 4 15.1046 4 14V7Z" stroke="#292929" strokeWidth="2" strokeLinejoin="round"/>
-<rect x="12" y="12" width="0.01" height="0.01" stroke="#292929" strokeWidth="3" strokeLinejoin="round"/>
-<path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#292929" strokeWidth="2" strokeLinejoin="round"/>
+<path d="M5 16H19V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V16Z" stroke="#969696" strokeWidth="2" strokeLinejoin="round"/>
+<path d="M4 7H20V14C20 15.1046 19.1046 16 18 16H6C4.89543 16 4 15.1046 4 14V7Z" stroke="#969696" strokeWidth="2" strokeLinejoin="round"/>
+<rect x="12" y="12" width="0.01" height="0.01" stroke="#969696" strokeWidth="3" strokeLinejoin="round"/>
+<path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#969696" strokeWidth="2" strokeLinejoin="round"/>
 </g>
 <defs>
 <clipPath id="clip0_1_20454">

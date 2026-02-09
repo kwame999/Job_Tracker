@@ -173,8 +173,8 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
                 <div>
                     <div className="flex items-center gap-1">
                         <IconSet iconName={svgType} size={svgSize}></IconSet>
-                        <p className="text-sm font-bold  text-black/30 tracking-wide">{statTxt}:</p>
-                        <div className="text-sm font-bold text-black/60 flex gap-2">{data || children}</div> 
+                        <p className="text-sm font-bold  text-black/40 tracking-wide">{statTxt}:</p>
+                        <div className="text-sm font-bold text-black/20 flex gap-2">{data || children}</div> 
                     </div>
         
                 </div>

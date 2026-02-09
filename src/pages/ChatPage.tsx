@@ -3,7 +3,7 @@ import { useState } from "react"
 import { getCoachResponse } from "../lib/gemini"
 import { StatCard } from "../DashAssets"
 import { IconSet } from "../icons/icon"
-
+import { Link } from "react-router-dom"
 interface ChatPageProps {
     jobsData: JobType[],
 
@@ -48,12 +48,17 @@ const ChatPage = ({jobsData}: ChatPageProps) => {
 
                 {messages.length === 1 && (
                     <div className="h-full flex flex-col items-center justify-center text-center animate-fade-in">
-                        <img src='src\assets\JTrack.png' alt="" width={100} />
-                    <h1 className="text-3xl font-bold text-gray-800 mb-7 mt-8 tracking-wide">Hi, Applicant!</h1>
+                        <img src='src\assets\JTrack.png' alt="" width={100} className="drop-shadow-md" />
+                    <h1 className="text-3xl font-extrabold text-gray-800 mb-7 mt-8 tracking-wide">Hi, Applicant</h1>
                     <p className="text-gray-400 max-w-sm">
                         What can coach help you with today? I've analyzed your board and I'm ready when you are.
                     </p>
+                    <button className="bg-black/3 mt-4 p-2 rounded-full hover:bg-black/8 transition-opacity outline-1 outline-black/15">
+                        {!jobsData.length && <Link to='/' className=""><IconSet iconName="plus" size={24}></IconSet></Link>}                        
+                    </button>
+
                     </div>
+                    
                 )}
 
                 {/* Main Convo - only maps if there are actual exchanges */}

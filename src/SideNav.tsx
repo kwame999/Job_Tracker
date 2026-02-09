@@ -42,30 +42,30 @@ const SideNav = ({recentJobs}:SideNavProps) => {
             <div className={`px-[12px] ${isExpanded && 'px-[20px]'} w-full flex justify-between mb-2`}>
                 
                 {isExpanded && <h3 className="font-bold text-lg text-black/80">JTrack</h3> }
-
                 <div 
                     onClick={handleSwitchNav}
                     className={`
                         flex items-center justify-center w-[26px] h-[26px] 
                         transition-transform hover:scale-110 active:scale-95
                         ${isExpanded ? "cursor-ew-resize" : "cursor-pointer"}
-                    `}
-                >
+                        `}
+                        >
                     <IconSet iconName="barleft" size={24}/>
                 </div>
             </div>
+                { isExpanded && <hr className="text-black/10 we"/>}
 
             {/* Dashboard Text & Content */}
             {isExpanded && (
-                <div className="mt-5 px-[20px] w-full animate-in fade-in slide-in-from-top-2 duration-400">
+                <div className="mt-5 px-[18px] w-full animate-in fade-in slide-in-from-top-2 duration-400">
                     {/* <h3 className="font-bold text-base text-black/80 mb-8">Dashboard</h3> */}
                         <div className="flex flex-col gap-2">
-                                <Link to="/" className="hover:bg-gray-100 rounded w-full p-1  tracking-wide text-[15px] flex gap-3">
+                                <Link to="/" className="hover:bg-gray-100 rounded w-full p-1 tracking-wide text-[15px] flex gap-4">
                                     <IconSet iconName="tags" size={24}></IconSet>                    
                                     Dashboard
                                 </Link>
                           
-                                <Link to="/chat" className="hover:bg-gray-100 rounded w-full p-1 tracking-wide text-[15px] flex gap-3">
+                                <Link to="/chat" className="hover:bg-gray-100 rounded w-full p-1 tracking-wide text-[15px] flex gap-4">
                                     <IconSet iconName="sparkle" size={24}></IconSet>                    
                                     AI Coach
                                 </Link>
