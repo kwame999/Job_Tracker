@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { icons } from './icons/icon';
-
+import type { JSX } from 'react';
 export type JobType = {
     
     id?: string
@@ -120,4 +120,27 @@ export type CustomContainerT = {
   id?: string
   container_name: string,
   containerColor?: string,
+}
+
+/////////////////
+export interface DashboardProps {
+    //States
+  jobs: JobType[];
+  isLoading: boolean;
+  tabActive: string;
+  tagTypes: Tags[];
+  customContainer: CustomContainerT[];
+  showNewModal: boolean;
+  
+  // Handlers
+  handleTab: (tab: string) => void;
+  handleShowModal: () => void;
+  handleCurrentColumn: (col: string) => void;
+  handleNewModal: () => void;
+  handleContainer: (container: CustomContainerT) => void;
+  handleSetTags: (newTag: Tags[]) => void
+  
+  // Logic helpers
+  renderFilteredJob: (status: string) => JSX.Element[];
+  jobStatusTypeCheck: (status: string) => boolean;
 }

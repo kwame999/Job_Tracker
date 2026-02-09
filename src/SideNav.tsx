@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import type { SideNavProps } from './Types'
 import {IconSet} from "./icons/icon"
 import './index.css'
+import { Link } from "react-router-dom"
 
 const SideNav = ({recentJobs}:SideNavProps) => {
 
@@ -38,7 +39,10 @@ const SideNav = ({recentJobs}:SideNavProps) => {
             onClick={() => !isExpanded && isSetExpanded(true)}
         >
             {/* Top Icon (Bar-Left) */}
-            <div className="px-[12px] w-full">
+            <div className={`px-[12px] ${isExpanded && 'px-[20px]'} w-full flex justify-between mb-2`}>
+                
+                {isExpanded && <h3 className="font-bold text-lg text-black/80">JTrack</h3> }
+
                 <div 
                     onClick={handleSwitchNav}
                     className={`
@@ -53,12 +57,23 @@ const SideNav = ({recentJobs}:SideNavProps) => {
 
             {/* Dashboard Text & Content */}
             {isExpanded && (
-                <div className="mt-6 px-[20px] w-full animate-in fade-in slide-in-from-top-2 duration-400">
-                    <h3 className="font-bold text-base text-black/80 mb-8">Dashboard</h3>
-                    
+                <div className="mt-5 px-[20px] w-full animate-in fade-in slide-in-from-top-2 duration-400">
+                    {/* <h3 className="font-bold text-base text-black/80 mb-8">Dashboard</h3> */}
+                        <div className="flex flex-col gap-2">
+                                <Link to="/" className="hover:bg-gray-100 rounded w-full p-1  tracking-wide text-[15px] flex gap-3">
+                                    <IconSet iconName="tags" size={24}></IconSet>                    
+                                    Dashboard
+                                </Link>
+                          
+                                <Link to="/chat" className="hover:bg-gray-100 rounded w-full p-1 tracking-wide text-[15px] flex gap-3">
+                                    <IconSet iconName="sparkle" size={24}></IconSet>                    
+                                    AI Coach
+                                </Link>
+                        
+                        </div>
                     <nav onClick={(e) => e.stopPropagation()}> 
                         <ul className="flex flex-col gap-4">
-                            <li className="text-[10px] font-bold text-black/30 uppercase tracking-[0.15em]">Tracked Jobs:</li>
+                            <li className="text-[10px] font-bold text-black/30 uppercase tracking-[0.15em] mt-8">Tracked Jobs:</li>
                             {recentJobs.map((job, i) => (
                                 <li key={i} className="text-sm font-medium text-black/60 hover:text-black cursor-pointer truncate transition-colors">
                                     {job.company}

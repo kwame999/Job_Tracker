@@ -286,6 +286,17 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
         );
     };
 
+    const StatCard = ({ label, value }: { label: string; value: number | string }) => (
+    <div className="flex flex-col items-center justify-center px-2 py-4 bg-white/50 backdrop-blur-md border border-gray-100 rounded-[20px] shadow-sm min-w-[140px]">
+        <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400 mb-1">
+        {label}
+        </span>
+        <span className="text-1xl font-bold text-gray-900">
+        {value}
+        </span>
+    </div>
+    );
 
 
-export {Tag, TabView, StatBlock, ProjectSetModal, ModalNewContainer} 
+
+export {Tag, TabView, StatBlock, StatCard, ProjectSetModal, ModalNewContainer} 
