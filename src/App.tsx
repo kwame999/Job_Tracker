@@ -24,7 +24,7 @@ function App() {
  const [tabActive, setTabActive] = useState<string>('Dashboard');
  const [currentColumn, setCurrentColumn] = useState<string>('wishlist');
  const [isLoading, setisLoading] = useState<boolean>(true)
- 
+ const [isPowerMode, setIsPowerMode] = useState<boolean>(false)
  
  useEffect(()=>{
 
@@ -146,6 +146,10 @@ function handleCurrentColumn(colName: string){
   setCurrentColumn(colName)
 }
 
+function handleSetPowerMode(){
+  setIsPowerMode(!isPowerMode ? true : false )
+}
+
   return (
 
    <BrowserRouter> 
@@ -167,7 +171,7 @@ function handleCurrentColumn(colName: string){
 
       <SideNav recentJobs={jobs}/>
       
-      <div className='flex-1 min-w-0 flex flex-col overflow-hidden'>
+      <div className='flex-1 min-w-0 flex flex-col overflow-hidden '>
 
       {/* <Header jobProjName='UX-Hunt 2026' isCollapsed={tabActive === 'Kanban View'}  jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes}></Header> */}
   
@@ -191,6 +195,9 @@ function handleCurrentColumn(colName: string){
           renderFilteredJob={renderFilteredJob}
           jobStatusTypeCheck={jobStatusTypeCheck}
           handleSetTags={handleSetTags}
+          isPowerMode={isPowerMode}
+          handlePowerMode={handleSetPowerMode}
+          
         />
 
 

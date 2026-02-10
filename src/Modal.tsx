@@ -101,7 +101,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
 
     async function moodTxtAnalyzer(company: string, position: string){
 
-        if((!company && !position) || moodTxt){
+        if((!company || !position) || moodTxt){
             setChecked(true);
             return
         }
@@ -213,10 +213,10 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                             </textarea>
                             <div className=" w-full flex justify-end items-center absolute">
                                 <button onClick={()=> !isLoading && moodTxtAnalyzer(company, position)}
-                                        className={`rounded-full outline-1 outline-gray-200 w-[30px] h-[30px] p-0.5 flex justify-center items-center absolute bottom-0 right-0 mb-4 mr-2 drop-shadow-md bg-blue-500/10 
+                                        className={`rounded-full outline-1 outline-gray-200 w-[30px] h-[30px] p-0.5 flex justify-center items-center absolute bottom-0 right-0 mb-4 mr-2 drop-shadow-md bg-blue-500/10 group-hover hover:animate-pulse hover:scale-110 hover:bg-blue-500/2
                                                     ${isLoading && 'cursor-not-allowed'}`} 
                                 
-                                ><IconSet iconName="sparkle" size={25}></IconSet>
+                                ><IconSet iconName="sparkle" size={18}></IconSet>
                                 </button>
                                 
                             </div>

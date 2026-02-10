@@ -65,6 +65,9 @@ export type HeaderProps = {
     handleNewTag: (tag: Tags[]) => void
     tagTypes: Tags[]
     isCollapsed?: boolean
+    isPowerMode?: boolean
+    handlePowerMode?: () => void;
+
     
 }
 
@@ -127,6 +130,7 @@ export interface DashboardProps {
     //States
   jobs: JobType[];
   isLoading: boolean;
+  isPowerMode: boolean
   tabActive: string;
   tagTypes: Tags[];
   customContainer: CustomContainerT[];
@@ -139,6 +143,7 @@ export interface DashboardProps {
   handleNewModal: () => void;
   handleContainer: (container: CustomContainerT) => void;
   handleSetTags: (newTag: Tags[]) => void
+  handlePowerMode: () => void;
   
   // Logic helpers
   renderFilteredJob: (status: string) => JSX.Element[];

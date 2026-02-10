@@ -59,15 +59,16 @@ const SideNav = ({recentJobs}:SideNavProps) => {
             {isExpanded && (
                 <div className="mt-5 px-[18px] w-full animate-in fade-in slide-in-from-top-2 duration-400">
                     {/* <h3 className="font-bold text-base text-black/80 mb-8">Dashboard</h3> */}
-                        <div className="flex flex-col gap-2">
-                                <Link to="/" className="hover:bg-gray-100 rounded w-full p-1 tracking-wide text-[15px] flex gap-4">
+                        <div className="flex flex-col gap-1">
+                                <Link to="/" className="hover:bg-gray-100 rounded-lg w-full p-2.5 text-[14px] flex gap-2 items-center">
                                     <IconSet iconName="tags" size={24}></IconSet>                    
-                                    Dashboard
+                                    <p>Dashboard</p>
+
                                 </Link>
                           
-                                <Link to="/chat" className="hover:bg-gray-100 rounded w-full p-1 tracking-wide text-[15px] flex gap-4">
-                                    <IconSet iconName="sparkle" size={24}></IconSet>                    
-                                    AI Coach
+                                <Link to="/chat" className="hover:bg-gray-100 rounded-lg w-full p-2.5 text-[14px] flex gap-3 items-center">
+                                    <IconSet iconName="sparkle" size={20}></IconSet>                    
+                                    <p>AI Coach</p>
                                 </Link>
                         
                         </div>

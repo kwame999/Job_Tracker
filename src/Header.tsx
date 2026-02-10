@@ -14,7 +14,7 @@ const presetBanners = [
     "bg-gradient-to-br from-[#a1c4fd] to-[#c2e9fb]"               // Sky Blue
 ]
 
-const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapsed}: HeaderProps)=> {
+const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapsed, isPowerMode, handlePowerMode}: HeaderProps)=> {
 
     const [crntBanner, setCrntBanner] = useState(()=> {
         const currentBanner = localStorage.getItem('Banner');
@@ -61,12 +61,19 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
                     </button>
                 </div>
 
-                <button 
-                    onClick={ handleSwitch }
-                    className="p-2 hover:bg-black/[0.04] rounded-md transition-colors flex justify-center items-center"
-                >
-                    <IconSet iconName="more" size={16} />
-                </button>
+                    <div className="flex gap-4 outline-1 rounded-md outline-gray-300 px-1 py-0.5  dropshadow-sm">
+                        <button className={`p-1 hover:bg-black/[0.08] rounded-md transition-colors flex justify-center items-center ${isPowerMode && 'bg-black/[0.08]'}`}
+                                onClick={handlePowerMode}
+                        >
+                            {!isPowerMode ? <IconSet iconName='zen' size={18}></IconSet> : <IconSet iconName="power" size={22}></IconSet>}
+                        </button>
+
+                        <button 
+                            onClick={ handleSwitch }
+                            className="px-1 hover:bg-black/[0.08] rounded-md transition-colors flex justify-center items-center">
+                            <IconSet iconName="more" size={15} />
+                        </button>
+                </div>
             </div>
 
             {/* Banner Section: When isCollapsed, image is shown else not*/}
