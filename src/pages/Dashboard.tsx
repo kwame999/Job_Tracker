@@ -35,7 +35,7 @@ const Dashboard = ({
             </div>
 
             <div className="flex-1 h-full flex flex-col min-w-0 overflow-hidden outline-gray-200 outline-1 bg-gray-100">   
-                <Header jobProjName='UX-Hunt 2026' isCollapsed={tabActive === 'Kanban View'} isPowerMode={isPowerMode} handlePowerMode={handlePowerMode} jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes} ></Header>
+                <Header jobProjName='UX-Hunt 2026' isCollapsed={tabActive === 'Kanban View'} isPowerMode={isPowerMode} handlePowerMode={handlePowerMode} jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes} setCurrentTab={handleTab} ></Header>
 
                 <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal} tags={tagTypes} onHandleTab={handleTab} tabActive= {tabActive} isLoading={isLoading}>
 

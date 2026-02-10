@@ -6,7 +6,6 @@ import { Tag } from "./DashAssets"
 import './index.css'
 
 
-
 //  Gradient strings
 const presetBanners = [
     "bg-gradient-to-tr from-[#FFD1FF] via-[#FAD0C4] to-[#D2E9FF]", // Soft Mesh
@@ -14,7 +13,7 @@ const presetBanners = [
     "bg-gradient-to-br from-[#a1c4fd] to-[#c2e9fb]"               // Sky Blue
 ]
 
-const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapsed, isPowerMode, handlePowerMode}: HeaderProps)=> {
+const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapsed, isPowerMode, handlePowerMode, setCurrentTab}: HeaderProps)=> {
 
     const [crntBanner, setCrntBanner] = useState(()=> {
         const currentBanner = localStorage.getItem('Banner');
@@ -39,6 +38,8 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
     function handleEdit(){
         setEditContent(!editContent);
     }
+    
+    isPowerMode && setCurrentTab?.('')
 
     return(
         <section className="bg-gray-50 border-b border-black/[0.06]">

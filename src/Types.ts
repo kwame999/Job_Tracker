@@ -67,6 +67,7 @@ export type HeaderProps = {
     isCollapsed?: boolean
     isPowerMode?: boolean
     handlePowerMode?: () => void;
+    setCurrentTab?: (tab: string) => void;
 
     
 }
