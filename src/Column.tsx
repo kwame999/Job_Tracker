@@ -7,13 +7,13 @@ const Column = ({children, color, name, onShowModal, onCurrentCol}: ColumnProps)
     const [more, setMore] = useState(false)
     
     return(
-        <div className="flex flex-col shrink-0 min-w-[420px] max-w-[350px] h-full bg-[#F7F7F7] rounded-[16px] border border-black/[0.05] overflow-hidden">
+        <div className="flex flex-col shrink-0 min-w-[420px] max-w-[350px] h-fit max-h-full  rounded-[16px] border border-black/[.1] overflow-hidden">
             
             {/* Column Header */}
             <div className="p-4 flex justify-between items-center bg-white border-b border-black/[0.03]">
                 <div className="flex items-center gap-2">
                     <div className="w-2.5 h-2.5 rounded-full" style={{backgroundColor: color}}></div>
-                    <span className="font-bold text-[#1A1A1A] tracking-tight capitalize">{name}</span>
+                    <span className="font-bold text-gray-900  capitalize">{name}</span>
                 </div>
                 <button onClick={() => setMore(!more)} className="p-1 hover:bg-gray-100 rounded-md transition-colors">
                     <IconSet iconName="moreHorizontal" size={20} />
@@ -21,7 +21,7 @@ const Column = ({children, color, name, onShowModal, onCurrentCol}: ColumnProps)
             </div>
 
             {/* Column Area */}
-            <div className="flex-1 bg-gray-50 overflow-y-auto p-3 flex flex-col gap-3 custom-scrollbar">
+            <div className="h-fit bg-gray-50 overflow-y-auto p-3 flex flex-col gap-3 custom-scrollbar">
                 {children}
             </div>
 

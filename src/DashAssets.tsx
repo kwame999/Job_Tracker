@@ -79,26 +79,27 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
     const tabItems: string[] = ["Dashboard", "Kanban View"];
     
     return (
-        <div className="flex flex-col h-full overflow-hidden">
-            <div className="px-8 py-4 mb-3">
-                <div className="flex justify-between items-end">
-                    
-                    {/* Stats Section */}
-                    <div className='flex flex-col gap-2'>
-                        <div className='flex gap-4.5'>
-                            <StatBlock svgType='calender2' svgSize={18} statTxt='Created' data={new Date().toLocaleDateString()} />
-                            <StatBlock svgType='briefcase' svgSize={18} statTxt='Jobs Tracked' data={data.length || <span className="text-sm font-medium text-black/20 italic ">0 tracked</span>} />
-                        </div>
-                            <StatBlock svgType='tags' 
-                                       svgSize={18} 
+        <div className="flex flex-col h-full overflow-hidden bg-gray-50">
+           
+                    <div className='flex flex-col gap-2   justify-center  '>
+                        <div className='flex gap-4.5 outline-1 p-2.5 pl-8 h-fit'>
+                            <StatBlock svgType='calender2' svgSize={22} statTxt='Created' data={new Date().toLocaleDateString()} />
+                            <StatBlock svgType='briefcase' svgSize={22} statTxt='Tracked' data={data.length || <span className="text-sm font-medium text-black/20 italic ">0 tracked</span>} />
+                            {/* <StatBlock svgType='tags' 
+                                       svgSize={22} 
                                        statTxt='Active Tags' 
                                        data={   tags.length > 0 ? tags.map((tag, indx) => (
                                             <p key={indx} className="px-2.5 py-0.5 bg-black/[0.03] border border-black/[0.09] rounded-lg text-[11px] font-bold text-black/60 ">
                                                 {tag}
                                             </p>
-                                )) : <span className="text-sm font-medium text-black/20 italic ">No tags set...</span>} />
+                                )) : <span className="text-sm font-medium text-black/20 italic ">No tags set...</span>} /> */}
+                        </div>
                         
                     </div>
+            <div className="px-8 py-1 mb-1 bg-gray-50   border-t border-gray-200">
+                <div className="flex justify-end">
+                    
+                    {/* Stats Section */}
 
                     {/* Tab Switcher */}
                     <nav className="relative flex bg-[#EFEFEF] p-1 rounded-xl border border-black/[0.04] shadow-inner">

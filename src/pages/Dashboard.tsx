@@ -27,12 +27,14 @@ const Dashboard = ({
    
     return(
         <div className="flex h-full overflow-hidden ">
-            {isPowerMode &&
-            <div className="w-[22%] h-full border-gray-100 flex flex-col overflow-hidden">
+           
+            <div className={`transition-all duration-500 ease-in overflow-hidden border-r border-gray-100 flex flex-col bg-white/50 backdrop-blur-xl ${
+        isPowerMode ? 'w-80 opacity-100' : 'w-0 opacity-0 border-none'
+      }`}>
             <ChatPage jobsData={jobs} isPowerMode={isPowerMode}></ChatPage>
-            </div>}
+            </div>
 
-            <div className="flex-1 h-full flex flex-col min-w-0 overflow-hidden">   
+            <div className="flex-1 h-full flex flex-col min-w-0 overflow-hidden outline-gray-200 outline-1 bg-gray-100">   
                 <Header jobProjName='UX-Hunt 2026' isCollapsed={tabActive === 'Kanban View'} isPowerMode={isPowerMode} handlePowerMode={handlePowerMode} jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes} ></Header>
 
                 <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal} tags={tagTypes} onHandleTab={handleTab} tabActive= {tabActive} isLoading={isLoading}>

@@ -78,7 +78,7 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
 
             {/* Banner Section: When isCollapsed, image is shown else not*/}
             <div className={`w-full overflow-hidden transition-all duration-500 ease-in-out border-y border-black/[0.03] ${
-                        isCollapsed ? 'h-0 opacity-0' : 'h-[120px] opacity-100'
+                        (isCollapsed || isPowerMode) ? 'h-0 opacity-0' : 'h-[120px] opacity-100'
                 }`}>
                 {/* Banner */}
                 <div className={`w-full h-[120px] relative ${crntBanner}`}>

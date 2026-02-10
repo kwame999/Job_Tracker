@@ -46,7 +46,7 @@ const ChatPage = ({jobsData, isPowerMode}: ChatPageProps) => {
                 }
 
                 {/* Conversation section */}
-                <div className={` ${!isPowerMode && 'flex-1 overflow-y-auto px-4 md:px-[20%] lg:px-[25%] py-10'}`}>
+                <div className={` ${!isPowerMode && 'flex-1  px-4 md:px-[20%] lg:px-[25%] py-10'} flex-1 overflow-y-auto`}>
 
                 {messages.length === 1 && (
                     <div className="h-full flex flex-col items-center justify-center text-center animate-fade-in ">
@@ -92,8 +92,8 @@ const ChatPage = ({jobsData, isPowerMode}: ChatPageProps) => {
                 </div>
 
                 {/* Input section*/}
-                <div className={`${!isPowerMode ? 'p-10' : 'p-2'} bg-transparent`}>
-                    <div className={`${!isPowerMode && 'max-w-3xl ' }mx-auto relative bg-white rounded-2xl border border-gray-200 shadow-lg p-2`}>
+                <div className={`${!isPowerMode ? 'p-10' : 'p-2 text-sm'} bg-transparent`}>
+                    <div className={`${!isPowerMode && 'max-w-3xl ' }mx-auto relative bg-gray-50 rounded-2xl border border-gray-200 shadow-lg p-2`}>
                     <textarea 
                         value={userPrompt}
                         onChange={(e) => setUserPrompt(e.target.value)}
