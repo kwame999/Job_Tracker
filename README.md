@@ -1,8 +1,11 @@
+
+<img width="803" height="227" alt="Frame 1171 (1)" src="https://github.com/user-attachments/assets/59ec491a-f715-48ee-a11a-242bd1c13f4f" />
+
 # JTracker
 
 JTracker is a job-application tracking app built with React + TypeScript. It combines a kanban-style dashboard, lightweight project customization, and an AI career coach chat to help track progress and stay consistent while applying.
 
-## Features
+## ✨ Features
 
 - Track job applications by status (Wishlist, Applied, Interview, Offer, Rejected, Ghosted).
 - Create custom pipeline columns for personalized workflows.
@@ -11,7 +14,7 @@ JTracker is a job-application tracking app built with React + TypeScript. It com
 - AI coach chat experience powered by Gemini for strategy/support prompts.
 - Supabase-backed persistence for jobs and custom containers.
 
-## Tech stack
+## 💻Tech stack
 
 - React 19 + TypeScript
 - Vite
@@ -20,7 +23,7 @@ JTracker is a job-application tracking app built with React + TypeScript. It com
 - Supabase (`@supabase/supabase-js`)
 - Gemini (`@google/genai`)
 
-## Getting started
+## 🛠Getting started
 
 ### 1) Install dependencies
 
@@ -44,14 +47,14 @@ VITE_GEMINI_KEY=your_gemini_api_key
 npm run dev
 ```
 
-## Scripts
+## 📄Scripts
 
 - `npm run dev` – start the dev server
 - `npm run build` – type-check and build for production
 - `npm run lint` – run ESLint
 - `npm run preview` – preview production build
 
-## Notes
+## ✏️Notes
 
 - This repository is actively being refined for portfolio presentation.
 - Next planned cleanup: move shared TypeScript snippets/types into dedicated files where applicable.
