@@ -78,10 +78,6 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
 
 
         
-
-
-        // if (editingJob) { updateJob(data[0]) } else { newJob.company && onAddJob(!data?.length || !data ? [] : data[0]) }
-        
     }
 
     function handleClose(){
@@ -111,7 +107,6 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
         
         generatedMood && setisLoading(false)
         setMoodTxt(generatedMood || "")
-        console.log(isLoading)
 
         return generatedMood;
     }
@@ -198,9 +193,10 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                         <label className="text-[13px] font-semibold text-[#1A1A1A]">Notes</label>
                         
                         <div className="relative">
-                            { isLoading && <div className="w-full bg-gray-300 h-full p-4 absolute rounded-[8px]  flex justify-center items-center animate-pulse">
-                                {/* <IconSet iconName="loading" size={40}></IconSet> */}
-                            </div>}
+                            {isLoading && (
+                                <div className="w-full bg-gray-300 h-full p-4 absolute rounded-[8px] flex justify-center items-center animate-pulse">
+                                </div>
+                            )}
                             <textarea 
                                 placeholder= {isLoading ? 'Coach at work...' : 'Add any additional notes...'}
                                 rows={3}

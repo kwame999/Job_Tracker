@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react'
-import {Column, Card} from './Column'
+import { Card } from './Column'
 import { Modal } from './Modal'
-import {Tag, TabView, StatBlock, ModalNewContainer} from './DashAssets'
 import './index.css'
-import {Header} from './Header'
 import type { JobType, Tags, CustomContainerT } from './Types'
 import SideNav from './SideNav'
-import { IconSet } from './icons/icon'
 import supabase from './lib/supabaseClient'
-import { Route, Routes, Link, BrowserRouter  } from 'react-router-dom'
+import { Route, Routes, BrowserRouter  } from 'react-router-dom'
 import Dashboard from './pages/Dashboard'
 import ChatPage from './pages/ChatPage'
-// console.log(supabase)
+
 function App() {
 
   
@@ -36,9 +33,8 @@ function App() {
       setisLoading(isLoading) ;
       
       if (error) {
-        console.log('Error fetching:', error);
+        console.error('Error fetching jobs:', error);
       } else {
-        console.log('My Jobs:', data);
         setJobs(data)
         setisLoading(!isLoading);
       }
@@ -53,9 +49,8 @@ function App() {
       setisLoading(isLoading);
 
       if(error) {
-        console.error(error);
+        console.error('Error fetching containers:', error);
       } else {
-        console.log('My Containers:', data);
         setCustomContainer(data);
         setisLoading(!isLoading);
 
@@ -172,8 +167,6 @@ function handleSetPowerMode(){
       <SideNav recentJobs={jobs}/>
       
       <div className='flex-1 min-w-0 flex flex-col overflow-hidden '>
-
-      {/* <Header jobProjName='UX-Hunt 2026' isCollapsed={tabActive === 'Kanban View'}  jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes}></Header> */}
   
       <Routes>
 
