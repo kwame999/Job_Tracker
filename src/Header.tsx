@@ -1,6 +1,5 @@
-import { Children, useState, type ReactNode, useEffect } from "react"
+import { useState, type ReactNode, useEffect } from "react"
 import type { HeaderProps } from './Types'
-import { StatBlock } from "./DashAssets"
 import { IconSet } from "./icons/icon"
 import { Tag } from "./DashAssets"
 import './index.css'
@@ -39,7 +38,11 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
         setEditContent(!editContent);
     }
     
-    isPowerMode && setCurrentTab?.('')
+    useEffect(() => {
+        if (isPowerMode) {
+            setCurrentTab?.('');
+        }
+    }, [isPowerMode, setCurrentTab]);
 
     return(
         <section className="bg-gray-50 border-b border-black/[0.06]">
@@ -84,9 +87,6 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
                 {/* Banner */}
                 <div className={`w-full h-[120px] relative ${crntBanner}`}>
                     <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]"></div>
-                    {/* <div className=" absolute -right-px bottom-px hover:bg-white/80 p-2 bg-white/20 rounded-full mb-2 mr-8">
-                        <IconSet iconName='editPencil' size={20}></IconSet>
-                    </div> */}
                 </div>
             </div>
 

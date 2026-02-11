@@ -66,9 +66,6 @@ const Dashboard = ({
                                                                         { renderFilteredJob('rejected') }
                                                                         </Column> }
                                         
-                                    {/* {jobs.map(job => jobStatusTypeCheck(job.status) && <Column name={job.status} onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                                                    { renderFilteredJob(job.status)}
-                                                                                    </Column>)} */}
                                     {customContainer.map(({container_name, id}) => <Column key={id} name={container_name} onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
                                                                     {renderFilteredJob(container_name.toLowerCase())}
                                                                     </Column>)}
