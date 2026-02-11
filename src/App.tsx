@@ -1,19 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Column, Card} from './Column'
 import { Modal } from './Modal'
 import {Tag, TabView, StatBlock, ModalNewContainer} from './DashAssets'
 import './index.css'
 import {Header} from './Header'
-import type { JobType, Tags} from './Types'
+import type { JobType, Tags, CustomContainerT } from './Types'
 import SideNav from './SideNav'
 import { IconSet } from './icons/icon'
-
-type CustomContainerT = {
-  containerName: string,
-  containerColor?: string,
-}
-
+import supabase from './lib/supabaseClient'
+import { Route, Routes, Link, BrowserRouter  } from 'react-router-dom'
+import Dashboard from './pages/Dashboard'
+import ChatPage from './pages/ChatPage'
+// console.log(supabase)
 function App() {
+
+  
  const [jobs, setJobs] = useState<JobType[]>([])
  const [editJob, setNewEditJob] = useState<JobType | null>(null)
  const [showModal, setShowModal] = useState<boolean>(false)
@@ -21,22 +22,75 @@ function App() {
  const [customContainer, setCustomContainer] = useState<CustomContainerT[]>([])
  const [tagTypes, setTagTypes] = useState<Tags[]>([]);
  const [tabActive, setTabActive] = useState<string>('Dashboard');
- const [currentColumn, setCurrentColumn] = useState<string>('wishlist')
+ const [currentColumn, setCurrentColumn] = useState<string>('wishlist');
+ const [isLoading, setisLoading] = useState<boolean>(true)
+ const [isPowerMode, setIsPowerMode] = useState<boolean>(false)
+ 
+ useEffect(()=>{
 
-  console.log(currentColumn)
+   const jobsData = async () => { 
+      const {data, error} = await supabase
+      .from('jobs')
+      .select('*');
+      
+      setisLoading(isLoading) ;
+      
+      if (error) {
+        console.log('Error fetching:', error);
+      } else {
+        console.log('My Jobs:', data);
+        setJobs(data)
+        setisLoading(!isLoading);
+      }
+
+  }
+
+  const containerData = async () => {
+      const {data, error} = await supabase
+      .from('containers')
+      .select('*');
+
+      setisLoading(isLoading);
+
+      if(error) {
+        console.error(error);
+      } else {
+        console.log('My Containers:', data);
+        setCustomContainer(data);
+        setisLoading(!isLoading);
+
+      }
+  }
+  
+  jobsData();
+  containerData();
+ },[])
+ 
+ 
  function handleContainer(newContainer: CustomContainerT){
   setCustomContainer(prev => [...prev, newContainer])
  }
 
  function handleJobs(newJob: JobType){
-
     setJobs(previous => [...previous, newJob])
-
  }
 
- function handleDeleteJobs(id: string){
-  setJobs(previous => previous.filter(job => job.id !== id))
- }
+ async function handleDeleteJobs(id: string) {
+  const { error } = await supabase
+    .from('jobs')
+    .delete()
+    .eq('id', id)
+   
+    setisLoading(true) 
+
+  if (error) {
+    console.error('Delete failed:', error.message);
+  } else {
+    setJobs(prev => prev.filter(job => job.id !== id));
+    setisLoading(false)
+
+  }
+}
 
  function handleEditJob(id: string){
   setNewEditJob(
@@ -79,7 +133,6 @@ function renderFilteredJob(jobStatus: string){
                           showModal={handleShowModal}></Card>) ) 
 }
 
-
 function handleSetTags(newTag: Tags[]){
 
   setTagTypes(newTag)
@@ -93,85 +146,80 @@ function handleCurrentColumn(colName: string){
   setCurrentColumn(colName)
 }
 
+function handleSetPowerMode(){
+  setIsPowerMode(!isPowerMode ? true : false )
+}
+
   return (
-  <div className='flex h-screen overflow-hidden bg-main-bgs'>
-        
-        {showModal &&  
-                          
-                  
-                          <Modal 
-                          onAddJob={handleJobs} 
-                          editingJob={editJob} 
-                          updateJob={handleUpdateJob} 
-                          cancelJob={handleCancelJob}
-                          onAddCustomCol={customContainer}
-                          currentCol={currentColumn}
-                          onSetCurrentCol={handleCurrentColumn}>
-                          </Modal>
-                    
-        }
 
-  <SideNav recentJobs={jobs}></SideNav>
- 
-  <div className='flex-1 min-w-0 flex flex-col overflow-hidden'>
-    
-    <Header jobProjName='UX-Hunt 2026' isCollapsed={tabActive === 'Kanban View'}  jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes}></Header>
-    <TabView data={jobs} jobs={jobs} onShowModal = {handleShowModal} tags={tagTypes} onHandleTab={handleTab} tabActive= {tabActive}>
-
-
-  {jobs.length && <div className=' flex gap-8 h-full justify-center'>
- 
-                    { jobStatusTypeCheck('ghosted') && <Column color='' name='Ghosted' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                        { renderFilteredJob('ghosted') }
-                                                    </Column> }
-  
-                    { jobStatusTypeCheck('applied') && <Column color='' name='Applied' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                        { renderFilteredJob('applied') }
-                                                    </Column> }
-
-                    { jobStatusTypeCheck('wishlist') && <Column color='' name='Wishlist' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                        { renderFilteredJob('wishlist') }
-                                                    </Column> }
-
-                    { jobStatusTypeCheck('interview') && <Column color='' name='Interview' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                          { renderFilteredJob('interview') }
-                                                        </Column> }
-
-                    { jobStatusTypeCheck('offer') && <Column color='' name='Offer' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                        { renderFilteredJob('offer') }
-                                                    </Column> }
-
-                    { jobStatusTypeCheck('rejected') && <Column color='' name='Rejected' onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                        { renderFilteredJob('rejected') }
-                                                        </Column> }
+   <BrowserRouter> 
+      <div className='flex h-screen overflow-hidden bg-main-bgs'>
+            {showModal &&  
+                              
+                      
+                              <Modal 
+                              onAddJob={handleJobs} 
+                              editingJob={editJob} 
+                              updateJob={handleUpdateJob} 
+                              cancelJob={handleCancelJob}
+                              onAddCustomCol={customContainer}
+                              currentCol={currentColumn}
+                              onSetCurrentCol={handleCurrentColumn}>
+                              </Modal>
                         
-                    {/* {jobs.map(job => jobStatusTypeCheck(job.status) && <Column name={job.status} onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                                       { renderFilteredJob(job.status)}
-                                                                       </Column>)} */}
-                    {customContainer.map(container => <Column  name={container.containerName} onShowModal={handleShowModal} onCurrentCol={handleCurrentColumn}>
-                                                      {renderFilteredJob(container.containerName.toLowerCase())}
-                                                      </Column>)}
-                    
-                  </div>}
-            
-          
-          <div className=' bg-transparent flex p-2  rounded-[1000px] font-medium ml-auto justify-center items-center bg-red-600 h-full'>
-              <button onClick={handleNewModal} 
-                      className='flex flex-col items-center justify-center text-gray-400 hover:text-black transition-colors'>
-                
-                      <div className='w-12 h-12 rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center mb-1'>
-                        <IconSet iconName='plus' size={28}></IconSet>
-                      </div>
-                <span className="text-[10px] font-bold uppercase tracking-widest">Add Column</span>
-              </button>
-          </div>
+            }
 
+      <SideNav recentJobs={jobs}/>
+      
+      <div className='flex-1 min-w-0 flex flex-col overflow-hidden '>
+
+      {/* <Header jobProjName='UX-Hunt 2026' isCollapsed={tabActive === 'Kanban View'}  jobProjDetails = {jobs} handleNewTag = {handleSetTags} tagTypes={tagTypes}></Header> */}
+  
+      <Routes>
+
+       <Route path = "/" element={
+
+        <Dashboard
+
+          jobs={jobs}
+          isLoading={isLoading}
+          tabActive={tabActive}
+          tagTypes={tagTypes}
+          customContainer={customContainer}
+          showNewModal={showNewModal}
+          handleTab={handleTab}
+          handleShowModal={handleShowModal}
+          handleCurrentColumn={handleCurrentColumn}
+          handleNewModal={handleNewModal}
+          handleContainer={handleContainer}
+          renderFilteredJob={renderFilteredJob}
+          jobStatusTypeCheck={jobStatusTypeCheck}
+          handleSetTags={handleSetTags}
+          isPowerMode={isPowerMode}
+          handlePowerMode={handleSetPowerMode}
           
-          {  showNewModal &&  <ModalNewContainer setNewContainer={handleContainer}></ModalNewContainer>  }
-            
-  </TabView>
-  </div>
-  </div>
+        />
+
+
+       }
+       
+       
+       ></Route>
+
+
+       <Route path='/chat' element={<ChatPage jobsData={jobs}/>}></Route>
+      </Routes>
+
+      </div>
+      
+
+
+
+
+
+      </div>
+  </BrowserRouter>  
+
 
 
   )

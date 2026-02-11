@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from "react"
-import type { Tags, StatsBlockProps, HeaderProps} from './Types'
+import type { Tags, StatsBlockProps, HeaderProps, CustomContainerT} from './Types'
 import { IconSet } from "./icons/icon";
 import './index.css'
 import type { TabViewProps } from "./Types";
-
+import supabase from "./lib/supabaseClient";
 
 const Tag = ({handleNewTag, tagTypes}: HeaderProps) => {
     const [tag, setTag] = useState<string>("");
@@ -74,31 +74,32 @@ const Tag = ({handleNewTag, tagTypes}: HeaderProps) => {
 
 
 
-const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActive}: TabViewProps) => {
+const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActive, isLoading}: TabViewProps) => {
 
     const tabItems: string[] = ["Dashboard", "Kanban View"];
     
     return (
-        <div className="flex flex-col h-full overflow-hidden">
-            <div className="px-8 py-4 mb-3">
-                <div className="flex justify-between items-end">
-                    
-                    {/* Stats Section */}
-                    <div className='flex flex-col gap-2'>
-                        <div className='flex gap-8'>
-                            <StatBlock svgType='clock' svgSize={22} statTxt='Created' data={new Date().toLocaleDateString()} />
-                            <StatBlock svgType='calender2' svgSize={24} statTxt='Jobs Tracked' data={data.length || <span className="text-sm font-medium text-black/20 italic ">0 tracked</span>} />
-                        </div>
-                            <StatBlock svgType='tags' 
+        <div className="flex flex-col h-full overflow-hidden bg-gray-50">
+           
+                    <div className='flex flex-col gap-2   justify-center  '>
+                        <div className='flex gap-4.5 outline-1 p-2.5 pl-8 h-fit'>
+                            <StatBlock svgType='calender2' svgSize={22} statTxt='Created' data={new Date().toLocaleDateString()} />
+                            <StatBlock svgType='briefcase' svgSize={22} statTxt='Tracked' data={data.length || <span className="text-sm font-medium text-black/20 italic ">0 tracked</span>} />
+                            {/* <StatBlock svgType='tags' 
                                        svgSize={22} 
                                        statTxt='Active Tags' 
                                        data={   tags.length > 0 ? tags.map((tag, indx) => (
                                             <p key={indx} className="px-2.5 py-0.5 bg-black/[0.03] border border-black/[0.09] rounded-lg text-[11px] font-bold text-black/60 ">
                                                 {tag}
                                             </p>
-                                )) : <span className="text-sm font-medium text-black/20 italic ">No tags set...</span>} />
+                                )) : <span className="text-sm font-medium text-black/20 italic ">No tags set...</span>} /> */}
+                        </div>
                         
                     </div>
+            <div className="px-8 py-1 mb-1 bg-gray-50   border-t border-gray-200">
+                <div className="flex justify-end">
+                    
+                    {/* Stats Section */}
 
                     {/* Tab Switcher */}
                     <nav className="relative flex bg-[#EFEFEF] p-1 rounded-xl border border-black/[0.04] shadow-inner">
@@ -130,29 +131,36 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
                     <div className="h-full flex gap-7 overflow-x-auto px-8 pb-8 justify-start items-start custom-scrollbar">
                         {children}
                     </div>
-                ) : (
-                
+                ) :  (
                     <div className="mx-8 flex flex-col w-auto items-center justify-center border-2 border-dashed rounded-[24px] py-12 h-full border-black/[0.1] bg-gray-50/40 transition-all"> 
-                        <img 
-                            src="/src/assets/flat-briefcase-icon-by-Vexels 1.png" 
-                            alt="Empty Workspace" 
-                            className="w-48 opacity-15 grayscale mb-6 select-none" 
-                        />
-                        <div className="text-center flex flex-col items-center">
-                            <h2 className="text-1xl font-black text-[#0A0A0A] tracking-tight mb-2 ">
-                                Tracker empty
-                            </h2>
-                            <p className="text-[14px] text-black/40 font-medium mb-10 max-w-[320px] leading-relaxed">
-                                Start your journey by tracking your first application to see your dashboard come to life.
-                            </p>
-                            
-                            <button 
-                                className="bg-gray-50 text-white px-4 py-4 rounded-full text-[13px] font-black uppercase tracking-widest shadow-lg hover:bg-black/10 hover:scale-[1.02] active:scale-95 transition-all" 
-                                onClick={onShowModal}
-                            >
-                                <IconSet iconName="plus" size={23}></IconSet>
-                            </button>
-                        </div>
+                        {isLoading ? <IconSet iconName="loading" size={70}></IconSet> :
+                        
+                        <>
+                            <img 
+                                src="/src/assets/flat-briefcase-icon-by-Vexels 1.png" 
+                                alt="Empty Workspace" 
+                                className="w-48 opacity-15 grayscale mb-6 select-none" 
+                            />
+                            <div className="text-center flex flex-col items-center">
+                                <h2 className="text-1xl font-black text-[#0A0A0A] tracking-tight mb-2 ">
+                                    Tracker empty
+                                </h2>
+                                <p className="text-[14px] text-black/40 font-medium mb-10 max-w-[320px] leading-relaxed">
+                                    Start your journey by tracking your first application to see your dashboard come to life.
+                                </p>
+                                
+                                <button 
+                                    className="bg-gray-50 text-white px-4 py-4 rounded-full text-[13px] font-black uppercase tracking-widest shadow-lg hover:bg-black/10 hover:scale-[1.02] active:scale-95 transition-all" 
+                                    onClick={onShowModal}
+                                >
+                                    <IconSet iconName="plus" size={23}></IconSet>
+                                </button>
+                            </div>
+                        </>
+                        
+                        
+                        }
+                        
                     </div>
                 )}
             </div>
@@ -166,8 +174,8 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
                 <div>
                     <div className="flex items-center gap-1">
                         <IconSet iconName={svgType} size={svgSize}></IconSet>
-                        <p className="text-sm font-bold  text-black/30 tracking-wide">{statTxt}:</p>
-                        <div className="text-sm font-bold text-black/60 flex gap-2">{data || children}</div> 
+                        <p className="text-sm font-bold  text-black/40 tracking-wide">{statTxt}:</p>
+                        <div className="text-sm font-bold text-black/20 flex gap-2">{data || children}</div> 
                     </div>
         
                 </div>
@@ -190,10 +198,7 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
 
     }
 
-    type CustomContainerT = {
-        containerName: string,
-        containerColor?: string,
-    }
+
 
     type ModalNewContainerProps = {
         setNewContainer: (container: CustomContainerT) => void
@@ -208,9 +213,20 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
             setIsVisible(false);
         };
 
-        function onSubmit() {
+        async function onSubmit() {
             if (!containerName.trim()) return;
-            setNewContainer({ containerName: containerName });
+
+            const newContainer = { container_name: containerName }
+
+            const {data, error} = await supabase
+            .from('containers')
+            .insert([newContainer])
+            .select()
+            
+            if (error) {
+                console.error(error.message)
+            }else
+            setNewContainer(data[0]);
             handleInternalClose();
         }
 
@@ -271,6 +287,17 @@ const TabView = ({children, data, jobs, onShowModal, tags, onHandleTab, tabActiv
         );
     };
 
+    const StatCard = ({ label, value }: { label: string; value: number | string }) => (
+    <div className="flex flex-col items-center justify-center px-2 py-4 bg-white/50 backdrop-blur-md border border-gray-100 rounded-[20px] shadow-sm min-w-[140px]">
+        <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400 mb-1">
+        {label}
+        </span>
+        <span className="text-1xl font-bold text-gray-900">
+        {value}
+        </span>
+    </div>
+    );
 
 
-export {Tag, TabView, StatBlock, ProjectSetModal, ModalNewContainer} 
+
+export {Tag, TabView, StatBlock, StatCard, ProjectSetModal, ModalNewContainer} 

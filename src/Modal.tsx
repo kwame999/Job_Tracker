@@ -2,8 +2,8 @@ import { useEffect, useReducer, useState } from "react"
 import { PreviewCard } from "./Column";
 import type { JobType, State, ModalProps, Action } from './Types'
 import { IconSet } from "./icons/icon";
-
-
+import supabase from './lib/supabaseClient'
+import { analyzeJob } from "./lib/gemini";
 
 const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, currentCol, onSetCurrentCol }: ModalProps) => {
     
@@ -11,44 +11,77 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
     const [position, setPosition] = useState("");
     const [status, setStatus] = useState(currentCol); //Default status is controlled by currentCol
     const [link, setLink] = useState("");
-    const [createdAt, setCreatedAt] = useState("");
     const [salary, setSalary] = useState<string | number>("");
     const [moodTxt, setMoodTxt] = useState("");
-   
+    const [isLoading, setisLoading] = useState<boolean>(false);
+    const [checked, setChecked] = useState<boolean>(false);
 
+    
     useEffect(() => {
         if(!editingJob) return
-        const {company, position, status, link, createdAt, salary, moodTxt} = editingJob;
+        const {company, position, status, link, salary, mood_txt} = editingJob;
         
         setCompany(company);
         setPosition(position);
         setStatus(status);
         setLink(link ?? "");
-        setCreatedAt(createdAt);
-        setSalary(salary ?? 0);
-        setMoodTxt(moodTxt)
+        setSalary(salary ?? "-");
+        setMoodTxt(mood_txt);
+
     },[editingJob]);
 
-    function handleJobsNType(){
+    async function handleJobsNType(){
+
         const newJob: JobType = {
-            id: editingJob ?  editingJob.id : crypto.randomUUID(),
-            company: company,
-            companyIcon: {
-                logo: `https://img.logo.dev/${company}.com?token=pk_RKtwoXuaQDSJdIEDV1NYVA`,
-                alt: `${company} logo`
-            },
-            position: position,
-            status: status,
-            link: link,
-            createdAt: createdAt,
-            date: new Date(),
-            salary: (typeof salary === 'string' ? parseInt(salary, 10) : salary) || salary,
-            moodTxt: moodTxt,
-            favorites: false,
+        company: company,
+        position: position,
+        status: status,
+        link: link,
+        salary: (typeof salary === 'string' ? parseInt(salary, 10) : salary) || 0,
+        mood_txt: moodTxt,
+        logo_url: `https://img.logo.dev/${company}.com?token=pk_RKtwoXuaQDSJdIEDV1NYVA`,
+        logo_alt: `${company} logo`,
         }
 
-        if (editingJob) { updateJob(newJob) } else { newJob.company && onAddJob(newJob) }
-      
+        if (editingJob) {
+            
+            const { data, error } = await supabase
+            .from('jobs')
+            .update(newJob)           
+            .eq('id', editingJob.id)  
+            .select()
+
+            if (error) {
+                console.error("Update failed:", error.message);
+            } else {
+                updateJob(data[0]); 
+                handleClose()
+            }
+
+        } else if (company) {
+            
+            const {data, error} = await supabase
+            .from('jobs')
+            .insert([newJob])
+            .select()
+    
+           if (error) {
+            console.error("Supabase Error:", error.message);
+            return; 
+            }
+    
+            if (data && data.length) {
+            onAddJob(data[0]); 
+            }
+
+        }
+
+
+        
+
+
+        // if (editingJob) { updateJob(data[0]) } else { newJob.company && onAddJob(!data?.length || !data ? [] : data[0]) }
+        
     }
 
     function handleClose(){
@@ -58,7 +91,6 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
 
     function jobStatesReset(){
         setCompany("");
-        setCreatedAt("");
         setLink("");
         setMoodTxt("");
         setPosition("");
@@ -67,6 +99,24 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
     
     }
 
+    async function moodTxtAnalyzer(company: string, position: string){
+
+        if((!company || !position) || moodTxt){
+            setChecked(true);
+            return
+        }
+        setisLoading(true)
+        setChecked(false)
+        let generatedMood = await analyzeJob(company, position)
+        
+        generatedMood && setisLoading(false)
+        setMoodTxt(generatedMood || "")
+        console.log(isLoading)
+
+        return generatedMood;
+    }
+    
+    
     return (
         <>
             <div className='fixed inset-0 bg-black/30 backdrop-blur-[2px] z-[999]' onClick={handleClose}></div>
@@ -139,20 +189,39 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                                 <option value="offer">Offer</option>
                                 <option value="rejected">Rejected</option>
                                 <option value="ghosted">Ghosted</option>
-                                {onAddCustomCol.map(col => <option key={col.containerName} value={col.containerName.toLowerCase()}>{col.containerName}</option>)}
+                                {onAddCustomCol.map(({container_name}) => <option key={container_name} value={container_name.toLowerCase()}>{container_name}</option>)}
                             </select>
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-[6px]">
+                    <div className="flex flex-col gap-[6px] relative">
                         <label className="text-[13px] font-semibold text-[#1A1A1A]">Notes</label>
-                        <textarea 
-                            placeholder="Add any additional notes..."
-                            rows={3}
-                            className="w-full p-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all resize-none"
-                            value={moodTxt} 
-                            onChange={(e) => setMoodTxt(e.target.value)}
-                        ></textarea>
+                        
+                        <div className="relative">
+                            { isLoading && <div className="w-full bg-gray-300 h-full p-4 absolute rounded-[8px]  flex justify-center items-center animate-pulse">
+                                {/* <IconSet iconName="loading" size={40}></IconSet> */}
+                            </div>}
+                            <textarea 
+                                placeholder= {isLoading ? 'Coach at work...' : 'Add any additional notes...'}
+                                rows={3}
+                                className="w-full p-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all resize-none"
+                                value={moodTxt} 
+                                onChange={(e) => setMoodTxt(e.target.value)}
+                            >
+
+                                
+                            </textarea>
+                            <div className=" w-full flex justify-end items-center absolute">
+                                <button onClick={()=> !isLoading && moodTxtAnalyzer(company, position)}
+                                        className={`rounded-full outline-1 outline-gray-200 w-[30px] h-[30px] p-0.5 flex justify-center items-center absolute bottom-0 right-0 mb-4 mr-2 drop-shadow-md bg-blue-500/10 group-hover hover:animate-pulse hover:scale-110 hover:bg-blue-500/2
+                                                    ${isLoading && 'cursor-not-allowed'}`} 
+                                
+                                ><IconSet iconName="sparkle" size={18}></IconSet>
+                                </button>
+                                
+                            </div>
+                        </div>
+                        {checked && (<p className={`text-red-600 text-sm ${(company && position) && 'hidden'}`}>*Please, provide a name and a position</p>)}
                     </div>
                 </div>
 
@@ -160,7 +229,7 @@ const Modal = ({ onAddJob, editingJob, updateJob, cancelJob, onAddCustomCol, cur
                 <div className="px-[32px] py-[24px] border-t border-[#F0F0F0] flex gap-[12px] bg-white">
                     <button type="button" onClick={()=>{
                         handleClose()
-                        onSetCurrentCol("");
+                        onSetCurrentCol('wishlist');
                     }} className="flex-1 h-[44px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[15px] font-semibold text-[#404040] hover:bg-gray-50 transition-colors">
                         Cancel
                     </button>

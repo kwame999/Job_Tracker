@@ -1,10 +1,9 @@
-import { Children, useState, type ReactNode } from "react"
+import { Children, useState, type ReactNode, useEffect } from "react"
 import type { HeaderProps } from './Types'
 import { StatBlock } from "./DashAssets"
 import { IconSet } from "./icons/icon"
 import { Tag } from "./DashAssets"
 import './index.css'
-
 
 
 //  Gradient strings
@@ -14,12 +13,20 @@ const presetBanners = [
     "bg-gradient-to-br from-[#a1c4fd] to-[#c2e9fb]"               // Sky Blue
 ]
 
-const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapsed}: HeaderProps)=> {
+const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapsed, isPowerMode, handlePowerMode, setCurrentTab}: HeaderProps)=> {
 
-    const [crntBanner, setCrntBanner] = useState(presetBanners[0]);
+    const [crntBanner, setCrntBanner] = useState(()=> {
+        const currentBanner = localStorage.getItem('Banner');
+        return currentBanner ? currentBanner : presetBanners[0]
+
+    });
     const [openSettings, setOpenSettings] = useState<boolean>(false)
     const [editContent, setEditContent] =  useState<boolean>(false);
     
+    useEffect(()=>{
+        localStorage.setItem('Banner', crntBanner);
+    },[crntBanner]);
+
     function handleCrntBanner(e: React.ChangeEvent<HTMLInputElement>){
         setCrntBanner(e.target.value)
     }
@@ -31,6 +38,8 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
     function handleEdit(){
         setEditContent(!editContent);
     }
+    
+    isPowerMode && setCurrentTab?.('')
 
     return(
         <section className="bg-gray-50 border-b border-black/[0.06]">
@@ -53,21 +62,31 @@ const Header = ({jobProjName, jobProjDetails, handleNewTag, tagTypes, isCollapse
                     </button>
                 </div>
 
-                <button 
-                    onClick={ handleSwitch }
-                    className="p-2 hover:bg-black/[0.04] rounded-md transition-colors flex justify-center items-center"
-                >
-                    <IconSet iconName="more" size={20} />
-                </button>
+                    <div className="flex gap-4 outline-1 rounded-md outline-gray-300 px-1 py-0.5  dropshadow-sm">
+                        <button className={`p-1 hover:bg-black/[0.08] rounded-md transition-colors flex justify-center items-center ${isPowerMode && 'bg-black/[0.08]'}`}
+                                onClick={handlePowerMode}
+                        >
+                            {!isPowerMode ? <IconSet iconName='zen' size={18}></IconSet> : <IconSet iconName="power" size={22}></IconSet>}
+                        </button>
+
+                        <button 
+                            onClick={ handleSwitch }
+                            className="px-1 hover:bg-black/[0.08] rounded-md transition-colors flex justify-center items-center">
+                            <IconSet iconName="more" size={15} />
+                        </button>
+                </div>
             </div>
 
             {/* Banner Section: When isCollapsed, image is shown else not*/}
             <div className={`w-full overflow-hidden transition-all duration-500 ease-in-out border-y border-black/[0.03] ${
-                        isCollapsed ? 'h-0 opacity-0' : 'h-[120px] opacity-100'
+                        (isCollapsed || isPowerMode) ? 'h-0 opacity-0' : 'h-[120px] opacity-100'
                 }`}>
                 {/* Banner */}
                 <div className={`w-full h-[120px] relative ${crntBanner}`}>
                     <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]"></div>
+                    {/* <div className=" absolute -right-px bottom-px hover:bg-white/80 p-2 bg-white/20 rounded-full mb-2 mr-8">
+                        <IconSet iconName='editPencil' size={20}></IconSet>
+                    </div> */}
                 </div>
             </div>
 

@@ -1,19 +1,18 @@
 import type { ReactNode } from 'react';
 import { icons } from './icons/icon';
-
+import type { JSX } from 'react';
 export type JobType = {
     
-    id: string,
+    id?: string
     company: string,
-    companyIcon: Company,
+    logo_url: string,
+    logo_alt: string,
     position: string,
     status: string,
     link?: string,
-    createdAt: string,
     salary?: string | number
-    moodTxt: string,
-    favorites: boolean,
-    date: Date
+    mood_txt: string,
+
 }
 
 export type Company = {
@@ -66,6 +65,10 @@ export type HeaderProps = {
     handleNewTag: (tag: Tags[]) => void
     tagTypes: Tags[]
     isCollapsed?: boolean
+    isPowerMode?: boolean
+    handlePowerMode?: () => void;
+    setCurrentTab?: (tab: string) => void;
+
     
 }
 
@@ -112,11 +115,38 @@ export type TabViewProps = {
     onShowModal: () => void
     tags: Tags[]
     onHandleTab: (currentTab: string) => void
-    tabActive: string
+    tabActive: string,
+    isLoading: boolean
  
 }
 
-type CustomContainerT = {
-  containerName: string,
+export type CustomContainerT = {
+  id?: string
+  container_name: string,
   containerColor?: string,
+}
+
+/////////////////
+export interface DashboardProps {
+    //States
+  jobs: JobType[];
+  isLoading: boolean;
+  isPowerMode: boolean
+  tabActive: string;
+  tagTypes: Tags[];
+  customContainer: CustomContainerT[];
+  showNewModal: boolean;
+  
+  // Handlers
+  handleTab: (tab: string) => void;
+  handleShowModal: () => void;
+  handleCurrentColumn: (col: string) => void;
+  handleNewModal: () => void;
+  handleContainer: (container: CustomContainerT) => void;
+  handleSetTags: (newTag: Tags[]) => void
+  handlePowerMode: () => void;
+  
+  // Logic helpers
+  renderFilteredJob: (status: string) => JSX.Element[];
+  jobStatusTypeCheck: (status: string) => boolean;
 }
