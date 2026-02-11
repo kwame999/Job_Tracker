@@ -4,6 +4,7 @@ import { getCoachResponse } from '../lib/gemini';
 import { StatCard } from '../DashAssets';
 import { IconSet } from '../icons/icon';
 import { Link } from 'react-router-dom';
+
 const ChatPage = ({ jobsData, isPowerMode }: ChatPageProps) => {
   const [userPrompt, setUserPrompt] = useState<string>('');
   const [isLoading, setisLoading] = useState<boolean>(false);
