@@ -78,7 +78,7 @@ body {
   --app-bg: #f3f5f9;
   --app-panel: #eef2f7;
   --app-surface: #ffffff;
-  --app-surface-soft: #f7f9fc;
+  --app-surface-soft: oklch(98.511% 0.00011 271.152);
   --app-border: rgba(15, 23, 42, 0.1);
   --app-text: #0f172a;
   --app-muted: #64748b;

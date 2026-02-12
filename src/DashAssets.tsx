@@ -92,7 +92,7 @@ const TabView = ({
   const tabItems: string[] = ['Dashboard', 'Kanban View'];
 
   return (
-    <div className='flex flex-col h-full overflow-hidden bg-gray-50'>
+    <div className='flex flex-col h-full overflow-hidden bg-app-bg'>
       <div className='flex flex-col gap-2   justify-center  '>
         <div className='flex gap-4.5 outline-1 p-2.5 pl-8 h-fit'>
           <StatBlock
@@ -123,7 +123,7 @@ const TabView = ({
                                 )) : <span className='text-sm font-medium text-black/20 italic '>No tags set...</span>} /> */}
         </div>
       </div>
-      <div className='px-8 py-1 mb-1 bg-gray-50   border-t border-gray-200'>
+      <div className='px-8 py-1 mb-1    border-t border-gray-200'>
         <div className='flex justify-end'>
           {/* Stats Section */}
 
