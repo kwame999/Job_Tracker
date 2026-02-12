@@ -4,6 +4,7 @@
 # JTracker
 
 JTracker is a job-application tracking app built with React + TypeScript. It combines a kanban-style dashboard, lightweight project customization, and an AI career coach chat to help track progress and stay consistent while applying.
+<img width="1912" height="901" alt="image" src="https://github.com/user-attachments/assets/8c180002-e873-4322-a9b6-d3aa1e9ec96a" />
 
 ## ✨ Features
 
