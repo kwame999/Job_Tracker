@@ -13,37 +13,37 @@ const Column = ({
   const [more, setMore] = useState(false);
 
   return (
-    <div className='flex flex-col shrink-0 min-w-[420px] max-w-[350px] h-fit max-h-full  rounded-[16px] border border-black/[.1] overflow-hidden'>
+    <div className='app-column flex flex-col shrink-0 min-w-[420px] max-w-[350px] h-fit max-h-full rounded-[16px] app-border overflow-hidden'>
       {/* Column Header */}
-      <div className='p-4 flex justify-between items-center bg-white border-b border-black/[0.03]'>
+      <div className='app-column-header p-4 flex justify-between items-center border-b app-border'>
         <div className='flex items-center gap-2'>
           <div
             className='w-2.5 h-2.5 rounded-full'
             style={{ backgroundColor: color }}
           ></div>
-          <span className='font-bold text-gray-900  capitalize'>{name}</span>
+          <span className='font-bold app-text capitalize'>{name}</span>
         </div>
         <button
           onClick={() => setMore(!more)}
-          className='p-1 hover:bg-gray-100 rounded-md transition-colors'
+          className='p-1 hover:bg-black/10 rounded-md transition-colors'
         >
           <IconSet iconName='moreHorizontal' size={20} />
         </button>
       </div>
 
       {/* Column Area */}
-      <div className='h-fit bg-gray-50 overflow-y-auto p-3 flex flex-col gap-3 custom-scrollbar'>
+      <div className='app-column-body h-fit overflow-y-auto p-3 flex flex-col gap-3 custom-scrollbar'>
         {children}
       </div>
 
       {/* Column Buttom / Add Button */}
-      <div className='p-3 bg-[#F7F7F7] border-t border-black/[0.02]'>
+      <div className='app-column-footer p-3 border-t app-border'>
         <button
           onClick={() => {
             onCurrentCol(name.toLowerCase());
             onShowModal();
           }}
-          className='w-full py-2.5 flex justify-center items-center gap-2 rounded-xl border-2 border-dashed border-black/[0.08] text-black/40 hover:text-black hover:border-black/20 hover:bg-white transition-all font-bold text-sm'
+          className='w-full py-2.5 flex justify-center items-center gap-2 rounded-xl border-2 border-dashed app-border app-muted hover:bg-white/40 transition-all font-bold text-sm'
         >
           <IconSet iconName='plus' size={18} />
           <span>Add Job</span>
@@ -58,7 +58,7 @@ const Card = ({ job, onDelete, onEdit, showModal }: CardProps) => {
   const { id, company, position, mood_txt, salary, logo_url, logo_alt } = job;
 
   return (
-    <section className='flex flex-col bg-white rounded-xl border border-black/[0.05] shadow-sm p-4'>
+    <section className='app-card flex flex-col rounded-xl app-border shadow-sm p-4'>
       <div className='flex gap-3 items-center'>
         {/* Image area */}
         <img
@@ -68,7 +68,7 @@ const Card = ({ job, onDelete, onEdit, showModal }: CardProps) => {
         />
         <div className='flex-1 overflow-hidden'>
           {/* Company Name and Top Row Meta */}
-          <p className='font-bold text-[#0A0A0A] truncate'>{company}</p>
+          <p className='font-bold app-text truncate'>{company}</p>
           <p className='text-xs font-semibold text-blue-600 truncate'>
             {'Position: ' + (position || '-')}
           </p>
@@ -97,7 +97,7 @@ const Card = ({ job, onDelete, onEdit, showModal }: CardProps) => {
       {/* Note Row */}
       {isOpen && (
         <div className='mt-4 pt-4 border-t border-gray-50 space-y-3'>
-          <p className={`text-xs text-gray-500 ${!mood_txt && 'italic'}`}>
+          <p className={`text-xs app-muted ${!mood_txt && 'italic'}`}>
             {mood_txt || 'No notes...'}
           </p>
           <div className='flex gap-2'>
