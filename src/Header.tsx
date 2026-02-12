@@ -12,8 +12,6 @@ const presetBanners = [
 ];
 
 const Header = ({
-  jobProjName,
-  jobProjDetails,
   handleNewTag,
   tagTypes,
   isCollapsed,
@@ -27,6 +25,10 @@ const Header = ({
   });
   const [openSettings, setOpenSettings] = useState<boolean>(false);
   const [editContent, setEditContent] = useState<boolean>(false);
+  const [projectName, setProjectName] = useState<string>(() => {
+    const storedName = localStorage.getItem('ProjectName');
+    return storedName && storedName.trim() ? storedName : 'Untitled';
+  });
 
   useEffect(() => {
     localStorage.setItem('Banner', crntBanner);
@@ -44,6 +46,12 @@ const Header = ({
     setEditContent(!editContent);
   }
 
+  function handleProjectName(event: React.FormEvent<HTMLHeadingElement>) {
+    const nextValue = event.currentTarget.textContent?.trim() || 'Untitled';
+    setProjectName(nextValue);
+    localStorage.setItem('ProjectName', nextValue);
+  }
+
   useEffect(() => {
     if (isPowerMode) {
       setCurrentTab?.('');
@@ -59,8 +67,9 @@ const Header = ({
             className={`text-lg font-bold text-[#0A0A0A] outline-none px-2 rounded-md transition-all ${editContent ? 'bg-black/[0.04] ring-1 ring-black/[0.1]' : ''}`}
             contentEditable={editContent}
             suppressContentEditableWarning={true}
+            onInput={handleProjectName}
           >
-            {jobProjName}
+            {projectName}
           </h1>
 
           <button
