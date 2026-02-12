@@ -1,10 +1,14 @@
 
-<img width="803" height="227" alt="Frame 1171 (1)" src="https://github.com/user-attachments/assets/59ec491a-f715-48ee-a11a-242bd1c13f4f" />
+<!-- <img width="803" height="227" alt="Frame 1171 (1)" src="https://github.com/user-attachments/assets/59ec491a-f715-48ee-a11a-242bd1c13f4f" /> -->
 
 # JTracker
-
 JTracker is a job-application tracking app built with React + TypeScript. It combines a kanban-style dashboard, lightweight project customization, and an AI career coach chat to help track progress and stay consistent while applying.
-<img width="1912" height="901" alt="image" src="https://github.com/user-attachments/assets/8c180002-e873-4322-a9b6-d3aa1e9ec96a" />
+
+## 📐 Architecture
+
+AI Orchestration & Context Injection UX-Hunt utilizes a "Dynamic Context" architecture to power the AI Coach. Rather than a standard chatbot, the system serializes the user’s real-time job application data (stored in Supabase) into a structured knowledge base. This context is injected into the Gemini Pro model via custom system instructions, allowing the Coach to provide highly relevant, data-driven advice, such as identifying "Ghosted" trends or generating interview prep specific to companies already on the user's board.
+
+<img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/0c93fa29-ba3c-45e9-afe6-951e8b1f5bb9" /><img width="1912" height="901" alt="image" src="https://github.com/user-attachments/assets/8c180002-e873-4322-a9b6-d3aa1e9ec96a" />
 
 ## ✨ Features
 
@@ -21,8 +25,8 @@ JTracker is a job-application tracking app built with React + TypeScript. It com
 - Vite
 - Tailwind CSS v4
 - React Router
-- Supabase (`@supabase/supabase-js`)
-- Gemini (`@google/genai`)
+- Supabase (PostgreSQL)
+- AI: Google Gemini Pro (Function Calling/Context Injection).
 
 ## 🛠Getting started
 
