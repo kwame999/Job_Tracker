@@ -147,9 +147,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div
-        className={`flex h-screen overflow-hidden ${isDark ? 'bg-[#0F1115] text-gray-100' : 'bg-main-bgs text-black'}`}
-      >
+      <div className='app-shell flex h-screen overflow-hidden'>
         {showModal && (
           <Modal
             onAddJob={handleJobs}
@@ -170,7 +168,7 @@ function App() {
           }
         />
 
-        <div className='flex-1 min-w-0 flex flex-col overflow-hidden '>
+        <div className='app-main-panel flex-1 min-w-0 flex flex-col overflow-hidden '>
           <Routes>
             <Route
               path='/'

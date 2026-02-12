@@ -59,12 +59,12 @@ const Header = ({
   }, [isPowerMode, setCurrentTab]);
 
   return (
-    <section className='bg-gray-50 border-b border-black/[0.06]'>
+    <section className='app-header border-b app-border'>
       {/* Top Bar */}
       <div className='flex py-3 px-8 justify-between items-center h-[60px]'>
         <div className='flex items-center gap-3'>
           <h1
-            className={`text-lg font-bold text-[#0A0A0A] outline-none px-2 rounded-md transition-all ${editContent ? 'bg-black/[0.04] ring-1 ring-black/[0.1]' : ''}`}
+            className={`text-lg font-bold app-text outline-none px-2 rounded-md transition-all ${editContent ? 'bg-black/[0.04] ring-1 ring-black/[0.1]' : ''}`}
             contentEditable={editContent}
             suppressContentEditableWarning={true}
             onInput={handleProjectName}
@@ -73,7 +73,7 @@ const Header = ({
           </h1>
 
           <button
-            className='p-2 hover:bg-black/[0.04] rounded-lg transition-colors text-black/30 hover:text-black'
+            className='p-2 hover:bg-black/[0.04] rounded-lg transition-colors app-muted'
             onClick={handleEdit}
           >
             <IconSet iconName='edit' size={18} />

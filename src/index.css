@@ -73,3 +73,71 @@ body {
 .dark .text-black\/60 {
   color: #f3f4f6 !important;
 }
+
+:root {
+  --app-bg: #f3f5f9;
+  --app-panel: #eef2f7;
+  --app-surface: #ffffff;
+  --app-surface-soft: #f7f9fc;
+  --app-border: rgba(15, 23, 42, 0.1);
+  --app-text: #0f172a;
+  --app-muted: #64748b;
+  --app-input-bg: #ffffff;
+}
+
+.dark {
+  --app-bg: #0b1220;
+  --app-panel: #10192b;
+  --app-surface: #111c30;
+  --app-surface-soft: #16243d;
+  --app-border: rgba(148, 163, 184, 0.28);
+  --app-text: #e2e8f0;
+  --app-muted: #94a3b8;
+  --app-input-bg: #0f1a2c;
+}
+
+.app-shell {
+  background-color: var(--app-bg);
+  color: var(--app-text);
+}
+
+.app-main-panel {
+  background-color: var(--app-panel);
+  color: var(--app-text);
+}
+
+.app-header,
+.app-column-header,
+.app-card,
+.app-modal {
+  background-color: var(--app-surface);
+  color: var(--app-text);
+}
+
+.app-column,
+.app-column-body,
+.app-column-footer {
+  background-color: var(--app-surface-soft);
+}
+
+.app-border {
+  border-color: var(--app-border) !important;
+}
+
+.app-text {
+  color: var(--app-text);
+}
+
+.app-muted {
+  color: var(--app-muted);
+}
+
+.app-input {
+  background-color: var(--app-input-bg);
+  border: 1.5px solid var(--app-border);
+  color: var(--app-text);
+}
+
+.app-input::placeholder {
+  color: var(--app-muted);
+}

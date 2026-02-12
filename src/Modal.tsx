@@ -113,19 +113,19 @@ const Modal = ({
         onClick={handleClose}
       ></div>
 
-      <section className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[520px] bg-white rounded-[16px] shadow-[0_20px_60px_rgba(0,0,0,0.3),0_0_1px_rgba(0,0,0,0.1)] z-[1000] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200'>
+      <section className='app-modal fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-[520px] rounded-[16px] shadow-[0_20px_60px_rgba(0,0,0,0.3),0_0_1px_rgba(0,0,0,0.1)] z-[1000] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200'>
         {/* Form Header */}
-        <div className='pt-[28px] px-[32px] pb-[24px] border-b border-[#F0F0F0] relative'>
+        <div className='pt-[28px] px-[32px] pb-[24px] border-b app-border relative'>
           <button
             onClick={handleClose}
             className='absolute right-[24px] top-[24px] w-[32px] h-[32px] rounded-[8px] flex items-center justify-center hover:bg-gray-100 transition-colors'
           >
             <IconSet iconName='close' size={16} />
           </button>
-          <h2 className='text-[24px] font-bold text-[#0A0A0A] leading-[1.3] tracking-[-0.02em]'>
+          <h2 className='text-[24px] font-bold app-text leading-[1.3] tracking-[-0.02em]'>
             {editingJob ? 'Edit Application' : 'Track New Job Application'}
           </h2>
-          <p className='mt-[6px] text-[14px] text-[#737373] leading-[1.5]'>
+          <p className='mt-[6px] text-[14px] app-muted leading-[1.5]'>
             Add details about your job application to track progress
           </p>
         </div>
@@ -134,24 +134,24 @@ const Modal = ({
         <div className='p-[32px] pt-[28px] flex flex-col gap-[24px]'>
           <div className='grid grid-cols-2 gap-[16px]'>
             <div className='flex flex-col gap-[6px]'>
-              <label className='text-[13px] font-semibold text-[#1A1A1A]'>
+              <label className='text-[13px] font-semibold app-text'>
                 Company Name
               </label>
               <input
                 placeholder='e.g., Google'
-                className='w-full h-[40px] px-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all'
+                className='app-input w-full h-[40px] px-[14px] rounded-[8px] text-[14px] outline-none transition-all'
                 type='text'
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
               />
             </div>
             <div className='flex flex-col gap-[6px]'>
-              <label className='text-[13px] font-semibold text-[#1A1A1A]'>
+              <label className='text-[13px] font-semibold app-text'>
                 Position
               </label>
               <input
                 placeholder='e.g., Product Designer'
-                className='w-full h-[40px] px-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all'
+                className='app-input w-full h-[40px] px-[14px] rounded-[8px] text-[14px] outline-none transition-all'
                 type='text'
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
@@ -161,23 +161,23 @@ const Modal = ({
 
           <div className='grid grid-cols-2 gap-[16px]'>
             <div className='flex flex-col gap-[6px]'>
-              <label className='text-[13px] font-semibold text-[#1A1A1A]'>
+              <label className='text-[13px] font-semibold app-text'>
                 Salary
               </label>
               <input
                 placeholder='e.g., $120,000'
-                className='w-full h-[40px] px-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all'
+                className='app-input w-full h-[40px] px-[14px] rounded-[8px] text-[14px] outline-none transition-all'
                 type='text'
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}
               />
             </div>
             <div className='flex flex-col gap-[6px]'>
-              <label className='text-[13px] font-semibold text-[#1A1A1A]'>
+              <label className='text-[13px] font-semibold app-text'>
                 Status
               </label>
               <select
-                className='w-full h-[40px] px-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all cursor-pointer'
+                className='app-input w-full h-[40px] px-[14px] rounded-[8px] text-[14px] outline-none transition-all cursor-pointer'
                 value={status.toLowerCase()}
                 onChange={(e) => {
                   setStatus(e.target.value); //status remains state when modal is open, else btn clicked is state
@@ -203,9 +203,7 @@ const Modal = ({
           </div>
 
           <div className='flex flex-col gap-[6px] relative'>
-            <label className='text-[13px] font-semibold text-[#1A1A1A]'>
-              Notes
-            </label>
+            <label className='text-[13px] font-semibold app-text'>Notes</label>
 
             <div className='relative'>
               {isLoading && (
@@ -216,7 +214,7 @@ const Modal = ({
                   isLoading ? 'Coach at work...' : 'Add any additional notes...'
                 }
                 rows={3}
-                className='w-full p-[14px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[14px] outline-none focus:border-black transition-all resize-none'
+                className='app-input w-full p-[14px] rounded-[8px] text-[14px] outline-none transition-all resize-none'
                 value={moodTxt}
                 onChange={(e) => setMoodTxt(e.target.value)}
               ></textarea>
@@ -243,14 +241,14 @@ const Modal = ({
         </div>
 
         {/* Footer Buttons */}
-        <div className='px-[32px] py-[24px] border-t border-[#F0F0F0] flex gap-[12px] bg-white'>
+        <div className='px-[32px] py-[24px] border-t app-border flex gap-[12px]'>
           <button
             type='button'
             onClick={() => {
               handleClose();
               onSetCurrentCol('wishlist');
             }}
-            className='flex-1 h-[44px] bg-white border-[1.5px] border-[#E5E5E5] rounded-[8px] text-[15px] font-semibold text-[#404040] hover:bg-gray-50 transition-colors'
+            className='app-input flex-1 h-[44px] rounded-[8px] text-[15px] font-semibold app-text hover:bg-black/5 transition-colors'
           >
             Cancel
           </button>

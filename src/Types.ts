@@ -153,16 +153,6 @@ export type StatCardProps = {
   value: number | string
 }
 
-export type ChatMessage = {
-  role: 'user' | 'coach'
-  text: string
-}
-
-export type ChatPageProps = {
-  jobsData: JobType[]
-  isPowerMode?: boolean
-}
-
 // Shared sub-component props
 export type ProjectSettingProp = {
   children: ReactNode;
