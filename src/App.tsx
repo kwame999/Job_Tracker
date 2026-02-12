@@ -22,6 +22,12 @@ function App() {
   const [currentColumn, setCurrentColumn] = useState<string>('wishlist');
   const [isLoading, setisLoading] = useState<boolean>(true);
   const [isPowerMode, setIsPowerMode] = useState<boolean>(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'dark' ? 'dark' : 'light';
+  });
+
+  const isDark = theme === 'dark';
 
   useEffect(() => {
     const jobsData = async () => {
@@ -53,6 +59,12 @@ function App() {
     jobsData();
     containerData();
   }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle('dark', isDark);
+    localStorage.setItem('theme', theme);
+  }, [isDark, theme]);
 
   function handleContainer(newContainer: CustomContainerT) {
     setCustomContainer((prev) => [...prev, newContainer]);
@@ -135,7 +147,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className='flex h-screen overflow-hidden bg-main-bgs'>
+      <div
+        className={`flex h-screen overflow-hidden ${isDark ? 'bg-[#0F1115] text-gray-100' : 'bg-main-bgs text-black'}`}
+      >
         {showModal && (
           <Modal
             onAddJob={handleJobs}
@@ -148,7 +162,13 @@ function App() {
           ></Modal>
         )}
 
-        <SideNav recentJobs={jobs} />
+        <SideNav
+          recentJobs={jobs}
+          isDark={isDark}
+          onToggleTheme={() =>
+            setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+          }
+        />
 
         <div className='flex-1 min-w-0 flex flex-col overflow-hidden '>
           <Routes>
