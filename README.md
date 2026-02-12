@@ -59,7 +59,12 @@ npm run dev
 - `npm run lint` – run ESLint
 - `npm run preview` – preview production build
 
-## ✏️Notes
+## ✏️ Roadmap
+  
+Phase 1: Intelligent Automation – Implement Gemini Function Calling to allow the Coach to directly update job statuses and add notes via natural language commands.
 
-- This repository is actively being refined for portfolio presentation.
-- Next planned cleanup: move shared TypeScript snippets/types into dedicated files where applicable.
+Phase 2: Document Intelligence – Integration with PDF parsers to allow users to upload job descriptions and receive instant resume-tailoring suggestions.
+
+Phase 3: Market Analytics – Interactive salary heatmaps and industry-specific trend analysis based on aggregated (anonymized) user data.
+
+Phase 4: Browser Extension – A companion "Clipper" to pull job data directly from LinkedIn, Indeed, and Glassdoor straight into the dashboard.
