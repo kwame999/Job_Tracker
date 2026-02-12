@@ -134,8 +134,23 @@ export interface DashboardProps {
   handlePowerMode: () => void;
 
   // Logic helpers
-  renderFilteredJob: (status: string) => JSX.Element[];
-  jobStatusTypeCheck: (status: string) => boolean;
+  renderFilteredJob: (status: string) => JSX.Element[]
+  jobStatusTypeCheck: (status: string) => boolean
+}
+
+// Shared sub-component props
+export type ProjectSettingProp = {
+  children: ReactNode
+  onClose: () => void
+}
+
+export type ModalNewContainerProps = {
+  setNewContainer: (container: CustomContainerT) => void
+}
+
+export type StatCardProps = {
+  label: string
+  value: number | string
 }
 
 // Shared sub-component props
