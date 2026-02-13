@@ -6,7 +6,7 @@ JTracker is a job-application tracking app built with React + TypeScript. It com
 
 ## 📐 Architecture
 
-AI Orchestration & Context Injection UX-Hunt utilizes a "Dynamic Context" architecture to power the AI Coach. Rather than a standard chatbot, the system serializes the user’s real-time job application data (stored in Supabase) into a structured knowledge base. This context is injected into the Gemini Pro model via custom system instructions, allowing the Coach to provide highly relevant, data-driven advice, such as identifying "Ghosted" trends or generating interview prep specific to companies already on the user's board.
+AI Orchestration & Context Injection JTracker utilizes a "Dynamic Context" architecture to power the AI Coach. Rather than a standard chatbot, the system serializes the user’s real-time job application data (stored in Supabase) into a structured knowledge base. This context is injected into the Gemini Pro model via custom system instructions, allowing the Coach to provide highly relevant, data-driven advice, such as identifying "Ghosted" trends or generating interview prep specific to companies already on the user's board.
 
 <img width="1919" height="907" alt="image" src="https://github.com/user-attachments/assets/0c93fa29-ba3c-45e9-afe6-951e8b1f5bb9" /><img width="1912" height="901" alt="image" src="https://github.com/user-attachments/assets/8c180002-e873-4322-a9b6-d3aa1e9ec96a" />
 
