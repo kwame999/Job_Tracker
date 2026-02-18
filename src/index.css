@@ -141,3 +141,77 @@ body {
 .app-input::placeholder {
   color: var(--app-muted);
 }
+
+
+:root {
+  --ai-page-bg: #ffffff;
+  --ai-board-bg: #f5f5f5;
+  --ai-board-border: rgba(0, 0, 0, 0.1);
+  --ai-header-border: rgba(0, 0, 0, 0.06);
+  --ai-text-muted: #888888;
+  --ai-input-bg: #f7f7f7;
+  --ai-input-border: rgba(0, 0, 0, 0.08);
+  --ai-user-bubble: #202020;
+  --ai-coach-bubble: #ffffff;
+  --ai-coach-bubble-border: rgba(0, 0, 0, 0.08);
+  --ai-soft-button-bg: rgba(0, 0, 0, 0.03);
+  --ai-soft-button-border: rgba(0, 0, 0, 0.15);
+  --ai-send-button-bg: #999999;
+  --ai-send-button-hover: #1f2937;
+}
+
+.jtrack-ai-page {
+  background: var(--ai-page-bg);
+}
+
+.jtrack-ai-shell {
+  background: var(--ai-page-bg);
+}
+
+.jtrack-ai-board {
+  background: var(--ai-board-bg);
+  border-color: var(--ai-board-border);
+}
+
+.jtrack-ai-header {
+  background: transparent;
+  border-color: var(--ai-header-border);
+}
+
+.jtrack-ai-muted {
+  color: var(--ai-text-muted);
+}
+
+.jtrack-ai-gradient-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.jtrack-ai-input-shell {
+  background: var(--ai-input-bg);
+  border-color: var(--ai-input-border);
+}
+
+.jtrack-ai-user-bubble {
+  background: var(--ai-user-bubble);
+}
+
+.jtrack-ai-coach-bubble {
+  background: var(--ai-coach-bubble);
+  border: 1px solid var(--ai-coach-bubble-border);
+  color: #1f2937;
+}
+
+.jtrack-ai-soft-button {
+  background: var(--ai-soft-button-bg);
+  border-color: var(--ai-soft-button-border);
+}
+
+.jtrack-ai-send-button {
+  background: var(--ai-send-button-bg);
+}
+
+.jtrack-ai-send-button:hover {
+  background: var(--ai-send-button-hover);
+}
+
