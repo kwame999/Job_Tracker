@@ -199,7 +199,7 @@ function App() {
               }
             ></Route>
 
-            <Route path='/chat' element={<ChatPage jobsData={jobs} onAddJob={handleJobs} onDelete={handleDeleteJobs}/>}></Route>
+            <Route path='/chat' element={<ChatPage jobsData={jobs} isPowerMode={isPowerMode} onAddJob={handleJobs} onDelete={handleDeleteJobs}/>}></Route>
           </Routes>
         </div>
       </div>
