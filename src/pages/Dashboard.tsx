@@ -21,6 +21,7 @@ const Dashboard = ({
   handleContainer,
   handleSetTags,
   handlePowerMode,
+  onAddJob,
   renderFilteredJob,
   jobStatusTypeCheck,
 }: DashboardProps) => {
@@ -31,7 +32,7 @@ const Dashboard = ({
           isPowerMode ? 'w-80 opacity-100' : 'w-0 opacity-0 border-none'
         }`}
       >
-        <ChatPage jobsData={jobs} isPowerMode={isPowerMode}></ChatPage>
+        <ChatPage jobsData={jobs} isPowerMode={isPowerMode} onAddJob={onAddJob}></ChatPage>
       </div>
 
       <div className='app-main-panel flex-1 h-full flex flex-col min-w-0 overflow-hidden outline-gray-200 outline-1'>

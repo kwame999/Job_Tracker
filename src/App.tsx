@@ -190,11 +190,12 @@ function App() {
                   handleSetTags={handleSetTags}
                   isPowerMode={isPowerMode}
                   handlePowerMode={handleSetPowerMode}
+                  onAddJob={handleJobs}
                 />
               }
             ></Route>
 
-            <Route path='/chat' element={<ChatPage jobsData={jobs} />}></Route>
+            <Route path='/chat' element={<ChatPage jobsData={jobs} onAddJob={handleJobs} />}></Route>
           </Routes>
         </div>
       </div>

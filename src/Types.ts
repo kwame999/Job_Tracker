@@ -1,5 +1,6 @@
 import type { JSX, ReactNode } from 'react';
 import { icons } from './icons/icon';
+import { Type } from "@google/genai";
 
 export type JobType = {
   id?: string;
@@ -123,6 +124,7 @@ export interface DashboardProps {
   tagTypes: Tags[];
   customContainer: CustomContainerT[];
   showNewModal: boolean;
+  onAddJob: (job: JobType) => void
 
   // Handlers
   handleTab: (tab: string) => void;
@@ -162,4 +164,23 @@ export type ChatMessage = {
 export type ChatPageProps = {
   jobsData: JobType[];
   isPowerMode?: boolean;
+  onAddJob: (job: JobType) => void
 };
+ //Coach types
+ export type PropertyDetail = {
+   type: Type
+   description: string;
+   enum?: string[]; 
+ };
+ 
+ export type parameters = {
+   type: Type.OBJECT; 
+   properties: Record<string, PropertyDetail>; 
+   required: string[];
+ };
+ 
+ export type CreateAutoJobsTypes = {
+   name: string;
+   description: string;
+   parameters: parameters;
+ };
