@@ -22,16 +22,16 @@ const SideNav = ({ recentJobs, isDark, onToggleTheme }: SideNavProps) => {
   return (
     <aside
       className={`
-                flex flex-col h-screen pt-[20px] pb-[20px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
+                flex flex-col h-screen px-[20px] py-[22px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
                 ${isDark ? 'bg-[#11161D] border-r border-white/10 text-gray-100 shadow-[0_1px_3px_0_rgba(0,0,0,0.25)]' : 'bg-gray-50 border-r border-black/[0.1] shadow-[0_1px_3px_0_rgba(0,0,0,0.02)]'}
                 relative overflow-hidden select-none resize-none
-                ${isExpanded ? 'w-[240px]' : 'w-[50px] cursor-ew-resize'}
+                ${isExpanded ? 'w-[240px]' : 'w-[41px] cursor-ew-resize'}
             `}
       onClick={() => !isExpanded && isSetExpanded(true)}
     >
       {/* Top Icon (Bar-Left) */}
       <div
-        className={`px-[12px] ${isExpanded && 'px-[20px]'} w-full flex justify-between mb-2`}
+        className={` ${isExpanded ? 'px-[20px] justify-between' : 'justify-center'} w-full flex mb-2`}
       >
         {isExpanded && (
           <h3
@@ -48,7 +48,7 @@ const SideNav = ({ recentJobs, isDark, onToggleTheme }: SideNavProps) => {
                         ${isExpanded ? 'cursor-ew-resize' : 'cursor-pointer'}
                         `}
         >
-          <IconSet iconName='barleft' size={24} />
+          <IconSet iconName='barleft' size={18} />
         </div>
       </div>
       {isExpanded && <hr className='text-black/10 we' />}
@@ -95,20 +95,18 @@ const SideNav = ({ recentJobs, isDark, onToggleTheme }: SideNavProps) => {
       )}
 
       {/* Theme Toggle */}
-      <div className='mt-auto px-[12px] w-full'>
+      <div className='mt-auto w-full'>
         <button
-          className={`flex items-center justify-center w-[26px] h-[40px] rounded-md transition-all active:scale-90 ${isDark ? 'hover:bg-white/10' : 'hover:bg-black/[0.04]'}`}
+          className={`flex items-center justify-center w-full h-[40px] rounded-md transition-all active:scale-90 ${isDark ? 'hover:bg-white/10' : 'hover:bg-black/[0.04]'}`}
           onClick={(e) => {
             e.stopPropagation();
             onToggleTheme();
           }}
         >
           <div className='transition-transform duration-200'>
-            {!isDark ? (
-              <IconSet iconName='sun' size={22} />
-            ) : (
-              <IconSet iconName='moon' size={22} />
-            )}
+      
+            <IconSet iconName={!isDark ? 'sun' : 'moon'} size={18} />
+        
           </div>
         </button>
       </div>

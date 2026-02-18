@@ -75,7 +75,10 @@ function App() {
   }
 
   async function handleDeleteJobs(id: string) {
-    const { error } = await supabase.from('jobs').delete().eq('id', id);
+    const { error } = await supabase
+    .from('jobs')
+    .delete()
+    .eq('id', id);
 
     setisLoading(true);
 
@@ -191,11 +194,12 @@ function App() {
                   isPowerMode={isPowerMode}
                   handlePowerMode={handleSetPowerMode}
                   onAddJob={handleJobs}
+                  onDelete={handleDeleteJobs}
                 />
               }
             ></Route>
 
-            <Route path='/chat' element={<ChatPage jobsData={jobs} onAddJob={handleJobs} />}></Route>
+            <Route path='/chat' element={<ChatPage jobsData={jobs} onAddJob={handleJobs} onDelete={handleDeleteJobs}/>}></Route>
           </Routes>
         </div>
       </div>

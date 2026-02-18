@@ -124,7 +124,8 @@ export interface DashboardProps {
   tagTypes: Tags[];
   customContainer: CustomContainerT[];
   showNewModal: boolean;
-  onAddJob: (job: JobType) => void
+  onAddJob: (job: JobType) => void;
+  onDelete: (id: string) => void;
 
   // Handlers
   handleTab: (tab: string) => void;
@@ -164,7 +165,8 @@ export type ChatMessage = {
 export type ChatPageProps = {
   jobsData: JobType[];
   isPowerMode?: boolean;
-  onAddJob: (job: JobType) => void
+  onAddJob: (job: JobType) => void,
+  onDelete: (id: string) => void
 };
  //Coach types
  export type PropertyDetail = {

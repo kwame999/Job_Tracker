@@ -5,7 +5,7 @@ import { StatCard } from '../DashAssets';
 import { IconSet } from '../icons/icon';
 import { Link } from 'react-router-dom';
 
-const ChatPage = ({ jobsData, isPowerMode, onAddJob }: ChatPageProps) => {
+const ChatPage = ({ jobsData, isPowerMode, onAddJob, onDelete }: ChatPageProps) => {
   const [userPrompt, setUserPrompt] = useState<string>('');
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -21,7 +21,7 @@ const ChatPage = ({ jobsData, isPowerMode, onAddJob }: ChatPageProps) => {
     setUserPrompt('');
     setisLoading(true);
 
-    const response = await getCoachResponse(input, jobsData, onAddJob);
+    const response = await getCoachResponse(input, jobsData, onAddJob, onDelete);
 
     // AI message
     setMessages((prev) => [

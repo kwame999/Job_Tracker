@@ -22,17 +22,18 @@ const Dashboard = ({
   handleSetTags,
   handlePowerMode,
   onAddJob,
+  onDelete,
   renderFilteredJob,
   jobStatusTypeCheck,
 }: DashboardProps) => {
   return (
-    <div className='app-shell flex h-full overflow-hidden '>
+    <div className='app-shell flex h-full overflow-hidden border-[rgba(0,0,0,0.17)]'>
       <div
         className={`transition-all duration-500 ease-in overflow-hidden border-r border-gray-100 flex flex-col bg-white/50 backdrop-blur-xl ${
           isPowerMode ? 'w-80 opacity-100' : 'w-0 opacity-0 border-none'
         }`}
       >
-        <ChatPage jobsData={jobs} isPowerMode={isPowerMode} onAddJob={onAddJob}></ChatPage>
+        <ChatPage jobsData={jobs} isPowerMode={isPowerMode} onAddJob={onAddJob} onDelete={onDelete} ></ChatPage>
       </div>
 
       <div className='app-main-panel flex-1 h-full flex flex-col min-w-0 overflow-hidden outline-gray-200 outline-1'>
